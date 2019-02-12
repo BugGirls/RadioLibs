@@ -1,0 +1,375 @@
+[
+  {
+    "id": 38,
+    "channel_id": 68,
+    "name": "5个规则的钟型",
+    "duration": 15,
+    "status": 0,
+    "start": {
+      "hour": 15,
+      "minute": 42,
+      "second": 0,
+      "nano": 0
+    },
+    "end": {
+      "hour": 15,
+      "minute": 57,
+      "second": 0,
+      "nano": 0
+    },
+    "playlist": [
+      {
+        "id": 55,
+        "name": "李玉刚 - 刚好遇见你",
+        "category": 0,
+        "duration": 199,
+        "playDuration": 199,
+        "path": "/uploads/netradio/2017/9/18/P6JrfVrh.mp3",
+        "size": 7998693,
+        "clockId": 38,
+        "typeId": 53,
+        "runtimeId": 1200,
+        "placeholder": 0,
+        "unitary": 1,
+        "starttime": {
+          "hour": 15,
+          "minute": 42,
+          "second": 0,
+          "nano": 0
+        },
+        "endtime": {
+          "hour": 15,
+          "minute": 45,
+          "second": 19,
+          "nano": 0
+        }
+      },
+      {
+        "id": 46,
+        "name": "你给的安全感",
+        "category": 0,
+        "duration": 262,
+        "playDuration": 262,
+        "path": "/uploads/system/2017/11/2/ErWqTq7N.mp3",
+        "size": 10492992,
+        "clockId": 38,
+        "typeId": 42,
+        "runtimeId": 1201,
+        "placeholder": 0,
+        "unitary": 0,
+        "starttime": {
+          "hour": 15,
+          "minute": 45,
+          "second": 19,
+          "nano": 0
+        },
+        "endtime": {
+          "hour": 15,
+          "minute": 49,
+          "second": 41,
+          "nano": 0
+        }
+      },
+      {
+        "id": 47,
+        "name": "莫小娘 - 喜欢你的小秘密",
+        "category": 0,
+        "duration": 200,
+        "playDuration": 200,
+        "path": "/uploads/system/2017/11/2/K4di18y3.mp3",
+        "size": 3214269,
+        "clockId": 38,
+        "typeId": 42,
+        "runtimeId": 1202,
+        "placeholder": 0,
+        "unitary": 0,
+        "starttime": {
+          "hour": 15,
+          "minute": 49,
+          "second": 41,
+          "nano": 0
+        },
+        "endtime": {
+          "hour": 15,
+          "minute": 53,
+          "second": 1,
+          "nano": 0
+        }
+      },
+      {
+        "id": 0,
+        "name": "PLACEHOLDER",
+        "category": 0,
+        "duration": 600,
+        "playDuration": 239,
+        "path": "blank.mp3",
+        "clockId": 38,
+        "typeId": 39,
+        "runtimeId": 1203,
+        "placeholder": 1,
+        "unitary": 1,
+        "starttime": {
+          "hour": 15,
+          "minute": 53,
+          "second": 1,
+          "nano": 0
+        },
+        "endtime": {
+          "hour": 15,
+          "minute": 57,
+          "second": 0,
+          "nano": 0
+        }
+      },
+      {
+        "id": 251,
+        "name": "亡灵序曲",
+        "category": 0,
+        "duration": 320,
+        "playDuration": 0,
+        "path": "/uploads/netradio/2017/11/2/ReYfaK6X.mp3",
+        "size": 5128199,
+        "clockId": 38,
+        "typeId": 26,
+        "runtimeId": 1204,
+        "placeholder": 0,
+        "unitary": 0,
+        "starttime": {
+          "hour": 15,
+          "minute": 57,
+          "second": 0,
+          "nano": 0
+        },
+        "endtime": {
+          "hour": 15,
+          "minute": 57,
+          "second": 0,
+          "nano": 0
+        }
+      },
+      {
+        "id": 85,
+        "name": "汪苏泷 - 雾都孤儿",
+        "category": 0,
+        "duration": 212,
+        "playDuration": 0,
+        "path": "/uploads/netradio/2017/11/2/U82TCnl9.mp3",
+        "size": 8496072,
+        "clockId": 38,
+        "typeId": 25,
+        "runtimeId": 1205,
+        "placeholder": 0,
+        "unitary": 0,
+        "starttime": {
+          "hour": 15,
+          "minute": 57,
+          "second": 0,
+          "nano": 0
+        },
+        "endtime": {
+          "hour": 15,
+          "minute": 57,
+          "second": 0,
+          "nano": 0
+        }
+      },
+      {
+        "id": 64,
+        "name": "张杰 - 着魔",
+        "category": 0,
+        "duration": 215,
+        "playDuration": 0,
+        "path": "/uploads/netradio/2017/9/18/90PbpEM3.mp3",
+        "size": 3451404,
+        "clockId": 38,
+        "typeId": 25,
+        "runtimeId": 1206,
+        "placeholder": 0,
+        "unitary": 0,
+        "starttime": {
+          "hour": 15,
+          "minute": 57,
+          "second": 0,
+          "nano": 0
+        },
+        "endtime": {
+          "hour": 15,
+          "minute": 57,
+          "second": 0,
+          "nano": 0
+        }
+      }
+    ]
+  },
+  {
+    "id": 20,
+    "channel_id": 68,
+    "name": "凌晨书场",
+    "duration": 5,
+    "status": 0,
+    "start": {
+      "hour": 15,
+      "minute": 57,
+      "second": 0,
+      "nano": 0
+    },
+    "end": {
+      "hour": 16,
+      "minute": 2,
+      "second": 0,
+      "nano": 0
+    },
+    "playlist": [
+      {
+        "id": 65,
+        "name": "威仔、颜寒 - 不爱我就不要说爱我",
+        "category": 0,
+        "duration": 297,
+        "playDuration": 297,
+        "path": "/uploads/system/2017/11/2/e2MLhIAg.mp3",
+        "size": 11901387,
+        "clockId": 20,
+        "typeId": 23,
+        "runtimeId": 1207,
+        "placeholder": 0,
+        "unitary": 0,
+        "starttime": {
+          "hour": 15,
+          "minute": 57,
+          "second": 0,
+          "nano": 0
+        },
+        "endtime": {
+          "hour": 16,
+          "minute": 1,
+          "second": 57,
+          "nano": 0
+        }
+      },
+      {
+        "id": 66,
+        "name": "威仔、夏凌兮 - 最自由的笑",
+        "category": 0,
+        "duration": 238,
+        "playDuration": 3,
+        "path": "/uploads/system/2017/11/2/WZYsChOL.mp3",
+        "size": 9549522,
+        "clockId": 20,
+        "typeId": 23,
+        "runtimeId": 1208,
+        "placeholder": 0,
+        "unitary": 0,
+        "starttime": {
+          "hour": 16,
+          "minute": 1,
+          "second": 57,
+          "nano": 0
+        },
+        "endtime": {
+          "hour": 16,
+          "minute": 2,
+          "second": 0,
+          "nano": 0
+        }
+      },
+      {
+        "id": 67,
+        "name": "海楠 - 爱啦啦",
+        "category": 0,
+        "duration": 175,
+        "playDuration": 0,
+        "path": "/uploads/netradio/2017/11/2/BkThaI6g.mp3",
+        "size": 7012354,
+        "clockId": 20,
+        "typeId": 23,
+        "runtimeId": 1209,
+        "placeholder": 0,
+        "unitary": 0,
+        "starttime": {
+          "hour": 16,
+          "minute": 2,
+          "second": 0,
+          "nano": 0
+        },
+        "endtime": {
+          "hour": 16,
+          "minute": 2,
+          "second": 0,
+          "nano": 0
+        }
+      },
+      {
+        "id": 68,
+        "name": "威仔、阿夏 - 重复的伤",
+        "category": 0,
+        "duration": 209,
+        "playDuration": 0,
+        "path": "/uploads/system/2017/11/2/cdRPinDz.mp3",
+        "size": 8398889,
+        "clockId": 20,
+        "typeId": 23,
+        "runtimeId": 1210,
+        "placeholder": 0,
+        "unitary": 0,
+        "starttime": {
+          "hour": 16,
+          "minute": 2,
+          "second": 0,
+          "nano": 0
+        },
+        "endtime": {
+          "hour": 16,
+          "minute": 2,
+          "second": 0,
+          "nano": 0
+        }
+      }
+    ]
+  },
+  {
+    "id": 22,
+    "channel_id": 68,
+    "name": "金山夜话",
+    "duration": 5,
+    "status": 0,
+    "start": {
+      "hour": 16,
+      "minute": 2,
+      "second": 0,
+      "nano": 0
+    },
+    "end": {
+      "hour": 16,
+      "minute": 7,
+      "second": 0,
+      "nano": 0
+    },
+    "playlist": [
+      {
+        "id": 0,
+        "name": "PLACEHOLDER",
+        "category": 0,
+        "duration": 600,
+        "playDuration": 300,
+        "path": "blank.mp3",
+        "clockId": 22,
+        "typeId": 39,
+        "runtimeId": 1211,
+        "placeholder": 1,
+        "unitary": 1,
+        "starttime": {
+          "hour": 16,
+          "minute": 2,
+          "second": 0,
+          "nano": 0
+        },
+        "endtime": {
+          "hour": 16,
+          "minute": 7,
+          "second": 0,
+          "nano": 0
+        }
+      }
+    ]
+  }
+]

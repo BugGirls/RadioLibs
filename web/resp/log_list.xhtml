@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:composite="http://xmlns.jcp.org/jsf/composite/composite" xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions" xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+<ui:composition template="template.xhtml">
+    <ui:param name="title" value="操作日志"/>
+    <ui:define name="content">
+
+        <h:dataTable value="#{logController.pageBean.list}" var="row" styleClass="am-table am-table-compact am-table-striped admin-content-table am-table-hover">
+            <h:column>
+                <f:facet name="header">执行</f:facet>
+                <h:outputText value="#{row.action}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">日志</f:facet>
+                <h:outputText value="#{row.title}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">操作人</f:facet>
+                <h:outputText value="#{row.manager_name}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">操作时间</f:facet>
+                <h:outputText value="#{row.createtime}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                </f:facet>
+                <h:panelGroup styleClass="am-btn-toolbar" layout="block">
+                    <div class="am-btn-group am-btn-group-xs">
+                        <h:commandButton value="删除" styleClass="am-btn am-btn-default" action="#{logController.delete(row)}"></h:commandButton>
+                    </div>
+                </h:panelGroup>
+            </h:column>
+        </h:dataTable>
+
+        <composite:pagination ctrl="#{logController}"/>
+
+    </ui:define>
+
+</ui:composition>
+</html>

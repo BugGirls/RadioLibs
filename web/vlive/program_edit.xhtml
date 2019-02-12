@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="template.xhtml">
+    <ui:param name="title" value="我的节目单 -> #{programController.createView() ? '添加' : '更新'}节目单"/>
+
+    <ui:define name="content">
+        <h:panelGroup layout="block" styleClass="am-margin am-g">
+            <h:panelGroup layout="block" styleClass="am-u-sm-8">
+                <h2>类型化节目单（Program）</h2>
+                <p>规划每日播放钟型</p>
+            </h:panelGroup>
+
+            <h:panelGroup layout="block" styleClass="am-u-sm-4">
+                <h:commandLink styleClass="am-btn am-btn-default am-btn-sm am-btn-warning am-margin-right am-fr" action="#{programController.save()}"> <i class="am-icon-save"></i> 保存 </h:commandLink>
+            </h:panelGroup>
+        </h:panelGroup>
+
+        <h:panelGroup id="table">
+            <h:panelGrid columns="2" styleClass="am-table tableForm" columnClasses="w60,w300">
+                <h:outputText value="节目单名称" styleClass="itemLabel"/>
+                <h:inputText id="programlName" value="#{programController.bean.name}" styleClass="am-form-field am-input-sm"/>
+
+                <h:outputText value="节目单描述" styleClass="itemLabel"/>
+                <h:inputText id="programlDesc" value="#{programController.bean.description}" styleClass="am-form-field am-input-sm"/>
+
+                <h:outputText value="所属频率" styleClass="itemLabel"/>
+                <h:selectOneMenu id="programChannel" value="#{programController.bean.channel_id}" styleClass="am-form-field am-input-sm">
+                    <f:selectItems value="#{programController.bean.channelBeanList}" var="bean" itemLabel="#{bean.name}" itemValue="#{bean.id}"></f:selectItems>
+                </h:selectOneMenu>
+
+                <h:outputText value="播放日期" styleClass="itemLabel"/>
+                <h:selectManyCheckbox id="programDays" value="#{programController.bean.selectDates}" styleClass="tableItems">
+                    <f:selectItems value="#{common.fromEnum('PlayDate')}" var="item" itemLabel="#{item.name}" itemValue="#{item.code}"></f:selectItems>
+                </h:selectManyCheckbox>
+
+                <h:outputText value="生效开始时间" styleClass="itemLabel"/>
+                <h:panelGrid columns="2">
+                    <h:inputText id="datepicker1" value="#{programController.bean.startdate}" p:data-am-datepicker="" styleClass="am-form-field am-input-sm data-am-datepicker w240" converter="timestampSimpleConverter"/>
+                    <h:outputText value="包含当天" styleClass="am-margin-horizontal"/>
+                </h:panelGrid>
+
+                <h:outputText value="生效结束时间" styleClass="itemLabel"/>
+                <h:panelGrid columns="2">
+                    <h:inputText id="datepicker2" value="#{programController.bean.enddate}" p:data-am-datepicker="" styleClass="am-form-field am-input-sm data-am-datepicker w240" converter="timestampSimpleConverter"/>
+                    <h:outputText value="不包含当天" styleClass="am-margin-horizontal"/>
+                </h:panelGrid>
+
+                <h:outputText value="开播时间" styleClass="itemLabel"/>
+                <h:panelGrid columns="2">
+                    <h:inputText id="datetimepicker1" value="#{programController.bean.starttime}" styleClass="am-form-field am-input-sm w240" converter="timestampTimeConverter"/>
+                    <h:outputText value="如，00:00" styleClass="am-margin-horizontal"/>
+                </h:panelGrid>
+
+                <h:outputText value="结束时间" styleClass="itemLabel"/>
+                <h:panelGrid columns="2">
+                    <h:inputText id="datetimepicker2" value="#{programController.bean.endtime}" styleClass="am-form-field am-input-sm w240" converter="timestampTimeConverter"/>
+                    <h:outputText value="如，23:59" styleClass="am-margin-horizontal"/>
+                </h:panelGrid>
+                <h:outputText value="节目单状态" styleClass="itemLabel"/>
+                <h:selectOneRadio styleClass="tableItems" value="#{programController.bean.status}">
+                    <f:selectItems value="#{common.fromEnum('Status')}" var="item" itemValue="#{item.code}" itemLabel="#{item.name}"/>
+                </h:selectOneRadio>
+
+                <h:outputText value="" styleClass=""/>
+                <h:inputText value="#{programController.bean.clockIdStr}" id="selectClock" styleClass="am-hide">
+                    <!--当执行完成onClockIdStrChanged()方法后，刷新id为click_list的panelGroup-->
+                    <f:ajax render="clock_list" listener="#{programController.onClockIdStrChanged()}"/>
+                </h:inputText>
+
+            </h:panelGrid>
+        </h:panelGroup>
+
+        <h:panelGroup layout="block" styleClass="am-margin am-g">
+            <div class="am-u-sm-8">
+                <h2>此节目单包含的钟型</h2>
+                <p>根据钟型规划当天的播放节目</p>
+            </div>
+            <div class="am-u-sm-4">
+                <h:commandButton type="button" value="选取钟型" styleClass="programClock am-btn am-btn-warning am-btn-sm am-margin-right am-fr"/>
+            </div>
+        </h:panelGroup>
+
+        <h:panelGroup id="clock_list">
+            <h:dataTable value="#{programController.bean.clockBeanList}" var="row" styleClass="am-table am-table-bordered am-table-radius am-table-striped">
+                <h:column styleClass="w50">
+                    <f:facet name="header">序号</f:facet>
+                    <h:outputText value="#{sequenceController.next()}"/>
+                </h:column>
+                <h:column styleClass="w50">
+                    <f:facet name="header">ID</f:facet>
+                    <h:outputText value="#{row.id}"/>
+                </h:column>
+                <h:column styleClass="w150">
+                    <f:facet name="header">钟型名称</f:facet>
+                    <h:outputText value="#{row.name} [#{row.id}]"/>
+                </h:column>
+                <h:column styleClass="w120">
+                    <f:facet name="header">持续时长</f:facet>
+                    <h:panelGroup>
+                        <h:outputText value="#{row.duration}分钟"/>
+                        <p class="am-margin-vertical">
+                            预计播出时间:
+                            <h:outputText value="#{row.starttime}"/>
+                        </p>
+                    </h:panelGroup>
+                </h:column>
+                <h:column styleClass="w260">
+                    <f:facet name="header">规则信息</f:facet>
+                    <h:outputText value="#{common.clockAsDescription(row)}" escape="false"/>
+                </h:column>
+                <h:column styleClass="w65">
+                    <f:facet name="header"></f:facet>
+                    <h:panelGroup styleClass="am-btn-toolbar" layout="block">
+                        <div class="am-btn-group am-btn-group-xs">
+                            <h:commandLink styleClass="am-btn am-btn-link am-padding-right-0" action="#{programController.up(row.id)}" rendered="#{programController.firstData(row.id)}"><i class="am-icon-arrow-circle-up"></i></h:commandLink>
+                            <h:commandLink styleClass="am-btn am-btn-link am-padding-right-0" action="#{programController.down(row.id)}" rendered="#{programController.lastData(row.id)}"><i class="am-icon-arrow-circle-down"></i></h:commandLink>
+                            <h:commandLink styleClass="am-btn am-btn-link am-padding-right-0" action="#{programController.removeForClockIds(row.id)}" onclick="return confirm('确认删除该钟型吗')"><i class="am-icon-remove"></i></h:commandLink>
+                        </div>
+                        <div class="am-dropdown" data-am-dropdown="">
+                            <a class="am-dropdown-toggle am-btn am-btn-link am-padding-right-0 am-btn-xs" data-am-dropdown-toggle=""><i class="am-icon-arrows am-text-warning" style="font-size: 12px;"></i></a>
+                            <h:panelGroup id="moveRow" styleClass="am-dropdown-content am-text-default w350">
+                                <p class="am-text-default">要把这一行移动到第几行的位置上？</p>
+                                <h:inputText styleClass="am-input-sm am-margin-vertical w90" value="#{row.sequence}" immediate="true"/>
+                                <h:commandLink styleClass="am-btn am-btn-secondary am-btn-xs am-align-right w60" action="#{programController.move(row)}" value="移动"> </h:commandLink>
+                            </h:panelGroup>
+                        </div>
+                    </h:panelGroup>
+
+                </h:column>
+            </h:dataTable>
+        </h:panelGroup>
+
+        <script>
+            $(function () {
+                $(".programClock").on('click', function () {
+                    var primaryId = $("#selectClock").val();
+
+                    //页面层
+                    layer.open({
+                        type: 2,// 层类型
+                        skin: 'layer-ext-moon', // 皮肤
+                        area: ['80%', '80%'], // 宽高
+                        title: "钟型选取", // 标题
+                        closeBtn: 2,// 关闭按钮样式
+                        shadeClose: false,// 是否点击遮罩关闭
+                        anim: 2,// 弹出动画
+                        btn: ['确定'],
+                        content: "clock_select.xhtml",// 内容
+                        yes: function (index, layero) {// 点击确定按钮后的回调函数
+                            var body = layer.getChildFrame('body', index);
+                            var inputList = body.find('input:checkbox');
+                            var ids = [];
+                            if (primaryId) {
+                                ids.push(primaryId);
+                            }
+                            inputList.each(function (index, obj) {
+                                if ($(this).is(':checked')) {
+                                    ids.push($(this).val());
+                                }
+                            })
+                            console.log(ids);
+                            // trigger()方法：当值改变时触发
+                            $("#selectClock").val(ids).trigger("change");
+
+                            layer.close(index);
+                        }
+                    });
+                })
+            });
+
+        </script>
+    </ui:define>
+
+</ui:composition>
+
+</html>

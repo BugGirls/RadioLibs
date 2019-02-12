@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:com="http://xmlns.jcp.org/jsf/composite/composite" xmlns:p="http://xmlns.jcp.org/jsf/passthrough" xmlns:c="http://java.sun.com/jsp/jstl/core">
+<ui:composition template="template.xhtml">
+    <ui:param name="title" value="资源库管理 - 格式"/>
+    <ui:define name="content">
+        <h:panelGroup id="tabs">
+            <com:resTab ctrl="#{resFormatController}"/>
+        </h:panelGroup>
+        <h:panelGroup layout="block" styleClass="am-margin am-g">
+            <h:panelGroup layout="block" styleClass="am-u-sm-8">
+                <h2>格式(Format)</h2>
+                <p>资料的文件格式、物理媒体或尺寸规格</p>
+            </h:panelGroup>
+            <h:panelGroup layout="block" styleClass="am-u-sm-4">
+                <h:commandLink styleClass="am-btn am-btn-default am-btn-sm am-btn-warning am-margin-right am-fr" action="#{resFormatController.save()}" rendered="#{resController.editable(resFormatController.bean)}"> <i class="am-icon-save"></i> 保存 </h:commandLink>
+            </h:panelGroup>
+        </h:panelGroup>
+        <h:panelGroup id="table">
+            <h:panelGrid columns="2" styleClass="am-table tableForm" columnClasses="w60,w300">
+                <h:outputText value="入点" title="音频资料正式有效内容的起始点时间" styleClass="itemLabel"/>
+                <h:inputText id="format_starting_point" value="#{resFormatController.bean.format_starting_point}" styleClass="am-form-field am-input-sm" converter="durationConverter"> </h:inputText>
+                <h:outputText value="时长" title="音频资料正式有效内容的实际时间长度" styleClass="itemLabel"/>
+                <h:inputText id="format_duration" value="#{resFormatController.bean.format_duration}" styleClass="am-form-field am-input-sm"></h:inputText>
+                <h:outputText value="原始介质" title="描述音频资料的原始载体特征" styleClass="itemLabel"/>
+                <h:inputText id="format_media" value="#{resFormatController.bean.format_media}" styleClass="am-form-field am-input-sm"></h:inputText>
+                <h:outputText value="有现场声" title="描述音频资料有无现场声(背景声)" styleClass="itemLabel"/>
+                <h:selectOneRadio value="#{resFormatController.bean.format_background_voice}" styleClass="tableItems">
+                    <f:ajax/>
+                    <f:selectItems value="#{common.fromEnum('YesNo')}" var="item" itemLabel="#{item.name}" itemValue="#{item.code}"/>
+                </h:selectOneRadio>
+                <h:outputText value="声道数量" title="描述音频资料的声道总数量" styleClass="itemLabel"/>
+                <h:inputText id="format_channels" value="#{resFormatController.bean.format_channels}" styleClass="am-form-field am-input-sm"></h:inputText>
+                <h:outputText value="声道内容" title="描述音频资料的声道所包含声音信息的内容" styleClass="itemLabel"/>
+                <h:inputText id="format_channels_content" value="#{resFormatController.bean.format_channels_content}" styleClass="am-form-field am-input-sm"></h:inputText>
+                <h:outputText value="音质" title="描述音频资料的声音质量" styleClass="itemLabel"/>
+                <h:selectOneRadio value="#{resFileController.bean.format_quality}" styleClass="tableItems">
+                    <f:ajax/>
+                    <f:selectItems value="#{common.fromEnum('Quality')}" var="item" itemLabel="#{item.name}" itemValue="#{item.code}"/>
+                </h:selectOneRadio>
+                <h:outputText value="语种" title="表达音频资料主要内容的语种或方言信息" styleClass="itemLabel"/>
+                <h:inputText id="format_languange" value="#{resFormatController.bean.format_languange}" styleClass="am-form-field am-input-sm"></h:inputText>
+            </h:panelGrid>
+
+            <h2>打点标识(Mark)</h2>
+            <p>适用于声乐</p>
+            <h:panelGrid columns="2" styleClass="am-table tableForm" columnClasses="w60,w300">
+                <h:outputText value="前奏、开始有声处" title="" styleClass="itemLabel"/>
+                <h:inputText id="trimStart" value="#{resFormatController.bean.markBean.trimStart}" converter="durationConverter" styleClass="am-form-field am-input-sm"></h:inputText>
+                <h:outputText value="伴唱1出人声处" title="" styleClass="itemLabel"/>
+                <h:inputText id="intro1" value="#{resFormatController.bean.markBean.intro1}" converter="durationConverter" styleClass="am-form-field am-input-sm"></h:inputText>
+                <h:outputText value="伴唱2出人声处" title="" styleClass="itemLabel"/>
+                <h:inputText id="intro2" value="#{resFormatController.bean.markBean.intro2}" converter="durationConverter" styleClass="am-form-field am-input-sm"></h:inputText>
+                <h:outputText value="伴唱3出人声处" title="" styleClass="itemLabel"/>
+                <h:inputText id="intro3" value="#{resFormatController.bean.markBean.intro3}" converter="durationConverter" styleClass="am-form-field am-input-sm"></h:inputText>
+                <h:outputText value="副歌开始" title="" styleClass="itemLabel"/>
+                <h:inputText id="hookStart" value="#{resFormatController.bean.markBean.hookStart}" converter="durationConverter" styleClass="am-form-field am-input-sm"></h:inputText>
+                <h:outputText value="副歌结束" title="" styleClass="itemLabel"/>
+                <h:inputText id="hookEnd" value="#{resFormatController.bean.markBean.hookEnd}" converter="durationConverter" styleClass="am-form-field am-input-sm"></h:inputText>
+                <h:outputText value="淡出" title="" styleClass="itemLabel"/>
+                <h:inputText id="nextToPlay" value="#{resFormatController.bean.markBean.nextToPlay}" converter="durationConverter" styleClass="am-form-field am-input-sm"></h:inputText>
+                <h:outputText value="结束" title="" styleClass="itemLabel"/>
+                <h:inputText id="trimEnd" value="#{resFormatController.bean.markBean.trimEnd}" converter="durationConverter" styleClass="am-form-field am-input-sm"></h:inputText>
+            </h:panelGrid>
+        </h:panelGroup>
+
+
+    </ui:define>
+
+</ui:composition>
+</html>

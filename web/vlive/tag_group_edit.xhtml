@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://xmlns.jcp.org/jsf/passthrough" xmlns:c="http://java.sun.com/jsp/jstl/core">
+<ui:composition template="template.xhtml">
+    <ui:param name="title" value="标签组管理"/>
+    <ui:param name="sub_title" value="添加或编辑标签组"/>
+    <ui:define name="headExtra">
+    </ui:define>
+    <ui:define name="tools">
+        <h:commandLink styleClass="am-btn am-btn-default am-btn-sm am-btn-warning" action="#{tagGroupController.save()}"> <f:ajax/><i class="am-icon-save"></i> 保存</h:commandLink>
+    </ui:define>
+    <ui:define name="content">
+        #{tagGroupController.bean.setNaturally(0)}
+        <h:panelGrid columns="2" styleClass="am-table tableForm" columnClasses="w40,w300">
+
+            <h:outputText value="组名称" styleClass="itemLabel"/>
+            <h:inputText value="#{tagGroupController.bean.name}" styleClass="am-form-field am-input-sm"><f:ajax/></h:inputText>
+
+            <h:outputText value="可多选" styleClass="itemLabel"/>
+            <h:selectOneRadio value="#{tagGroupController.bean.repeatable}" styleClass="tableItems">
+                <f:ajax/>
+                <f:selectItems value="#{common.fromEnum('YesNo')}" var="item" itemLabel="#{item.name}" itemValue="#{item.code}"/>
+            </h:selectOneRadio>
+
+            <h:outputText value="客观属性" styleClass="itemLabel" title="0自然客观属性(不可编辑)，1主观属性(可编辑)"/>
+            <h:selectOneRadio value="#{tagGroupController.bean.naturally}" styleClass="tableItems">
+                <f:ajax/>
+                <f:selectItems value="#{common.fromEnum('YesNo')}" var="item" itemLabel="#{item.name}" itemValue="#{item.code}"/>
+            </h:selectOneRadio>
+
+            <h:outputText value="启用" styleClass="itemLabel"/>
+            <h:selectOneRadio value="#{tagGroupController.bean.status}" styleClass="tableItems">
+                <f:ajax/>
+                <f:selectItems value="#{common.fromEnum('YesNo')}" var="item" itemLabel="#{item.name}" itemValue="#{item.code}"/>
+            </h:selectOneRadio>
+
+
+        </h:panelGrid>
+
+    </ui:define>
+
+</ui:composition>
+</html>

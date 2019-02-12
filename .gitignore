@@ -1,0 +1,54 @@
+# Compiled class file
+*.class
+
+# Log file
+*.log
+catelina*/
+
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.nar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+#eclipse ignore
+.settings/
+.project
+.classpath
+.keep
+.tern-project
+
+#package file
+*.war
+*.ear
+
+#idea
+.idea/
+/idea/
+*.ipr
+*.iml
+*.iws
+out/
+classes/
+target/
+
+#temp file
+*.log
+*.cache
+*.diff
+*.patch
+*.tmp
+
+#system ignore
+.DS_Store
+Thumbs.db

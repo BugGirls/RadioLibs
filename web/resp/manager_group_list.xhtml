@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:composite="http://xmlns.jcp.org/jsf/composite/composite">
+
+    <ui:composition template="template.xhtml">
+        <ui:param name="title" value="人员和权限"/>
+        <ui:define name="content">
+
+            <div style="float:right;">
+                <composite:searchbox keyword="#{managerGroupController.keyword}" ctrl="#{managerGroupController}"/>
+            </div>
+
+            <h:dataTable value="#{managerGroupController.pageBean.list}" var="row" styleClass="am-table am-table-compact am-table-striped admin-content-table am-table-hover">
+                <h:column>
+                    <f:facet name="header">名称</f:facet>
+                    <h:outputText value="#{row.name}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">人员</f:facet>
+                    <h:outputText value="#{row.manager_ids}"/>
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">
+                    </f:facet>
+                    <h:panelGroup layout="block">
+                        <h:commandLink value="编辑" action="#{managerGroupController.edit(row)}" styleClass="am-btn am-btn-link am-btn-xs"/>
+                    </h:panelGroup>
+                </h:column>
+            </h:dataTable>
+
+            <composite:pagination ctrl="#{managerGroupController}"/>
+        </ui:define>
+
+    </ui:composition>
+</html>

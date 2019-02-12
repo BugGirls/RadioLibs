@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:com="http://xmlns.jcp.org/jsf/composite/composite"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<ui:composition template="template.xhtml">
+    <ui:param name="title" value="规则管理 -> 类型"/>
+    <ui:define name="content">
+        <h:panelGroup id="tabs">
+            <com:typedTab ctrl="#{typedController}"/>
+        </h:panelGroup>
+
+        <h:panelGroup layout="block" styleClass="am-margin am-g">
+            <h:panelGroup layout="block" styleClass="am-u-sm-8">
+                <h2>类型(Type)</h2>
+                <p>定义资源文件的选取策略。打的标签越多，表示音频的筛选范围越宽。</p>
+                <h:panelGroup id="tableEmpty" rendered="#{empty(typedController.bean.id)}">
+                    <p class="am-text-danger">请重新检查基础规则，先保存基础规则</p>
+                </h:panelGroup>
+            </h:panelGroup>
+            <h:panelGroup layout="block" styleClass="am-u-sm-4">
+                <h:commandLink styleClass="am-btn am-btn-default am-btn-sm am-btn-warning am-margin-right am-fr" action="#{typedTagController.saveTypeTags()}"> <i class="am-icon-save"></i> 保存 <f:ajax render="table tabs"/> </h:commandLink>
+            </h:panelGroup>
+        </h:panelGroup>
+
+        <h:panelGroup id="table" rendered="#{typedController.bean.id gt 0}">
+            <h:panelGrid columns="2" styleClass="am-table tableForm" columnClasses="w60,w300">
+                <c:forEach items="#{typedTagController.groups}" var="group">
+                    <h:outputText value="#{group.name}" title="" styleClass="itemLabel"/>
+                    <h:panelGroup id="group_#{group.id}">
+                        <c:forEach items="#{group.children}" var="tag">
+                            <h:commandLink id="tag_#{tag.code}" value="#{tag.name}" title="#{tag.code}" class="tag_btn am-btn am-btn-sm am-margin-right-xs am-margin-xs am-btn-primary am-btn-hollow am-round #{typedTagController.isActive(group,tag)?'am-active':''}" action="#{typedTagController.selectTag(group,tag)}" >
+                                <f:ajax render="group_#{group.id}"/>
+                            </h:commandLink>
+                        </c:forEach>
+                    </h:panelGroup>
+                </c:forEach>
+            </h:panelGrid>
+        </h:panelGroup>
+
+
+
+    </ui:define>
+
+</ui:composition>
+</html>

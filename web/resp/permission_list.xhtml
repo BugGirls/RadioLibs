@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:composite="http://xmlns.jcp.org/jsf/composite/composite">
+
+<ui:composition template="template.xhtml">
+    <ui:param name="title" value="权限管理"/>
+    <ui:define name="content">
+
+        <div style="float:right;">
+            <composite:searchbox keyword="#{permissionController.keyword}" ctrl="#{permissionController}"/>
+        </div>
+
+        <h:dataTable value="#{permissionController.pageBean.list}" var="row" styleClass="am-table am-table-compact am-table-striped admin-content-table am-table-hover">
+            <h:column styleClass="w200">
+                <f:facet name="header">权限名称</f:facet>
+                <h:outputText value="#{row.name}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">权限地址</f:facet>
+                <h:outputLabel escape="false" value="#{row.urls}"/>
+            </h:column>
+            <h:column styleClass="w200">
+                <f:facet name="header">启用</f:facet>
+                <h:outputLabel styleClass="#{row.status==0?'am-text-danger':''}" value="#{common.yesnoLabel(row.status)}"/>
+            </h:column>
+            <h:column styleClass="w200">
+                <f:facet name="header">
+                    <h:commandLink action="permission_edit.xhtml" class="am-btn am-btn-default am-btn-sm am-btn-warning">
+                        <span class="am-icon-plus"> </span> 新权限
+                    </h:commandLink>
+                </f:facet>
+                <h:panelGroup styleClass="am-btn-toolbar" layout="block">
+                    <div class="am-btn-group am-btn-group-xs">
+                        <div class="am-dropdown" data-am-dropdown="">
+                            <button id="docTypeBtn" class="am-btn am-btn-link am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle="">更多 <span class="am-icon-caret-down"></span></button>
+                            <ul class="am-dropdown-content">
+                                <li><h:commandLink value="编辑" action="#{permissionController.edit(row)}"/></li>
+                                <li><h:commandLink value="#{row.status==1?'禁用':'启用'}" action="#{permissionController.toggle(row)}" onclick="return confirm('确认改变状态吗')"/></li>
+                                <li><h:commandLink value="删除" action="#{permissionController.delete(row)}" onclick="return confirm('确认删除该权限吗？')"/></li>
+                            </ul>
+                        </div>
+                    </div>
+                </h:panelGroup>
+            </h:column>
+        </h:dataTable>
+
+        <composite:pagination ctrl="#{permissionController}"/>
+    </ui:define>
+
+</ui:composition>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:composite="http://xmlns.jcp.org/jsf/composite/composite">
+
+    <ui:composition template="template.xhtml">
+        <ui:param name="title" value="人员和权限"/>
+        <ui:define name="content">
+
+            <div style="float:right;">
+                <composite:searchbox keyword="#{managerController.keyword}" ctrl="#{managerController}"/>
+            </div>
+
+            <h:dataTable value="#{managerController.pageBean.list}" var="row" styleClass="am-table am-table-compact am-table-striped admin-content-table am-table-hover">
+                <h:column>
+                    <f:facet name="header">名称</f:facet>
+                    <h:outputText value="#{row.name}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">角色</f:facet>
+                    <h:outputText value="#{common.asString(row.roleList, 'name')}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">启用</f:facet>
+                    <h:outputText styleClass="#{row.status==0?'am-text-danger':''}" value="#{common.yesnoLabel(row.status)}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                    </f:facet>
+                    <h:panelGroup layout="block">
+                        <h:commandLink value="编辑" action="#{managerController.edit(row)}" styleClass="am-btn am-btn-link am-btn-xs"/>
+                        <div class="am-btn-group am-btn-group-xs">
+                            <div class="am-dropdown" data-am-dropdown="">
+                                <button id="docTypeBtn" class="am-btn am-btn-link am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle="">更多 <span class="am-icon-caret-down"></span></button>
+                                <ul class="am-dropdown-content">
+                                    <li><h:commandLink value="#{row.status==1?'禁用':'启用'}" action="#{managerController.toggle(row)}" onclick="return confirm('确认改变状态吗')"/></li>
+                                    <li><h:commandLink value="清空角色" action="#{managerController.clear(row)}" onclick="return confirm('确认清空角色吗')"/></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </h:panelGroup>
+                </h:column>
+            </h:dataTable>
+
+            <composite:pagination ctrl="#{managerController}"/>
+        </ui:define>
+
+    </ui:composition>
+</html>

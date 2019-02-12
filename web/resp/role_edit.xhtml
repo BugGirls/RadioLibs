@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="template.xhtml">
+    <ui:param name="title" value="角色管理 -> #{roleController.createView() ? '添加' : '更新'}角色"/>
+
+    <ui:define name="content">
+        <h:panelGroup layout="block" styleClass="am-margin am-g">
+            <h:panelGroup layout="block" styleClass="am-u-sm-8">
+                <h2>角色（Role）</h2>
+                <p>提供给用户进行分配</p>
+            </h:panelGroup>
+
+            <h:panelGroup layout="block" styleClass="am-u-sm-4">
+                <h:commandLink styleClass="am-btn am-btn-default am-btn-sm am-btn-warning" action="#{roleController.save()}"> <i class="am-icon-save"></i> 保存 </h:commandLink>
+            </h:panelGroup>
+        </h:panelGroup>
+
+        <h:panelGrid columns="2" styleClass="am-table tableForm" columnClasses="w60,w300">
+            <h:outputText value="角色名称" styleClass="itemLabel"/>
+            <h:inputText value="#{roleController.bean.name}" styleClass="am-form-field am-input-sm"></h:inputText>
+
+            <h:outputText value="权限名称" styleClass="itemLabel"/>
+            <h:selectManyCheckbox value="#{roleController.bean.selectedIds}" styleClass="tableItems">
+                <f:selectItems value="#{roleController.bean.permissionBeanList}" var="permissionBean" itemValue="#{permissionBean.id}" itemLabel="#{permissionBean.name}" />
+            </h:selectManyCheckbox>
+
+            <h:outputText value="启用" styleClass="itemLabel"/>
+            <h:selectOneRadio value="#{roleController.bean.status}" styleClass="tableItems">
+                <f:selectItems value="#{common.fromEnum('YesNo')}" var="item" itemLabel="#{item.name}" itemValue="#{item.code}"/>
+            </h:selectOneRadio>
+        </h:panelGrid>
+
+    </ui:define>
+</ui:composition>
+</html>

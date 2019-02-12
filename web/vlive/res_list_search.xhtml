@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:composite="http://xmlns.jcp.org/jsf/composite/composite" xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+<ui:composition template="template.xhtml">
+    <ui:param name="title" value="资源管理 -> 标签"/>
+    <ui:define name="content">
+        <h:panelGroup id="searchPanel" layout="block" styleClass="am-g am-margin">
+            <div class="am-u-sm-10 am-form-inline" role="form">
+                <div class="am-form-group am-input-group-sm">
+                    <h:inputText value="#{resController.keyword}" styleClass="am-form-field" p:placeholder="歌曲名、演唱"/>
+                </div>
+                <div class="am-form-group am-input-group-sm">
+                    <div class="am-dropdown" data-am-dropdown="">
+                        <a class="am-btn am-btn-xs am-btn-default am-dropdown-toggle" data-am-dropdown-toggle="">选择标签 <h:outputLabel class="am-badge am-badge-danger" rendered="#{resController.selectedTags.size() gt 0}">#{resController.selectedTags.size()}</h:outputLabel></a>
+                        <div class="am-dropdown-content" style="width: 800px; height: 660px; overflow:scroll;">
+                            <h:panelGroup layout="block" rendered="#{resController.selectedTags.size() gt 0}" styleClass="am-fr">
+                                <h:commandLink styleClass="am-btn am-btn-default am-btn-sm am-btn-danger" action="#{resController.clearSelectTags()}"> 清除所选 </h:commandLink>
+                            </h:panelGroup>
+                            <c:forEach items="#{resController.tagGroups}" var="group">
+                                <h:outputText value="#{group.name}" styleClass="grey"/>
+                                <p>
+                                    <c:forEach items="#{group.children}" var="tag">
+                                        <h:commandLink id="tag_#{tag.code}" value="#{tag.name}" title="#{tag.code}" class="tag_btn am-btn am-btn-sm am-margin-xs am-btn-primary am-btn-hollow am-round #{resController.isActive(group,tag)?'am-active':''}" action="#{resController.selectTag(group,tag)}">
+                                        </h:commandLink>
+                                    </c:forEach>
+                                    <h:outputText value="" styleClass="grey am-margin-left"/>
+                                </p>
+                            </c:forEach>
+                        </div>
+                    </div>
+                </div>
+                <div class="am-form-group am-input-group-sm">
+                    <h:commandLink styleClass="am-btn am-btn-default am-btn-sm am-btn-primary" action="#{resController.pagination()}"> <i class="am-icon-search"></i> 检索 </h:commandLink>
+                </div>
+            </div>
+            <h:panelGroup styleClass="am-u-sm-2 am-text-right">
+                <audio id="player" style="width:80px;" src="" controls="controls" autoplay="autoplay"></audio>
+            </h:panelGroup>
+        </h:panelGroup>
+        <hr class="am-list"/>
+        <h:panelGroup layout="block" id="table_list">
+            <h:dataTable value="#{resController.pageBean.list}" var="row" styleClass="am-table am-table-compact am-table-striped admin-content-table am-table-hover">
+                <h:column>
+                    <f:facet name="header">ID</f:facet>
+                    <h:outputText value="#{row.id}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">类别</f:facet>
+                    <h:outputText value="#{common.categoryLabel(row.category)}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">题名</f:facet>
+                    <h:outputText value="#{row.title_proper}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">创建者</f:facet>
+                    <h:outputText value="#{row.singer}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">标签</f:facet>
+                    <h:panelGroup layout="block" class="am-dropdown" p:data-am-dropdown="">
+                        <h:outputText class="am-badge am-badge-default am-radius am-margin-xs am-dropdown-toggle" p:data-am-dropdown-toggle="" value="#{row.tagBeanList.size()}" rendered="#{row.tagBeanList.size() gt 0}"/>
+                        <div class="am-dropdown-content" style="width: 500px;">
+                            <h:outputText escape="false" value="#{common.resTagAsDescription(row)}"/>
+                        </div>
+                    </h:panelGroup>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">生命期</f:facet>
+                    <h:outputText value="#{common.lifeLabel(row.lifetime)}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">时长</f:facet>
+                    <h:outputText value="#{common.duration(row.format_duration)}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">上传人</f:facet>
+                    <h:outputText value="#{common.manager(row.manager_id).name}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">创建/修改时间</f:facet>
+                    <h:panelGroup>
+                        <h:outputText styleClass="am-text-xs am-block" value="#{row.createtime}"/>
+                        <h:outputText styleClass="am-text-xs am-block" value="#{row.updatetime}"/>
+                    </h:panelGroup>
+                </h:column>
+                <h:column>
+                    <f:facet name="header"></f:facet>
+                    <a class="resPathForPlay am-btn am-btn-link" data-url="${row.path}" title="播放"><i class="am-icon-play-circle am-text-xs"></i></a>
+                </h:column>
+
+            </h:dataTable>
+        </h:panelGroup>
+
+        <composite:pagination ctrl="#{resController}"/>
+
+    </ui:define>
+
+</ui:composition>
+</html>

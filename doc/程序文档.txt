@@ -1,0 +1,30 @@
+部署时，web.xml里：
+   1 javax.faces.PROJECT_STAGE = Production
+   2 移除gen.jsp里的代码
+   3 移除login.xhtml里的代码
+
+
+
+
+
+
+APPID
+
+  {
+    "appID": "hngbAudioLibs9983",
+    "appSecret": "kdf120d8ca_AUDIOLIBS_we9cknzsqF01gayuwskjz"
+  },
+  {
+    "appID": "hngbTypedPrograms053z23",
+    "appSecret": "aiyaz_TypedPrograms_6hhcvw"
+  }
+
+
+
+写在java类Enum中的枚举型
+category,visibility
+
+用数据库表enumeration保存的枚举型
+语种,     资料获取方式(source_acquired),
+
+

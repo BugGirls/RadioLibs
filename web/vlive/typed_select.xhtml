@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:composite="http://xmlns.jcp.org/jsf/composite/composite" xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<ui:composition template="template.xhtml">
+    <ui:define name="content">
+        <h:panelGroup layout="block" styleClass="am-g am-margin">
+            <h:panelGroup styleClass="am-u-sm-2">
+                <composite:switch ctrl="#{typedController}" property="#{typedController.channel_id}" items="#{common.fromChannels()}" source="entity" firstItem="请选择所属频率"/>
+            </h:panelGroup>
+            <h:panelGroup styleClass="am-u-sm-2">
+                <composite:switch ctrl="#{typedController}" property="#{typedController.res_category}" items="#{common.fromEnum('Category')}" source="enum" firstItem="请选择资源类型"/>
+            </h:panelGroup>
+            <h:panelGroup styleClass="am-u-sm-8"/>
+        </h:panelGroup>
+        <hr class="am-list"/>
+        <c:set value="#{typedController.getTypedList()}" var="typedList" scope="view"/>
+        <h:panelGroup layout="block" id="table_list" >
+            <h:dataTable value="#{typedList}" var="row" styleClass="CheckboxRow am-table am-table-compact am-table-striped am-table-hover">
+                <label class="am-checkbox-inline">
+                    <h:column styleClass="w30">
+                        <f:facet name="header"></f:facet>
+                        <input type="checkbox" id="#{row.id}" value="#{row.id}"/>
+                    </h:column>
+                    <h:column styleClass="w50">
+                        <f:facet name="header">ID</f:facet>
+                        <h:outputText value="#{row.id}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">所属频率</f:facet>
+                        <h:outputText value="#{common.channel(row.channel_id).name}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">资源类别</f:facet>
+                        <h:outputText value="#{common.categoryLabel(row.res_category)}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">预留</f:facet>
+                        <h:outputText value="#{common.yesnoLabel(row.placeholder)}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">个数</f:facet>
+                        <h:outputText value="#{row.amount}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">保持完整</f:facet>
+                        <h:outputText value="#{common.yesnoLabel(row.unitary)}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">顺序</f:facet>
+                        <h:outputText value="#{common.ordinal(row.ordinal)}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">间隔</f:facet>
+                        <h:outputText value="#{common.intervals(row.intervals)}"/>
+                    </h:column>
+                    <h:column styleClass="w500">
+                        <f:facet name="header">标签</f:facet>
+                        <h:outputText value="#{common.typedAsDescription(row)}" escape="false"/>
+                    </h:column>
+                </label>
+            </h:dataTable>
+        </h:panelGroup>
+
+    </ui:define>
+</ui:composition>
+
+</html>

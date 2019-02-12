@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:c="http://java.sun.com/jsp/jstl/core">
+<ui:composition template="template.xhtml">
+    <ui:param name="title" value="钟型管理 -> #{clockController.createView() ? '添加' : '更新'}钟型"/>
+    <ui:define name="content">
+        <script src="/resources/js/Chart.js"></script>
+        #{sequenceController.reset()}
+        <c:set value="#{clockController.pie()}" var="pieData"/>
+        <h:panelGroup layout="block" styleClass="am-margin am-g">
+            <h:panelGroup layout="block" styleClass="am-u-sm-8">
+                <h2>钟型（Clock）</h2>
+                <p>一个小时内的类型化节目单</p>
+            </h:panelGroup>
+            <h:panelGroup layout="block" styleClass="am-u-sm-4">
+                <h:commandLink styleClass="am-btn am-btn-default am-btn-sm am-btn-warning am-margin-right am-fr" action="#{clockController.save()}"> <i class="am-icon-save"></i> 保存 </h:commandLink>
+            </h:panelGroup>
+        </h:panelGroup>
+
+        <h:panelGroup id="table">
+            <h:panelGrid columns="4" styleClass="am-table tableForm" columnClasses="w140,w300">
+                <h:outputText value="管理员" styleClass="itemLabel"/>
+                <h:outputLabel id="programManager" value="#{common.manager(clockController.bean.manager_id).name}"/>
+
+                <h:outputText value="钟型名称" styleClass="itemLabel"/>
+                <h:inputText id="programlName" value="#{clockController.bean.name}" styleClass="am-form-field am-input-sm w300"></h:inputText>
+
+                <h:outputText value="持续时长" styleClass="itemLabel"/>
+                <h:selectOneMenu id="programDuration" value="#{clockController.bean.duration}" styleClass="am-form-field am-input-sm">
+                    <f:selectItems value="#{common.fromEnum('Duration')}" var="item" itemLabel="#{item.name}" itemValue="#{item.code}"/>
+                </h:selectOneMenu>
+
+                <h:outputText value="所属频率" styleClass="itemLabel"/>
+                <h:selectOneMenu id="programChannel" value="#{clockController.bean.channel_id}" styleClass="am-form-field am-input-sm w300">
+                    <f:selectItem itemValue="0" itemLabel="所有频率"/>
+                    <f:selectItems value="#{clockController.bean.channelList}" var="bean" itemLabel="#{bean.name}" itemValue="#{bean.id}"></f:selectItems>
+                </h:selectOneMenu>
+
+                <h:outputText value="钟型状态" styleClass="itemLabel"/>
+                <h:selectOneRadio styleClass="tableItems" value="#{clockController.bean.status}">
+                    <f:selectItems value="#{common.fromEnum('Status')}" var="item" itemValue="#{item.code}" itemLabel="#{item.name}"/>
+                </h:selectOneRadio>
+
+                <h:outputText value="" styleClass=""/>
+                <h:inputText value="#{clockController.bean.typed_ids}" id="selectTyped" styleClass="am-hide">
+                    <!--当执行完成getCheckTypedList()方法后，刷新id为typed_list的panelGroup-->
+                    <f:ajax render="typedList" listener="#{clockController.getCheckTypedList()}"/>
+                </h:inputText>
+            </h:panelGrid>
+        </h:panelGroup>
+
+        <div class="am-center">
+            <!--<div style="height: 450px; width: 850px;" class="am-center">-->
+                <!--<canvas id="myChart"></canvas>-->
+            <!--</div>-->
+        </div>
+
+        <script>
+            // var ctx = document.getElementById("myChart").getContext('2d');
+            // var myChart = new Chart(ctx, {
+            //     type: 'doughnut',
+            //     data: {
+            //         labels: #{common.json(pieData.keySet())},
+            //         datasets: [{
+            //             label: '',
+            //             data: #{common.json(pieData.values())},
+            //             backgroundColor: #{common.json(pieData.keySet())},
+            //             borderColor: #{common.json(pieData.keySet())},
+            //             borderWidth: 1
+            //         }]
+            //     },
+            //     options: {
+            //
+            //     }
+            // });
+        </script>
+
+        <h:panelGroup layout="block" styleClass="am-margin am-g">
+            <div class="am-u-sm-8">
+                <h2>此钟型包含的规则</h2>
+                <p>按次序播放此钟型的规则，超过持续时长则截断</p>
+            </div>
+            <div class="am-u-sm-4">
+                <h:commandButton type="button" value="选取规则" styleClass="clockTyped am-btn am-btn-warning am-btn-sm am-margin-right am-fr"/>
+            </div>
+        </h:panelGroup>
+
+        <h:panelGroup id="typedList">
+            <h:dataTable value="#{clockController.bean.typedList}" var="row" styleClass="am-table am-table-compact am-table-striped am-table-hover">
+                <h:column styleClass="w50">
+                    <f:facet name="header">序号</f:facet>
+                    <h:panelGroup style="background-color: ${row.color};height:22px; width:32px; font-size:12px;" layout="block" styleClass="am-radius am-text-center am-text-sm">
+                        <h:outputText value="#{sequenceController.next()}" style="color: white"/>
+                    </h:panelGroup>
+                </h:column>
+                <h:column styleClass="w50">
+                    <f:facet name="header">ID</f:facet>
+                    <h:outputText value="#{row.id}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">类别</f:facet>
+                    <h:outputText value="#{common.categoryLabel(row.res_category)}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">预留</f:facet>
+                    <h:outputText styleClass="#{row.placeholder==1?'am-text-danger':''}" value="#{common.yesnoLabel(row.placeholder)}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">保持完整</f:facet>
+                    <h:outputText styleClass="#{row.unitary==1?'am-text-danger':''}" value="#{common.yesnoLabel(row.unitary)}"/>
+                </h:column>
+                <h:column styleClass="w100">
+                    <f:facet name="header">顺序</f:facet>
+                    <h:outputText value="#{common.ordinal(row.ordinal)}"/>
+                </h:column>
+                <h:column styleClass="w100">
+                    <f:facet name="header">间隔</f:facet>
+                    <h:outputText value="#{common.intervals(row.intervals)}"/>
+                </h:column>
+                <h:column styleClass="w100">
+                    <f:facet name="header">个数</f:facet>
+                    <h:outputText value="#{row.amount}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">规则标签</f:facet>
+                    <h:panelGroup layout="block" styleClass="">
+                        <h:outputText value="#{common.typedAsDescription(row)}" escape="false"/>
+                    </h:panelGroup>
+                </h:column>
+                <h:column styleClass="w150">
+                    <f:facet name="header"></f:facet>
+                    <h:panelGroup styleClass="am-btn-toolbar" layout="block">
+                        <div class="am-btn-group am-btn-group-xs">
+                            <h:commandLink styleClass="am-btn am-btn-link am-padding-right-0" action="#{clockController.up(row)}"><i class="am-icon-arrow-circle-up"></i></h:commandLink>
+                            <h:commandLink styleClass="am-btn am-btn-link am-padding-right-0" action="#{clockController.down(row)}"><i class="am-icon-arrow-circle-down"></i></h:commandLink>
+                            <h:commandLink styleClass="am-btn am-btn-link am-padding-right-0" action="#{clockController.removeSelectedTyped(row)}" onclick="return confirm('确认删除该规则吗')"><i class="am-icon-remove"></i></h:commandLink>
+                        </div>
+                        <div class="am-dropdown" data-am-dropdown="">
+                            <a class="am-dropdown-toggle am-btn am-btn-link am-padding-right-0 am-btn-xs" data-am-dropdown-toggle=""><i class="am-icon-arrows am-text-warning" style="font-size: 12px;"></i></a>
+                            <h:panelGroup id="moveRow" styleClass="am-dropdown-content am-text-default w350">
+                                <p class="am-text-default">要把这一行移动到第几行的位置上？</p>
+                                <h:inputText styleClass="am-input-sm am-margin-vertical w90" value="#{row.sequence}" immediate="true"/>
+                                <h:commandLink styleClass="am-btn am-btn-secondary am-btn-xs am-align-right w60" action="#{clockController.move(row)}" value="移动"> </h:commandLink>
+                            </h:panelGroup>
+                        </div>
+                    </h:panelGroup>
+                </h:column>
+            </h:dataTable>
+        </h:panelGroup>
+
+        <script>
+            $(function () {
+                $(".clockTyped").on('click', function () {
+                    var primaryId = $("#selectTyped").val();
+
+                    // 页面层
+                    layer.open({
+                        type: 2,// 层类型
+                        skin: 'layer-ext-moon', // 皮肤
+                        area: ['80%', '80%'], // 宽高
+                        title: "规则选取",// 标题
+                        closeBtn: 2,// 关闭按钮样式
+                        shadeClose: false,// 是否点击遮罩关闭
+                        anim: 2,// 弹出动画
+                        btn: ['确定'],
+                        content: "typed_select.xhtml",// 内容
+                        yes: function (index, layero) {// 点击确定按钮后的回调函数
+                            var body = layer.getChildFrame('body', index);
+                            var inputList = body.find('input:checkbox');
+                            var ids = [];
+                            if (primaryId) {
+                                ids.push(primaryId);
+                            }
+                            inputList.each(function (index, obj) {
+                                if ($(this).is(':checked')) {
+                                    ids.push($(this).val());
+                                }
+                            })
+
+                            // trigger()方法：当值改变时触发
+                            $("#selectTyped").val(ids).trigger("change");
+
+                            layer.close(index);
+                        }
+                    });
+                });
+
+            })
+        </script>
+    </ui:define>
+
+</ui:composition>
+
+</html>

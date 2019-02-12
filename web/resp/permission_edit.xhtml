@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="template.xhtml">
+    <ui:param name="title" value="权限管理 -> #{permissionController.createView() ? '添加' : '更新'}权限"/>
+
+    <ui:define name="content">
+        <h:panelGroup layout="block" styleClass="am-margin am-g">
+            <h:panelGroup layout="block" styleClass="am-u-sm-8">
+                <h2>权限（Permission）</h2>
+                <p>角色所拥有的功能</p>
+            </h:panelGroup>
+
+            <h:panelGroup layout="block" styleClass="am-u-sm-4">
+                <h:commandLink styleClass="am-btn am-btn-default am-btn-sm am-btn-warning" action="#{permissionController.save()}"> <i class="am-icon-save"></i> 保存 </h:commandLink>
+            </h:panelGroup>
+        </h:panelGroup>
+
+        <h:panelGrid columns="2" styleClass="am-table tableForm" columnClasses="w60,w300">
+            <h:outputText value="权限名称" styleClass="itemLabel"/>
+            <h:inputText value="#{permissionController.permissionBean.name}" styleClass="am-form-field am-input-sm"></h:inputText>
+
+            <h:outputText value="权限地址" styleClass="itemLabel"/>
+            <h:inputTextarea value="#{permissionController.permissionBean.urls}" rows="7" cols="40" styleClass="am-form-field am-input-sm"></h:inputTextarea>
+
+            <h:outputText value="启用" styleClass="itemLabel"/>
+            <h:selectOneRadio value="#{permissionController.permissionBean.status}" styleClass="tableItems">
+                <f:selectItems value="#{common.fromEnum('YesNo')}" var="item" itemLabel="#{item.name}" itemValue="#{item.code}"/>
+            </h:selectOneRadio>
+        </h:panelGrid>
+
+    </ui:define>
+</ui:composition>
+</html>

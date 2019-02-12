@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" xmlns:com="http://xmlns.jcp.org/jsf/composite/composite" xmlns:hndt="http://hndt.com/composite" xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+<f:view contentType="text/html; charset=utf-8" />
+<h:head>
+    <f:metadata><f:viewAction action="#{feature.clearSession()}"/></f:metadata>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="renderer" content="webkit"/>
+    <script src="/resources/js/jquery-1.9.1.min.js"></script>
+    <script src="/resources/amazeui/js/amazeui.min.js"></script>
+    <script src="/resources/layer/layer.js"></script>
+    <link rel="stylesheet" href="/resources/amazeui/css/amazeui.min.css"/>
+</h:head>
+<h:body>
+
+    <h:form id="frm" acceptcharset="utf-8" prependId="false" styleClass="am-form">
+        <button onclick="myJsClientFunction({user:'pysh008'}); return false;">来吧!</button>
+        <h:commandScript name="myJsClientFunction" execute="@form" action="#{feature.doit()}" render=":output" />
+        <h:outputText id="output" value="#{sessionScope.get('user')}" />
+
+        <h:outputScript>
+            var o = new Date();
+            console.log(o);
+        </h:outputScript>
+
+        <h:dataTable var="entry" value="#{feature.fmap}" styleClass="am-table am-table-compact am-table-striped admin-content-table am-table-hover am-margin">
+            <h:column>#{entry.key}</h:column>
+            <h:column>#{entry.value}</h:column>
+        </h:dataTable>
+    </h:form>
+
+
+    <h:panelGroup id="panelgroup">
+        <h:form id="form">
+            <h:button id="button" >Button foo</h:button>
+            <h:commandButton id="commandButton" action="#{feature.doit()}" value="invoke foo"/>
+            <h:outputText id="body" value="body"/>
+        </h:form>
+    </h:panelGroup>
+
+
+</h:body>
+
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+<f:view contentType="text/html; charset=utf-8"/>
+<h:head>
+    <title>后台管理</title>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="renderer" content="webkit"/>
+    <script src="/resources/js/jquery-1.9.1.min.js"></script>
+    <script src="/resources/amazeui/js/amazeui.min.js"></script>
+    <script src="/resources/layer/layer.js"></script>
+    <link rel="stylesheet" href="/resources/amazeui/css/amazeui.min.css"/>
+    <link rel="stylesheet" href="/resources/css/system.css"/>
+    <link rel="stylesheet" href="/resources/css/width.css"/>
+    <script src="/resources/amazeui/js/system.js?v=beta"></script>
+    <script src="/resources/layer/layer.js"/>
+    <ui:insert name="headExtra"/>
+</h:head>
+
+<h:body>
+    <h:form id="frm" acceptcharset="utf-8" prependId="false" enctype="#{enctype==null?'multipart/form-data':enctype}" styleClass="am-form">
+        <div class="am-g" style="background-color: #fffcfc; height: 45px; line-height: 30px;">
+            <div class="am-u-md-4 am-padding-xs am-margin-left-sm am-text-nowrap">
+                <span class="am-text-primary am-text-sm">${title}</span>
+            </div>
+            <div class="am-u-md-6 am-padding-xs">
+                <div class="am-cf am-text-right am-padding-right">
+                    <ui:insert name="tools"/>
+                </div>
+            </div>
+        </div>
+        <h:panelGroup id="form" layout="block" styleClass="">
+            <div class="am-margin-xs">
+                <ui:insert name="content"/>
+            </div>
+        </h:panelGroup>
+    </h:form>
+</h:body>
+
+</html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:p="http://xmlns.jcp.org/jsf/passthrough" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:c="http://java.sun.com/jsp/jstl/core">
+<ui:composition template="template.xhtml">
+    <ui:param name="title" value="节目单预览"/>
+
+    <ui:define name="content">
+
+        <div>
+            <!--日历选择插件，选取日期-->
+            <div id="datetimepicker">
+                <h:inputText value="#{programController.dateValue}" id="selectDate" styleClass="am-form-field am-hide">
+                    <f:ajax render="program_list" listener="#{programController.onChangeDate()}"/>
+                </h:inputText>
+            </div>
+            <div>
+                <audio id="audios" style="width: 260px;z-index: 10000000; top: 404px; left: 11px; position: absolute;" src="" controls="controls" autoplay="autoplay">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+        </div>
+
+
+        <!--节目单预览-->
+        <h:panelGroup style="float: left;margin-top: 10px;margin-left:280px;width: 1020px;" id="top">
+            <div class="am-panel am-panel-default">
+                <div class="am-panel-hd">
+                    <strong class="am-text-secondary">频率：</strong><span>#{common.channel(programController.bean.channel_id).name} [#{common.channel(programController.bean.channel_id).uuid}]</span>
+                    <strong class="am-text-secondary">节目单：</strong><span>#{programController.bean.name} </span>
+                    <strong class="am-text-secondary  am-margin-left">播放时段：</strong><span>#{programController.bean.startStr} - #{programController.bean.endStr}</span>
+                    <h:commandLink value="生成次日节目单" title="生成次日节目单，会重取文件会重新挑选音频资源并覆盖现有数据" action="#{programController.pick()}" styleClass="am-margin-left am-text-danger" onclick="return confirm('生成次日节目单，会重取文件会重新挑选音频资源并覆盖现有数据。要继续吗？')"/>
+                </div>
+                <div class="am-padding am-center">
+                    <span class="am-icon-warning am-text-warning"></span>当天的节目单播放清单未开播的部分，可调整顺序、删除音频。
+                </div>
+
+                <h:panelGroup id="anchors" class="am-btn-group am-padding">
+                    <c:set value="#{common.hours()}" var="hours"></c:set>
+                    <ui:repeat value="#{hours}" var="h">
+                        <a type="button" id="#anchor_${h}" class="am-btn am-btn-default am-btn-xs anchor">#{h}</a>
+                    </ui:repeat>
+                    <h:commandLink class="am-btn am-btn-default am-btn-xs" action="#{programController.findCurrentPlayItem()}"><i class="am-icon-anchor am-text-warning"></i>
+                        <f:ajax render="anchors"/>
+                    </h:commandLink>
+                </h:panelGroup>
+
+                <h:panelGroup id="program_list" styleClass="">
+                    <ui:repeat value="#{programController.bean.clockBeanList}" var="clock" varStatus="cvars">
+                        <div id="anchor_#{common.hour(clock.starttime)}"><a name="#{common.hour(clock.starttime)}"></a></div>
+                        <div class="am-text-sm am-padding">
+                            <h:panelGrid columns="2">
+                                <h:panelGroup>
+                                    <span class="am-icon-clock-o" title="#{cvars}"></span>  #{clock.name} 【#{clock.starttime} - #{clock.endtime}】
+                                </h:panelGroup>
+                            </h:panelGrid>
+
+                            <div class="am-btn-group am-btn-group-xs" style="float: right;">
+                                <h:commandLink id="click_#{clock.id}" p:clock_id="#{clock.id}" styleClass="programRes am-btn am-btn-link" disabled="true" title="添加资源"><i class="am-icon-plus"></i></h:commandLink>
+                                <h:inputText id="resId_#{clock.id}" value="#{programController.resIds}" styleClass="selectRes resId_#{clock.id} am-hide">
+                                    <f:ajax render="program_list" execute="resId_#{clock.id}" listener="#{programController.saveSelectedRes(programController.bean, clock)}" onevent="refresh" />
+                                </h:inputText>
+                            </div>
+                        </div>
+
+                        <ul class="am-list am-list-static am-margin-left am-margin-top">
+                            <h:outputLabel value="暂无节目" rendered="#{programController.isNull(clock.runtimeList)}"/>
+                            <ui:repeat value="#{clock.runtimeList}" var="runtime">
+                                <li id="anchor_${runtime.id}">
+                                    <span title="资源:${runtime.id},${runtime.resBean.path},resId=${runtime.res_id}" class="${runtime.placeholder==1?'am-text-warning':''}"><i class="am-icon-circle" style="color: ${runtime.typedBean.color}"></i> ${runtime.resBean.title_proper} <i class="grey">#{runtime.resBean.singer}</i> <span
+                                            class="am-text-secondary">${common.manager(runtime.resBean.manager_id).name}</span></span>
+                                    <span class="am-margin-left">时长：${common.duration( runtime.resBean.format_duration ) }</span>
+                                    <span class="am-margin-left">预计：${runtime.expectedToPlay}</span>
+                                    <div class="am-btn-group am-btn-group-xs" style="float: right;">
+                                        <a class="am-btn am-btn-link am-padding-right-0" data-url="${runtime.resBean.path}" title="播放"><i class="am-icon-play-circle am-text-xs"></i></a>
+                                        <h:commandLink styleClass="am-btn am-btn-link am-padding-right-0 "   onclick="updown(this)" action="#{programController.upRes(runtime)}" title="向上移动" ><i class="am-icon-arrow-circle-up" dataid="anchor_#{common.hour(clock.starttime)}"></i></h:commandLink>
+                                        <h:commandLink styleClass="am-btn am-btn-link am-padding-right-0" onclick="updown(this)" action="#{programController.downRes(runtime)}" title="向下移动"><i class="am-icon-arrow-circle-down"  dataid="anchor_#{common.hour(clock.starttime)}"></i></h:commandLink>
+                                        <h:commandLink styleClass="am-btn am-btn-link am-padding-right del"  action="#{programController.removeRuntimeById(runtime.id)}" onclick="return confirm('确认要删除该信息吗？')" title="删除资源"><i class="am-icon-remove" dataid="anchor_#{common.hour(clock.starttime)}"></i></h:commandLink>
+                                    </div>
+                                </li>
+                            </ui:repeat>
+                            <li style="background-color: #ffffdd"><h:outputText value="#{programController.clockWarning(clock)}" escape="false"/></li>
+                        </ul>
+                    </ui:repeat>
+                </h:panelGroup>
+            </div>
+        </h:panelGroup>
+
+        <div data-am-sticky="{bottom:80}" style="float: right;" class="am-margin">
+            <a id="gotop" class="am-btn"><i class="am-icon-rocket am-text-xxl am-text-warning"></i></a>
+        </div>
+
+        <script>
+
+            function goCurrentPlayItem(rid) {
+                $(".am-list>li").removeClass("running");
+                $(".am-list>li#anchor_" + rid).addClass("running");
+                $('html, body').animate({
+                    scrollTop: $("#anchor_" + rid).offset().top - 200
+                }, 500);
+            }
+
+            function refresh(e) {
+                if (e.status == 'success') {
+                    $("#selectDate").trigger("change");
+                }
+            }
+
+            function updown(tag) {
+                var tapid = $(tag).children().eq(0).attr("dataid");
+                localStorage.setItem('tapid',tapid)
+            }
+
+            $(".del").bind("click",function(){
+                var tapid = $(this).children().eq(0).attr("dataid");
+                localStorage.setItem('tapid',tapid);
+            })
+
+            var popupLayer = function () {
+                var clock_id = $(this).attr("clock_id");
+
+                //页面层
+                layer.open({
+                    type: 2,// 层类型
+                    skin: 'layer-ext-moon', // 皮肤
+                    area: ['80%', '80%'], // 宽高
+                    title: "资源选取",// 标题
+                    closeBtn: 2,// 关闭按钮样式
+                    shadeClose: false,// 是否点击遮罩关闭
+                    anim: 2,// 弹出动画
+                    btn: ['确定'],
+                    content: "res_list_select.xhtml",// 内容
+                    yes: function (index, layero) {// 点击确定按钮后的回调函数
+                        var body = layer.getChildFrame('body', index);
+                        var inputList = body.find('input:checkbox');
+                        var ids = "";
+                        inputList.each(function (index, obj) {
+                            if ($(this).is(':checked')) {
+                                ids += $(this).val();
+                                ids += ',';
+                            }
+                        });
+                        ids = ids.substring(0, ids.lastIndexOf(','));
+                        ids += "";
+                        console.log("ids",ids);
+                        // trigger()方法：当值改变时触发
+
+                        $(".resId_" + clock_id).val(ids).trigger("change");
+                        $("#selectDate").trigger("change");
+                        layer.close(index);
+                    }
+                });
+            }
+
+            $(function () {
+
+                $(document).on("click", "#gotop", function (e) {
+                    $('html, body').animate({
+                        scrollTop: $("body").offset().top - 200
+                    }, 500);
+                });
+
+                $(document).on("click", ".anchor", function (e) {
+                    $('html, body').animate({
+                        scrollTop: $("#anchor_" + $(this).html()).offset().top - 80
+                    }, 500);
+                });
+
+                $('#datetimepicker').datepicker({
+                    format: 'yyyy-mm-dd',
+                    viewMode: 0,
+                    autoClose: false,
+                    theme: 'warning',
+                    date: '#{programController.selectFormatDate}'
+                }).on('changeDate.datepicker.amui', function (ev) {// 时间日期发生修改时触发
+                    $("#selectDate").val(ev.date.valueOf()).trigger("change");
+                });
+                $(document).on('click', '.programRes', popupLayer);
+
+                //得到要滚动的高度
+                var tapHeight = localStorage.getItem('tapid')
+                //如果有值的话滚动到指定高度 并清除缓存带来的影响
+                if(tapHeight){
+                    $('html, body').animate({
+                        scrollTop: $("#"+tapHeight).offset().top - 80
+                    }, 500);
+                    localStorage.removeItem('tapid')
+                }
+
+                $(".am-list .am-icon-play-circle").on("click", function () {
+                    var url = $(this).parent().data("url");
+                    $("#audios").attr("src", url);
+                });
+            });
+
+
+        </script>
+
+        <style>
+            .am-datepicker {
+                display: block;
+                margin-top: 60px;
+                margin-left: 10px;
+            }
+
+            #program_list {
+                -webkit-box-shadow: 0 0 10px rgba(170, 170, 170, .5);
+                -moz-box-shadow: 0 0 10px rgba(170, 170, 170, .5);
+                box-shadow: 0 0 10px rgba(170, 170, 170, .5);
+            }
+
+            .am-list > li.running {
+                background-color: #ffffaa;
+            }
+
+
+        </style>
+    </ui:define>
+</ui:composition>
+
+</html>

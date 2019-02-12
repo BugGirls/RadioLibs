@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:com="http://xmlns.jcp.org/jsf/composite/composite" xmlns:p="http://xmlns.jcp.org/jsf/passthrough" xmlns:c="http://java.sun.com/jsp/jstl/core">
+<ui:composition template="template.xhtml">
+    <ui:param name="title" value="资源库管理 - 题名"/>
+    <ui:define name="tools">
+        <h:commandLink styleClass="am-btn am-btn-default am-btn-sm am-btn-warning" action="#{resTitleController.save()}"> <i class="am-icon-save"></i> 保存 </h:commandLink>
+    </ui:define>
+    <ui:define name="content">
+        <h:panelGroup id="tabs">
+            <com:resTab ctrl="#{resTitleController}"/>
+        </h:panelGroup>
+
+        <h:panelGroup styleClass="am-margin">
+            <h2>题名(Title)</h2>
+            <p>创建者或标引者赋予该音频资料的正式名称</p>
+        </h:panelGroup>
+
+        <h:panelGroup id="table">
+            <h:panelGrid columns="2" styleClass="am-table tableForm" columnClasses="w20,w300">
+
+                <h:outputText value="正题名" title="音频资料的正式名称" styleClass="itemLabel"/>
+                <h:inputText id="title_proper" value="#{resTitleController.bean.title_proper}" styleClass="am-form-field am-input-sm"></h:inputText>
+
+                <h:outputText value="并列正题名" title="正题名的其他语种表示" styleClass="itemLabel"/>
+                <h:inputText id="title_parallel" value="#{resTitleController.bean.title_parallel}" styleClass="am-form-field am-input-sm"></h:inputText>
+
+                <h:outputText value="其他题名" title="从属于正题名的解释或补充" styleClass="itemLabel"/>
+                <h:inputText id="title_other" value="#{resTitleController.bean.title_other}" styleClass="am-form-field am-input-sm"></h:inputText>
+
+                <h:outputText value="交替题名" title="正题名的别名" styleClass="itemLabel"/>
+                <h:inputText id="title_alternative" value="#{resTitleController.bean.title_alternative}" styleClass="am-form-field am-input-sm"></h:inputText>
+
+                <h:outputText value="系列题名" title="音频资料所属系列的名称" styleClass="itemLabel"/>
+                <h:inputText id="title_series" value="#{resTitleController.bean.title_series}" styleClass="am-form-field am-input-sm"></h:inputText>
+
+                <h:outputText value="系列号" title="在系列中的顺序号" styleClass="itemLabel"/>
+                <h:inputText id="sequence" value="#{resTitleController.bean.sequence}" styleClass="am-form-field am-input-sm"></h:inputText>
+
+            </h:panelGrid>
+        </h:panelGroup>
+
+
+    </ui:define>
+
+</ui:composition>
+</html>

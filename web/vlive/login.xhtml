@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" xmlns:com="http://xmlns.jcp.org/jsf/composite/composite" xmlns:hndt="http://hndt.com/composite" xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+<f:view contentType="text/html; charset=utf-8"/>
+<h:head>
+    <title>后台管理</title>
+    <meta name="renderer" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <script src="/resources/js/jquery-1.9.1.min.js"></script>
+    <script src="/resources/amazeui/js/amazeui.min.js"></script>
+    <script src="/resources/layer/layer.js"></script>
+    <link rel="stylesheet" href="/resources/amazeui/css/amazeui.css"/>
+    <link rel="stylesheet" href="/resources/css/system.css"/>
+    <link rel="stylesheet" href="/resources/css/width.css"/>
+    <link rel="stylesheet" href="/resources/css/login.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+
+    <script>
+        function tagclick(tag) {
+            $("#life").attr("value", "45,67,89");
+        }
+    </script>
+    <c:if test="#{sessionScope.manager==null and not(common.localhost())}">
+        <script>
+            if (top.location != self.location) {
+                //top.location = "login.xhtml" + this.location.search;
+                top.location = "http://uc.hndt.com" + this.location.search;
+            }
+        </script>
+    </c:if>
+    <c:if test="#{sessionScope.manager==null and common.localhost()}">
+        <script>
+            if (top.location != self.location) {
+            top.location = "login.xhtml" + this.location.search;
+            }
+        </script>
+    </c:if>
+</h:head>
+<h:body>
+
+    <h:panelGroup layout="block" id="messages" class="am-text-center">
+        <h:messages style="margin: 0;" errorClass="tipError" infoClass="tipInfo" fatalClass="tipFatal" styleClass="am-alert am-alert-danger"/>
+    </h:panelGroup>
+    <h:form id="frm" acceptcharset="utf-8" prependId="false" styleClass="am-form"  rendered="#{common.localhost()}">
+
+        <div class="login_form">
+            <div class="am-g">
+                <div class="am-u-sm-12 am-text-center am-margin-bottom-xl">
+                    <i class="am-icon-music myapp-login-logo"></i>
+                </div>
+                <div class="am-u-sm-11 am-u-sm-centered">
+                    <fieldset class="myapp-login-form am-form-set">
+                        <div class="am-form-group am-form-icon">
+                            <i class="am-icon-user"></i>
+                            <h:inputText styleClass="myapp-login-input-text am-form-field" id="email" value="#{loginController.bean.name}" p:placeholder="用户名" required="true" requiredMessage="验证错误:用户名不能为空"><f:ajax/></h:inputText>
+                        </div>
+                        <div class="am-form-group am-form-icon">
+                            <i class="am-icon-lock"></i>
+                            <h:inputSecret styleClass="myapp-login-input-text am-form-field" id="password" value="#{loginController.bean.password}" p:placeholder="密码" required="true" requiredMessage="验证错误:密码不能为空" redisplay="true"/>
+                        </div>
+                    </fieldset>
+                    <h:commandLink id="submit0" value="登录" class="myapp-login-form-submit am-btn am-btn-warning am-round am-btn-block" action="#{loginController.login()}"/>
+                    <p/>
+                    <!--<h:commandButton styleClass="" id="submit5" value="系统管理员" immediate="true" class="am-btn am-btn-sm am-btn-link am-margin-right" action="#{loginController.loginSpecial(1)}"/>-->
+                    <!--<h:commandButton styleClass=""  value="冯阳" immediate="true" class="am-btn am-btn-sm am-btn-link am-margin-right" action="#{loginController.loginSpecial(204)}"/>-->
+                    <h:commandButton styleClass=""  value="傅丽芸" immediate="true" class="am-btn am-btn-sm am-btn-link am-margin-right" action="#{loginController.loginSpecial(211)}"/>
+                    <h:commandButton styleClass=""  value="杨涛" immediate="true" class="am-btn am-btn-sm am-btn-link am-margin-right" action="#{loginController.loginSpecial(242)}"/>
+                    <h:commandButton styleClass=""  value="夏冰" immediate="true" class="am-btn am-btn-sm am-btn-link am-margin-right" action="#{loginController.loginSpecial(241)}"/>
+                    <h:commandButton styleClass=""  value="刘子群" immediate="true" class="am-btn am-btn-sm am-btn-link am-margin-right" action="#{loginController.loginSpecial(229)}"/>
+                </div>
+            </div>
+        </div>
+
+    </h:form>
+</h:body>
+
+</html>

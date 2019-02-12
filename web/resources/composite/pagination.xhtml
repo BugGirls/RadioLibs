@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:cc="http://java.sun.com/jsf/composite">
+
+    <cc:interface>
+        <cc:attribute name="ctrl" required="true"/>
+        <cc:attribute name="compact" default="false"/>
+        <cc:attribute name="align" default="am-fr"/>
+    </cc:interface>
+    <cc:implementation>
+        <h:panelGroup styleClass="pagination #{cc.attrs.compact=='true'?'pagination_compact':''}  clear #{cc.attrs.align}">
+            <c:if test="#{cc.attrs.compact=='true'}">
+                <span><b>#{cc.attrs.ctrl.pageBean.page}</b>/#{cc.attrs.ctrl.pageBean.pages}</span>
+            </c:if>
+            <c:if test="#{cc.attrs.compact!='true'}">
+                <span>总条数：<b>#{cc.attrs.ctrl.pageBean.rows}</b> <i class="am-margin-horizontal-sm"></i> 页码：<b>#{cc.attrs.ctrl.pageBean.page}</b> / #{cc.attrs.ctrl.pageBean.pages}页 <i class="am-margin-horizontal-sm"></i></span>
+            </c:if>
+
+            <h:commandLink action="#{cc.attrs.ctrl.toPage(1)}" value="" ><i class="am-icon-angle-double-up am-text-success"></i> 首页</h:commandLink>
+            <h:commandLink action="#{cc.attrs.ctrl.toPage(cc.attrs.ctrl.pageBean.page-1)}" value="" onclick="return #{cc.attrs.ctrl.pageBean.page!=1}" ><i class="am-icon-angle-up am-text-success"></i> 上页</h:commandLink>
+            <h:commandLink action="#{cc.attrs.ctrl.toPage(cc.attrs.ctrl.pageBean.page+1)}" value="" onclick="return #{cc.attrs.ctrl.pageBean.page!=cc.attrs.ctrl.pageBean.pages}">
+                <i class="am-icon-angle-down am-text-success"></i> 下页</h:commandLink>
+            <h:commandLink action="#{cc.attrs.ctrl.toPage(cc.attrs.ctrl.pageBean.pages)}" value="" ><i class="am-icon-angle-double-down am-text-success"></i> 尾页</h:commandLink>
+            <c:if test="#{cc.attrs.compact!='true'}">
+                <span class="grey am-margin-horizontal-xs am-text-xs grey">| </span>
+                <span class="go am-margin-left-sm"> 第<h:inputText value="#{cc.attrs.ctrl.pageBean.page}"/>页</span>
+                <h:commandLink action="#{cc.attrs.ctrl.toPage(cc.attrs.ctrl.pageBean.page)}" > 确定 </h:commandLink>
+            </c:if>
+        </h:panelGroup>
+    </cc:implementation>
+</html>

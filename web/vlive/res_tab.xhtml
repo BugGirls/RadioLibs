@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" xmlns:p="http://xmlns.jcp.org/jsf/passthrough" xmlns:com="http://xmlns.jcp.org/jsf/composite/composite">
+<f:view contentType="text/html; charset=utf-8"/>
+
+<h:panelGroup id="tabs" layout="block" styleClass="am-tabs">
+    <ul class="am-tabs-nav am-nav am-nav-tabs">
+        <ui:repeat value="#{common.fromEnum('Section')}" var="section">
+            <li class="#{resController.tabIsActive(section.code) ?'am-active':''}"><a href="javascript:void(0);" onclick="window.location.href='res_edit_#{section.code}.xhtml?category=#{resController.category}&amp;id=#{resController.id}'"><i class="am-icon-#{section.icon}"></i> #{section.name}</a></li>
+        </ui:repeat>
+    </ul>
+</h:panelGroup>
+
+</html>

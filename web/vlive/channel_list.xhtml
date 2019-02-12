@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:composite="http://xmlns.jcp.org/jsf/composite/composite">
+
+<ui:composition template="template.xhtml">
+    <ui:param name="title" value="我的频率"/>
+
+    <ui:define name="content">
+        <h:panelGroup layout="block" styleClass="am-g am-margin">
+            <h:panelGroup styleClass="am-u-sm-2">
+                <composite:searchbox keyword="#{channelController.keyword}" ctrl="#{channelController}"/>
+            </h:panelGroup>
+            <h:panelGroup styleClass="am-u-sm-8"/>
+        </h:panelGroup>
+        <hr class="am-list"/>
+        <h:panelGroup layout="block" id="table_list">
+            <h:dataTable value="#{channelController.pageBean.list}" var="row" styleClass="am-table am-table-compact am-table-striped admin-content-table am-table-hover">
+                <h:column styleClass="w60">
+                    <f:facet name="header">ID</f:facet>
+                    <h:outputText value="#{row.id}"/>
+                </h:column>
+                <h:column styleClass="w60">
+                    <f:facet name="header">UUID</f:facet>
+                    <h:outputText value="#{row.uuid}"/>
+                </h:column>
+                <h:column styleClass="w120">
+                    <f:facet name="header">名称</f:facet>
+                    <h:panelGroup>
+                        <h:outputText value="#{row.name}"/>
+                        <h:panelGroup rendered="#{row.status==1}">
+                            <a style="margin-left: 5px;" href="player.jsp?channel_id=#{row.id}" target="blank"><i class="am-icon-music"></i></a>
+                        </h:panelGroup>
+                    </h:panelGroup>
+                </h:column>
+                <h:column styleClass="w500">
+                    <f:facet name="header">描述</f:facet>
+                    <h:outputText value="#{row.description}"/>
+                </h:column>
+                <h:column styleClass="w100">
+                    <f:facet name="header">LOGO</f:facet>
+                    <img src="#{row.logo}" alt="LOGO" class="img-circle" style="width: 60px;height: 60px;border-radius: 50%;"/>
+                </h:column>
+                <h:column styleClass="w100">
+                    <f:facet name="header">管理员</f:facet>
+                    <h:outputText value="#{common.manager(row.manager_id).name}"/>
+                </h:column>
+                <h:column styleClass="w50">
+                    <f:facet name="header">启用</f:facet>
+                    <h:outputText styleClass="#{row.status==0?'am-text-danger':''}" value="#{common.yesnoLabel(row.status)}"/>
+                </h:column>
+                <h:column styleClass="w150">
+                    <f:facet name="header">创建时间</f:facet>
+                    <h:outputText value="#{row.createtime}"/>
+                </h:column>
+                <h:column styleClass="w150">
+                    <f:facet name="header">
+                        <h:commandLink action="channel_edit.xhtml" class="am-btn am-btn-default am-btn-sm am-btn-warning">
+                            <span class="am-icon-plus"> </span> 新频率
+                        </h:commandLink>
+                    </f:facet>
+                    <h:panelGroup styleClass="am-btn-toolbar" layout="block">
+                        <div class="am-btn-group am-btn-group-xs">
+                            <div class="am-dropdown" data-am-dropdown="">
+                                <h:commandLink value="编辑" action="#{channelController.tab(row)}" styleClass="am-margin-0"/>
+                                <button id="docTypeBtn" class="am-btn am-btn-link am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle=""><h:outputText value="更多"/> <span class="am-icon-caret-down"></span></button>
+                                <ul class="am-dropdown-content">
+                                    <li><h:commandLink value="#{row.status==1?'禁用':'启用'}" action="#{channelController.toggle(row)}" onclick="return confirm('确认改变状态吗')" styleClass="am-margin-right-sm"/></li>
+                                    <li><h:commandLink value="删除" action="#{channelController.delete(row)}" onclick="return confirm('确认清空角色吗')"/></li>
+                                    <li><h:commandLink value="节目单" action="#{channelController.tabProgram(row)}"/></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </h:panelGroup>
+                </h:column>
+            </h:dataTable>
+        </h:panelGroup>
+
+        <composite:pagination ctrl="#{channelController}"/>
+
+    </ui:define>
+</ui:composition>
+
+</html>

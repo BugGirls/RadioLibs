@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:cc="http://java.sun.com/jsf/composite">
+
+    <cc:interface>
+        <cc:attribute name="ctrl" required="true"/>
+    </cc:interface>
+
+    <cc:implementation>
+        <h:panelGroup layout="block" styleClass="am-tabs">
+            <ul class="am-tabs-nav am-nav am-nav-tabs">
+                <ui:repeat value="#{common.fromEnum('SectionTyped')}" var="sectionTyped">
+                    <li class="#{cc.attrs.ctrl.tabIsActive(sectionTyped.code) ?'am-active':''}"><a href="javascript:void(0);" onclick="window.location.href='typed_edit_#{sectionTyped.code}.xhtml?id=#{cc.attrs.ctrl.id}'"><i class="am-icon-#{sectionTyped.icon}"></i> #{sectionTyped.name}</a></li>
+                </ui:repeat>
+            </ul>
+        </h:panelGroup>
+    </cc:implementation>
+</html>

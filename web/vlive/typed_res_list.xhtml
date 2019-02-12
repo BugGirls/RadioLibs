@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:composite="http://xmlns.jcp.org/jsf/composite/composite">
+
+<ui:composition template="template.xhtml">
+    <ui:param name="title" value="规则资源选取预览"/>
+    <ui:define name="content">
+        <h:panelGroup layout="block" styleClass="am-g am-margin">
+            <h:panelGroup styleClass="am-u-sm-2">
+                <a class="am-btn am-btn-default am-btn-sm am-btn-success am-text-left" onclick="javascript:window.history.go(-1)"> <i class="am-icon-save"></i> 返回 </a>
+            </h:panelGroup>
+            <h:panelGroup styleClass="am-u-sm-8">
+            </h:panelGroup>
+            <h:panelGroup styleClass="am-u-sm-2 am-text-right">
+                <audio id="player" style="width:80px;" src="" controls="controls" autoplay="autoplay"></audio>
+            </h:panelGroup>
+        </h:panelGroup>
+
+        <h:panelGroup layout="block" id="table_list">
+            <h:dataTable value="#{typedResController.list}" var="row" styleClass="am-table am-table-compact am-table-striped am-table-hover">
+                <h:column>
+                    <f:facet name="header">序号</f:facet>
+                    <h:outputText value="#{row.sequence}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">ID</f:facet>
+                    <h:outputText value="#{row.id}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">类别</f:facet>
+                    <h:outputText value="#{common.categoryLabel(row.category)}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">题名</f:facet>
+                    <h:outputText value="#{row.title_proper}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">时长(秒)</f:facet>
+                    <h:outputText value="#{row.format_duration}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">上传人</f:facet>
+                    <h:outputText value="#{common.manager(row.manager_id).name}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header"></f:facet>
+                    <a class="resPathForPlay am-btn am-btn-link am-margin-0 am-padding-vertical-0" data-url="${row.path}" title="播放"><i class="am-icon-play-circle am-text-xs"></i></a>
+                </h:column>
+            </h:dataTable>
+        </h:panelGroup>
+
+    </ui:define>
+</ui:composition>
+
+</html>

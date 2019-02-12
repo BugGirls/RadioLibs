@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"><head id="j_idt2">
+    <title>后台管理</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="renderer" content="webkit" />
+    <script src="/resources/js/jquery-1.9.1.min.js"></script>
+    <script src="/resources/amazeui/js/amazeui.min.js"></script>
+    <script src="/resources/layer/layer.js"></script>
+    <link rel="stylesheet" href="/resources/amazeui/css/amazeui.min.css" />
+    <link rel="stylesheet" href="/resources/css/system.css" />
+    <link rel="stylesheet" href="/resources/css/width.css" />
+    <script src="/resources/amazeui/js/system.js"></script>
+    <script src="/resources/layer/layer.js"></script></head><body>
+<form id="frm" name="frm" method="post" action="/vlive/res_edit_publish.xhtml" class="am-form" accept-charset="utf-8" enctype="multipart/form-data">
+    <input type="hidden" name="frm" value="frm" />
+
+    <div class="am-g" style="background-color: #fffcfc; height: 45px; line-height: 30px;">
+        <div class="am-u-md-4 am-padding-xs am-margin-left-sm am-text-nowrap">
+            <span class="am-text-primary am-text-sm">资源库管理 - 出版者</span>
+        </div>
+        <div class="am-u-md-6 am-padding-xs">
+            <div class="am-cf am-text-right am-padding-right">
+            </div>
+        </div>
+    </div><div id="form" class="">
+    <div class="am-margin-xs"><span id="tabs"><div class="am-tabs">
+            <ul class="am-tabs-nav am-nav am-nav-tabs">
+                    <li><a href="javascript:void(0);" onclick="window.location.href='res_edit_file.xhtml?category=3&amp;id=0'"><i class="am-icon-file"></i> 文件</a></li>
+                    <li><a href="javascript:void(0);" onclick="window.location.href='res_edit_title.xhtml?category=3&amp;id=0'"><i class="am-icon-info-circle"></i> 题名</a></li>
+                    <li><a href="javascript:void(0);" onclick="window.location.href='res_edit_create.xhtml?category=3&amp;id=0'"><i class="am-icon-user"></i> 创建者</a></li>
+                    <li><a href="javascript:void(0);" onclick="window.location.href='res_edit_tag.xhtml?category=3&amp;id=0'"><i class="am-icon-check-circle"></i> 类型</a></li>
+                    <li class="am-active"><a href="javascript:void(0);" onclick="window.location.href='res_edit_publish.xhtml?category=3&amp;id=0'"><i class="am-icon-font"></i> 出版</a></li>
+                    <li><a href="javascript:void(0);" onclick="window.location.href='res_edit_format.xhtml?category=3&amp;id=0'"><i class="am-icon-cube"></i> 格式</a></li>
+                    <li><a href="javascript:void(0);" onclick="window.location.href='res_edit_right.xhtml?category=3&amp;id=0'"><i class="am-icon-unlock"></i> 授权</a></li>
+            </ul></div></span><span id="table"><div class="am-margin am-g"><div class="am-u-sm-8">
+                    <h2>描述(Description) ， 主题词(Subject Term)</h2>
+                    <p>对音频资料的说明解释；揭示音频资料内容主要特征的规范化的词或词组</p></div><div class="am-u-sm-4"><script type="text/javascript" src="/javax.faces.resource/jsf.js.xhtml?ln=javax.faces&amp;stage=Development"></script><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt18':'j_idt18'},'');return false" class="am-btn am-btn-default am-btn-sm am-btn-warning am-margin-right am-fr"> <i class="am-icon-save"></i> 保存 </a></div></div><table class="am-table tableForm">
+<tbody>
+<tr>
+<td class="w60"><span class="itemLabel">文稿/歌词</span></td>
+<td class="w300"><input id="subject_lyrics" type="text" name="subject_lyrics" class="am-form-field am-input-sm" /></td>
+</tr>
+<tr>
+<td class="w60"><span class="itemLabel" title="揭示音频资料内容主要特征的规范化的词或词组">主题词</span></td>
+<td class="w300"><input id="subject_term" type="text" name="subject_term" class="am-form-field am-input-sm" /></td>
+</tr>
+<tr>
+<td class="w60"><span class="itemLabel" title="揭示音频资料主要内容且具有检索意义的未经控制或只作少量控制的词或词组">关键字</span></td>
+<td class="w300"><input id="subject_keyword" type="text" name="subject_keyword" class="am-form-field am-input-sm" /></td>
+</tr>
+<tr>
+<td class="w60"><span class="itemLabel" title="概括地说明音频资料的内容要点">摘要</span></td>
+<td class="w300"><input id="desc_abstract" type="text" name="desc_abstract" class="am-form-field am-input-sm" /></td>
+</tr>
+<tr>
+<td class="w60"><span class="itemLabel" title="说明音频资料的性质、特征、用途以及范围等的文字">附注</span></td>
+<td class="w300"><input id="desc_note" type="text" name="desc_note" class="am-form-field am-input-sm" /></td>
+</tr>
+<tr>
+<td class="w60"><span class="itemLabel" title="音频资料的获奖情况">获奖情况</span></td>
+<td class="w300"><input id="desc_awards" type="text" name="desc_awards" class="am-form-field am-input-sm" /></td>
+</tr>
+</tbody>
+</table>
+<span class="am-margin">
+                <h2>出版者(Publisher)，日期(Date)</h2>
+                <p>使音频资料可以获得和利用的责任实体，与音频资料生命周期中的事件相关的日期，包括但不限于音频资料的录制、出版和首播日期</p></span><table class="am-table tableForm">
+<tbody>
+<tr>
+<td class="w60"><span class="itemLabel" title="音频资料可以获得和利用的责任实体">出版者</span></td>
+<td class="w300"><input id="publisher" type="text" name="publisher" class="am-form-field am-input-sm" /></td>
+</tr>
+<tr>
+<td class="w60"><span class="itemLabel">出版日期</span></td>
+<td class="w300"><input id="date_published" type="text" name="date_published" class="am-form-field am-input-sm data-am-datepicker" data-am-datepicker="" /></td>
+</tr>
+<tr>
+<td class="w60"><span class="itemLabel">录制日期</span></td>
+<td class="w300"><input id="date_recorded" type="text" name="date_recorded" class="am-form-field am-input-sm data-am-datepicker" data-am-datepicker="" /></td>
+</tr>
+<tr>
+<td class="w60"><span class="itemLabel">首播日期</span></td>
+<td class="w300"><input id="date_debut" type="text" name="date_debut" class="am-form-field am-input-sm data-am-datepicker" data-am-datepicker="" /></td>
+</tr>
+<tr>
+<td class="w60"><span class="itemLabel">首播栏目</span></td>
+<td class="w300"><input id="subject_debut_column" type="text" name="subject_debut_column" class="am-form-field am-input-sm" /></td>
+</tr>
+</tbody>
+</table>
+<span class="am-margin">
+                <h2>标识符(Identifier)</h2></span><table class="am-table tableForm">
+<tbody>
+<tr>
+<td class="w60"><span class="itemLabel" title="国际标准音像制品编码">国际标准音像制品编码</span></td>
+<td class="w300"><input id="id_isrc" type="text" name="id_isrc" class="am-form-field am-input-sm" /></td>
+</tr>
+<tr>
+<td class="w60"><span class="itemLabel" title="国际标准书号">国际标准书号</span></td>
+<td class="w300"><input id="id_isbn" type="text" name="id_isbn" class="am-form-field am-input-sm" /></td>
+</tr>
+<tr>
+<td class="w60"><span class="itemLabel" title="音频资料的原始出版编号">音频资料的原始出版编号</span></td>
+<td class="w300"><input id="id_original" type="text" name="id_original" class="am-form-field am-input-sm" /></td>
+</tr>
+</tbody>
+</table>
+<span class="am-margin">
+                <h2>主题(Subject)</h2>
+                <p>描述音频资料的主要内容</p></span><table class="am-table tableForm">
+<tbody>
+<tr>
+<td class="w60"><span class="itemLabel" title="事件主要责任者或新闻发布者或所涉及的主要对象">事件责任者</span></td>
+<td class="w300"><input id="subject_contributor" type="text" name="subject_contributor" class="am-form-field am-input-sm" /></td>
+</tr>
+<tr>
+<td class="w60"><span class="itemLabel" title="音频资料主要内容所表述的事件发生的日期">事发日期</span></td>
+<td class="w300"><input id="subject_event_date" type="text" name="subject_event_date" class="am-form-field am-input-sm data-am-datepicker" data-am-datepicker="" /></td>
+</tr>
+<tr>
+<td class="w60"><span class="itemLabel" title="音频资料主要内容所表述的事件发生的地点">事发地点</span></td>
+<td class="w300"><input id="subject_event_place" type="text" name="subject_event_place" class="am-form-field am-input-sm" /></td>
+</tr>
+</tbody>
+</table>
+</span>
+    </div></div><input type="hidden" name="javax.faces.ViewState" id="j_id1-javax.faces.ViewState-0" value="5685669193805176345:-2837251666308382567" autocomplete="off" />
+</form></body>
+
+</html>

@@ -1,0 +1,555 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"><head id="j_idt2">
+    <title>后台管理</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="renderer" content="webkit" />
+    <script src="/resources/js/jquery-1.9.1.min.js"></script>
+    <script src="/resources/amazeui/js/amazeui.min.js"></script>
+    <script src="/resources/layer/layer.js"></script>
+    <link rel="stylesheet" href="/resources/amazeui/css/amazeui.min.css" />
+    <link rel="stylesheet" href="/resources/css/system.css" />
+    <link rel="stylesheet" href="/resources/css/width.css" />
+    <script src="/resources/amazeui/js/system.js"></script>
+    <script src="/resources/layer/layer.js"></script><script type="text/javascript" src="/javax.faces.resource/jsf.js.xhtml?ln=javax.faces&amp;stage=Development"></script></head><body>
+<form id="frm" name="frm" method="post" action="/vlive/res_by_member_list.xhtml" class="am-form" accept-charset="utf-8" enctype="multipart/form-data">
+    <input type="hidden" name="frm" value="frm" />
+
+    <div class="am-g" style="background-color: #fffcfc; height: 45px; line-height: 30px;">
+        <div class="am-u-md-4 am-padding-xs am-margin-left-sm am-text-nowrap">
+            <span class="am-text-primary am-text-sm">资源管理 -&gt; 我的资源库</span>
+        </div>
+        <div class="am-u-md-6 am-padding-xs">
+            <div class="am-cf am-text-right am-padding-right">
+            </div>
+        </div>
+    </div><div id="form" class="">
+    <div class="am-margin-xs"><div id="group" class="am-g am-margin"><a id="tag_1001204" href="#" title="1001204" onclick="mojarra.ab(this,event,'action',0,'group table_list');return false" class="tag_btn am-btn am-btn-sm am-margin-xs am-btn-primary am-btn-hollow am-round ">新闻</a><a id="tag_1001205" href="#" title="1001205" onclick="mojarra.ab(this,event,'action',0,'group table_list');return false" class="tag_btn am-btn am-btn-sm am-margin-xs am-btn-primary am-btn-hollow am-round ">路况</a><a id="tag_1001206" href="#" title="1001206" onclick="mojarra.ab(this,event,'action',0,'group table_list');return false" class="tag_btn am-btn am-btn-sm am-margin-xs am-btn-primary am-btn-hollow am-round ">孕婴</a><a id="tag_1001207" href="#" title="1001207" onclick="mojarra.ab(this,event,'action',0,'group table_list');return false" class="tag_btn am-btn am-btn-sm am-margin-xs am-btn-primary am-btn-hollow am-round ">经管</a><a id="tag_1001208" href="#" title="1001208" onclick="mojarra.ab(this,event,'action',0,'group table_list');return false" class="tag_btn am-btn am-btn-sm am-margin-xs am-btn-primary am-btn-hollow am-round ">眼科</a><a id="tag_1001209" href="#" title="1001209" onclick="mojarra.ab(this,event,'action',0,'group table_list');return false" class="tag_btn am-btn am-btn-sm am-margin-xs am-btn-primary am-btn-hollow am-round ">营养</a><a id="tag_1001210" href="#" title="1001210" onclick="mojarra.ab(this,event,'action',0,'group table_list');return false" class="tag_btn am-btn am-btn-sm am-margin-xs am-btn-primary am-btn-hollow am-round ">市区</a><a id="tag_1001211" href="#" title="1001211" onclick="mojarra.ab(this,event,'action',0,'group table_list');return false" class="tag_btn am-btn am-btn-sm am-margin-xs am-btn-primary am-btn-hollow am-round ">高速</a></div>
+        <hr class="am-list" /><div id="table_list"><table class="am-table am-table-compact am-table-striped admin-content-table am-table-hover">
+            <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">类别</th>
+                <th scope="col">题名</th>
+                <th scope="col">可见</th>
+                <th scope="col">生命期</th>
+                <th scope="col">时长</th>
+                <th scope="col">上传人</th>
+                <th scope="col">创建时间</th>
+                <th scope="col">
+                    <a href="res_edit_file.xhtml?category=-1" class="am-btn am-btn-default am-btn-sm am-btn-warning"><span class="am-icon-plus"> </span> 新资源 </a></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>262</td>
+                <td>声乐</td>
+                <td>高速路</td>
+                <td>完全公开</td>
+                <td>永久</td>
+                <td>287</td>
+                <td>冯阳</td>
+                <td>2017-11-21 10:10</td>
+                <td><div class="am-btn-toolbar">
+                    <div class="am-btn-group am-btn-group-xs">
+                        <div class="am-dropdown" data-am-dropdown="">
+                            <button id="docTypeBtn" class="am-btn am-btn-link am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle="">编辑  <span class="am-icon-caret-down"></span></button>
+                            <ul class="am-dropdown-content">
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-0-j_idt40-0-j_idt42':'j_idt9-0-j_idt40-0-j_idt42'},'');return false"> <i class="am-text-xs am-icon-file" style="font-size: 12px;"></i>文件 file </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-0-j_idt40-1-j_idt42':'j_idt9-0-j_idt40-1-j_idt42'},'');return false"> <i class="am-text-xs am-icon-info-circle" style="font-size: 12px;"></i>题名 title </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-0-j_idt40-2-j_idt42':'j_idt9-0-j_idt40-2-j_idt42'},'');return false"> <i class="am-text-xs am-icon-user" style="font-size: 12px;"></i>创建者 create </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-0-j_idt40-3-j_idt42':'j_idt9-0-j_idt40-3-j_idt42'},'');return false"> <i class="am-text-xs am-icon-check-circle" style="font-size: 12px;"></i>类型 tag </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-0-j_idt40-4-j_idt42':'j_idt9-0-j_idt40-4-j_idt42'},'');return false"> <i class="am-text-xs am-icon-font" style="font-size: 12px;"></i>出版 publish </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-0-j_idt40-5-j_idt42':'j_idt9-0-j_idt40-5-j_idt42'},'');return false"> <i class="am-text-xs am-icon-cube" style="font-size: 12px;"></i>格式 format </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-0-j_idt40-6-j_idt42':'j_idt9-0-j_idt40-6-j_idt42'},'');return false"> <i class="am-text-xs am-icon-unlock" style="font-size: 12px;"></i>授权 right </a></li>
+                            </ul>
+                        </div>
+                    </div></div></td>
+            </tr>
+            <tr>
+                <td>261</td>
+                <td>专业素材</td>
+                <td>垫片_00012</td>
+                <td>完全公开</td>
+                <td>永久</td>
+                <td>686</td>
+                <td>冯阳</td>
+                <td>2017-11-02 18:06</td>
+                <td><div class="am-btn-toolbar">
+                    <div class="am-btn-group am-btn-group-xs">
+                        <div class="am-dropdown" data-am-dropdown="">
+                            <button id="docTypeBtn" class="am-btn am-btn-link am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle="">编辑  <span class="am-icon-caret-down"></span></button>
+                            <ul class="am-dropdown-content">
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-1-j_idt40-0-j_idt42':'j_idt9-1-j_idt40-0-j_idt42'},'');return false"> <i class="am-text-xs am-icon-file" style="font-size: 12px;"></i>文件 file </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-1-j_idt40-1-j_idt42':'j_idt9-1-j_idt40-1-j_idt42'},'');return false"> <i class="am-text-xs am-icon-info-circle" style="font-size: 12px;"></i>题名 title </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-1-j_idt40-2-j_idt42':'j_idt9-1-j_idt40-2-j_idt42'},'');return false"> <i class="am-text-xs am-icon-user" style="font-size: 12px;"></i>创建者 create </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-1-j_idt40-3-j_idt42':'j_idt9-1-j_idt40-3-j_idt42'},'');return false"> <i class="am-text-xs am-icon-check-circle" style="font-size: 12px;"></i>类型 tag </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-1-j_idt40-4-j_idt42':'j_idt9-1-j_idt40-4-j_idt42'},'');return false"> <i class="am-text-xs am-icon-font" style="font-size: 12px;"></i>出版 publish </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-1-j_idt40-5-j_idt42':'j_idt9-1-j_idt40-5-j_idt42'},'');return false"> <i class="am-text-xs am-icon-cube" style="font-size: 12px;"></i>格式 format </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-1-j_idt40-6-j_idt42':'j_idt9-1-j_idt40-6-j_idt42'},'');return false"> <i class="am-text-xs am-icon-unlock" style="font-size: 12px;"></i>授权 right </a></li>
+                            </ul>
+                        </div>
+                    </div></div></td>
+            </tr>
+            <tr>
+                <td>260</td>
+                <td>专业素材</td>
+                <td>垫片_00011</td>
+                <td>完全公开</td>
+                <td>永久</td>
+                <td>285</td>
+                <td>冯阳</td>
+                <td>2017-11-02 18:05</td>
+                <td><div class="am-btn-toolbar">
+                    <div class="am-btn-group am-btn-group-xs">
+                        <div class="am-dropdown" data-am-dropdown="">
+                            <button id="docTypeBtn" class="am-btn am-btn-link am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle="">编辑  <span class="am-icon-caret-down"></span></button>
+                            <ul class="am-dropdown-content">
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-2-j_idt40-0-j_idt42':'j_idt9-2-j_idt40-0-j_idt42'},'');return false"> <i class="am-text-xs am-icon-file" style="font-size: 12px;"></i>文件 file </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-2-j_idt40-1-j_idt42':'j_idt9-2-j_idt40-1-j_idt42'},'');return false"> <i class="am-text-xs am-icon-info-circle" style="font-size: 12px;"></i>题名 title </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-2-j_idt40-2-j_idt42':'j_idt9-2-j_idt40-2-j_idt42'},'');return false"> <i class="am-text-xs am-icon-user" style="font-size: 12px;"></i>创建者 create </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-2-j_idt40-3-j_idt42':'j_idt9-2-j_idt40-3-j_idt42'},'');return false"> <i class="am-text-xs am-icon-check-circle" style="font-size: 12px;"></i>类型 tag </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-2-j_idt40-4-j_idt42':'j_idt9-2-j_idt40-4-j_idt42'},'');return false"> <i class="am-text-xs am-icon-font" style="font-size: 12px;"></i>出版 publish </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-2-j_idt40-5-j_idt42':'j_idt9-2-j_idt40-5-j_idt42'},'');return false"> <i class="am-text-xs am-icon-cube" style="font-size: 12px;"></i>格式 format </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-2-j_idt40-6-j_idt42':'j_idt9-2-j_idt40-6-j_idt42'},'');return false"> <i class="am-text-xs am-icon-unlock" style="font-size: 12px;"></i>授权 right </a></li>
+                            </ul>
+                        </div>
+                    </div></div></td>
+            </tr>
+            <tr>
+                <td>259</td>
+                <td>专业素材</td>
+                <td>垫片_梦中的婚礼</td>
+                <td>完全公开</td>
+                <td>永久</td>
+                <td>182</td>
+                <td>冯阳</td>
+                <td>2017-11-02 18:05</td>
+                <td><div class="am-btn-toolbar">
+                    <div class="am-btn-group am-btn-group-xs">
+                        <div class="am-dropdown" data-am-dropdown="">
+                            <button id="docTypeBtn" class="am-btn am-btn-link am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle="">编辑  <span class="am-icon-caret-down"></span></button>
+                            <ul class="am-dropdown-content">
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-3-j_idt40-0-j_idt42':'j_idt9-3-j_idt40-0-j_idt42'},'');return false"> <i class="am-text-xs am-icon-file" style="font-size: 12px;"></i>文件 file </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-3-j_idt40-1-j_idt42':'j_idt9-3-j_idt40-1-j_idt42'},'');return false"> <i class="am-text-xs am-icon-info-circle" style="font-size: 12px;"></i>题名 title </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-3-j_idt40-2-j_idt42':'j_idt9-3-j_idt40-2-j_idt42'},'');return false"> <i class="am-text-xs am-icon-user" style="font-size: 12px;"></i>创建者 create </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-3-j_idt40-3-j_idt42':'j_idt9-3-j_idt40-3-j_idt42'},'');return false"> <i class="am-text-xs am-icon-check-circle" style="font-size: 12px;"></i>类型 tag </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-3-j_idt40-4-j_idt42':'j_idt9-3-j_idt40-4-j_idt42'},'');return false"> <i class="am-text-xs am-icon-font" style="font-size: 12px;"></i>出版 publish </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-3-j_idt40-5-j_idt42':'j_idt9-3-j_idt40-5-j_idt42'},'');return false"> <i class="am-text-xs am-icon-cube" style="font-size: 12px;"></i>格式 format </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-3-j_idt40-6-j_idt42':'j_idt9-3-j_idt40-6-j_idt42'},'');return false"> <i class="am-text-xs am-icon-unlock" style="font-size: 12px;"></i>授权 right </a></li>
+                            </ul>
+                        </div>
+                    </div></div></td>
+            </tr>
+            <tr>
+                <td>258</td>
+                <td>专业素材</td>
+                <td>垫片_大自然流水声</td>
+                <td>完全公开</td>
+                <td>永久</td>
+                <td>122</td>
+                <td>冯阳</td>
+                <td>2017-11-02 18:05</td>
+                <td><div class="am-btn-toolbar">
+                    <div class="am-btn-group am-btn-group-xs">
+                        <div class="am-dropdown" data-am-dropdown="">
+                            <button id="docTypeBtn" class="am-btn am-btn-link am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle="">编辑  <span class="am-icon-caret-down"></span></button>
+                            <ul class="am-dropdown-content">
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-4-j_idt40-0-j_idt42':'j_idt9-4-j_idt40-0-j_idt42'},'');return false"> <i class="am-text-xs am-icon-file" style="font-size: 12px;"></i>文件 file </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-4-j_idt40-1-j_idt42':'j_idt9-4-j_idt40-1-j_idt42'},'');return false"> <i class="am-text-xs am-icon-info-circle" style="font-size: 12px;"></i>题名 title </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-4-j_idt40-2-j_idt42':'j_idt9-4-j_idt40-2-j_idt42'},'');return false"> <i class="am-text-xs am-icon-user" style="font-size: 12px;"></i>创建者 create </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-4-j_idt40-3-j_idt42':'j_idt9-4-j_idt40-3-j_idt42'},'');return false"> <i class="am-text-xs am-icon-check-circle" style="font-size: 12px;"></i>类型 tag </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-4-j_idt40-4-j_idt42':'j_idt9-4-j_idt40-4-j_idt42'},'');return false"> <i class="am-text-xs am-icon-font" style="font-size: 12px;"></i>出版 publish </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-4-j_idt40-5-j_idt42':'j_idt9-4-j_idt40-5-j_idt42'},'');return false"> <i class="am-text-xs am-icon-cube" style="font-size: 12px;"></i>格式 format </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-4-j_idt40-6-j_idt42':'j_idt9-4-j_idt40-6-j_idt42'},'');return false"> <i class="am-text-xs am-icon-unlock" style="font-size: 12px;"></i>授权 right </a></li>
+                            </ul>
+                        </div>
+                    </div></div></td>
+            </tr>
+            <tr>
+                <td>257</td>
+                <td>专业素材</td>
+                <td>垫片_Faded</td>
+                <td>完全公开</td>
+                <td>永久</td>
+                <td>210</td>
+                <td>冯阳</td>
+                <td>2017-11-02 18:04</td>
+                <td><div class="am-btn-toolbar">
+                    <div class="am-btn-group am-btn-group-xs">
+                        <div class="am-dropdown" data-am-dropdown="">
+                            <button id="docTypeBtn" class="am-btn am-btn-link am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle="">编辑  <span class="am-icon-caret-down"></span></button>
+                            <ul class="am-dropdown-content">
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-5-j_idt40-0-j_idt42':'j_idt9-5-j_idt40-0-j_idt42'},'');return false"> <i class="am-text-xs am-icon-file" style="font-size: 12px;"></i>文件 file </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-5-j_idt40-1-j_idt42':'j_idt9-5-j_idt40-1-j_idt42'},'');return false"> <i class="am-text-xs am-icon-info-circle" style="font-size: 12px;"></i>题名 title </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-5-j_idt40-2-j_idt42':'j_idt9-5-j_idt40-2-j_idt42'},'');return false"> <i class="am-text-xs am-icon-user" style="font-size: 12px;"></i>创建者 create </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-5-j_idt40-3-j_idt42':'j_idt9-5-j_idt40-3-j_idt42'},'');return false"> <i class="am-text-xs am-icon-check-circle" style="font-size: 12px;"></i>类型 tag </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-5-j_idt40-4-j_idt42':'j_idt9-5-j_idt40-4-j_idt42'},'');return false"> <i class="am-text-xs am-icon-font" style="font-size: 12px;"></i>出版 publish </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-5-j_idt40-5-j_idt42':'j_idt9-5-j_idt40-5-j_idt42'},'');return false"> <i class="am-text-xs am-icon-cube" style="font-size: 12px;"></i>格式 format </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-5-j_idt40-6-j_idt42':'j_idt9-5-j_idt40-6-j_idt42'},'');return false"> <i class="am-text-xs am-icon-unlock" style="font-size: 12px;"></i>授权 right </a></li>
+                            </ul>
+                        </div>
+                    </div></div></td>
+            </tr>
+            <tr>
+                <td>256</td>
+                <td>专业素材</td>
+                <td>垫片_钢琴曲</td>
+                <td>完全公开</td>
+                <td>永久</td>
+                <td>280</td>
+                <td>冯阳</td>
+                <td>2017-11-02 18:03</td>
+                <td><div class="am-btn-toolbar">
+                    <div class="am-btn-group am-btn-group-xs">
+                        <div class="am-dropdown" data-am-dropdown="">
+                            <button id="docTypeBtn" class="am-btn am-btn-link am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle="">编辑  <span class="am-icon-caret-down"></span></button>
+                            <ul class="am-dropdown-content">
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-6-j_idt40-0-j_idt42':'j_idt9-6-j_idt40-0-j_idt42'},'');return false"> <i class="am-text-xs am-icon-file" style="font-size: 12px;"></i>文件 file </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-6-j_idt40-1-j_idt42':'j_idt9-6-j_idt40-1-j_idt42'},'');return false"> <i class="am-text-xs am-icon-info-circle" style="font-size: 12px;"></i>题名 title </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-6-j_idt40-2-j_idt42':'j_idt9-6-j_idt40-2-j_idt42'},'');return false"> <i class="am-text-xs am-icon-user" style="font-size: 12px;"></i>创建者 create </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-6-j_idt40-3-j_idt42':'j_idt9-6-j_idt40-3-j_idt42'},'');return false"> <i class="am-text-xs am-icon-check-circle" style="font-size: 12px;"></i>类型 tag </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-6-j_idt40-4-j_idt42':'j_idt9-6-j_idt40-4-j_idt42'},'');return false"> <i class="am-text-xs am-icon-font" style="font-size: 12px;"></i>出版 publish </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-6-j_idt40-5-j_idt42':'j_idt9-6-j_idt40-5-j_idt42'},'');return false"> <i class="am-text-xs am-icon-cube" style="font-size: 12px;"></i>格式 format </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-6-j_idt40-6-j_idt42':'j_idt9-6-j_idt40-6-j_idt42'},'');return false"> <i class="am-text-xs am-icon-unlock" style="font-size: 12px;"></i>授权 right </a></li>
+                            </ul>
+                        </div>
+                    </div></div></td>
+            </tr>
+            <tr>
+                <td>255</td>
+                <td>专业素材</td>
+                <td>垫片_天空之城</td>
+                <td>完全公开</td>
+                <td>永久</td>
+                <td>120</td>
+                <td>冯阳</td>
+                <td>2017-11-02 18:03</td>
+                <td><div class="am-btn-toolbar">
+                    <div class="am-btn-group am-btn-group-xs">
+                        <div class="am-dropdown" data-am-dropdown="">
+                            <button id="docTypeBtn" class="am-btn am-btn-link am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle="">编辑  <span class="am-icon-caret-down"></span></button>
+                            <ul class="am-dropdown-content">
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-7-j_idt40-0-j_idt42':'j_idt9-7-j_idt40-0-j_idt42'},'');return false"> <i class="am-text-xs am-icon-file" style="font-size: 12px;"></i>文件 file </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-7-j_idt40-1-j_idt42':'j_idt9-7-j_idt40-1-j_idt42'},'');return false"> <i class="am-text-xs am-icon-info-circle" style="font-size: 12px;"></i>题名 title </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-7-j_idt40-2-j_idt42':'j_idt9-7-j_idt40-2-j_idt42'},'');return false"> <i class="am-text-xs am-icon-user" style="font-size: 12px;"></i>创建者 create </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-7-j_idt40-3-j_idt42':'j_idt9-7-j_idt40-3-j_idt42'},'');return false"> <i class="am-text-xs am-icon-check-circle" style="font-size: 12px;"></i>类型 tag </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-7-j_idt40-4-j_idt42':'j_idt9-7-j_idt40-4-j_idt42'},'');return false"> <i class="am-text-xs am-icon-font" style="font-size: 12px;"></i>出版 publish </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-7-j_idt40-5-j_idt42':'j_idt9-7-j_idt40-5-j_idt42'},'');return false"> <i class="am-text-xs am-icon-cube" style="font-size: 12px;"></i>格式 format </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-7-j_idt40-6-j_idt42':'j_idt9-7-j_idt40-6-j_idt42'},'');return false"> <i class="am-text-xs am-icon-unlock" style="font-size: 12px;"></i>授权 right </a></li>
+                            </ul>
+                        </div>
+                    </div></div></td>
+            </tr>
+            <tr>
+                <td>254</td>
+                <td>专业素材</td>
+                <td>垫片_卡农</td>
+                <td>完全公开</td>
+                <td>永久</td>
+                <td>291</td>
+                <td>冯阳</td>
+                <td>2017-11-02 18:02</td>
+                <td><div class="am-btn-toolbar">
+                    <div class="am-btn-group am-btn-group-xs">
+                        <div class="am-dropdown" data-am-dropdown="">
+                            <button id="docTypeBtn" class="am-btn am-btn-link am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle="">编辑  <span class="am-icon-caret-down"></span></button>
+                            <ul class="am-dropdown-content">
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-8-j_idt40-0-j_idt42':'j_idt9-8-j_idt40-0-j_idt42'},'');return false"> <i class="am-text-xs am-icon-file" style="font-size: 12px;"></i>文件 file </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-8-j_idt40-1-j_idt42':'j_idt9-8-j_idt40-1-j_idt42'},'');return false"> <i class="am-text-xs am-icon-info-circle" style="font-size: 12px;"></i>题名 title </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-8-j_idt40-2-j_idt42':'j_idt9-8-j_idt40-2-j_idt42'},'');return false"> <i class="am-text-xs am-icon-user" style="font-size: 12px;"></i>创建者 create </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-8-j_idt40-3-j_idt42':'j_idt9-8-j_idt40-3-j_idt42'},'');return false"> <i class="am-text-xs am-icon-check-circle" style="font-size: 12px;"></i>类型 tag </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-8-j_idt40-4-j_idt42':'j_idt9-8-j_idt40-4-j_idt42'},'');return false"> <i class="am-text-xs am-icon-font" style="font-size: 12px;"></i>出版 publish </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-8-j_idt40-5-j_idt42':'j_idt9-8-j_idt40-5-j_idt42'},'');return false"> <i class="am-text-xs am-icon-cube" style="font-size: 12px;"></i>格式 format </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-8-j_idt40-6-j_idt42':'j_idt9-8-j_idt40-6-j_idt42'},'');return false"> <i class="am-text-xs am-icon-unlock" style="font-size: 12px;"></i>授权 right </a></li>
+                            </ul>
+                        </div>
+                    </div></div></td>
+            </tr>
+            <tr>
+                <td>253</td>
+                <td>专业素材</td>
+                <td>垫片_大自然流水声</td>
+                <td>完全公开</td>
+                <td>永久</td>
+                <td>122</td>
+                <td>冯阳</td>
+                <td>2017-11-02 18:02</td>
+                <td><div class="am-btn-toolbar">
+                    <div class="am-btn-group am-btn-group-xs">
+                        <div class="am-dropdown" data-am-dropdown="">
+                            <button id="docTypeBtn" class="am-btn am-btn-link am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle="">编辑  <span class="am-icon-caret-down"></span></button>
+                            <ul class="am-dropdown-content">
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-9-j_idt40-0-j_idt42':'j_idt9-9-j_idt40-0-j_idt42'},'');return false"> <i class="am-text-xs am-icon-file" style="font-size: 12px;"></i>文件 file </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-9-j_idt40-1-j_idt42':'j_idt9-9-j_idt40-1-j_idt42'},'');return false"> <i class="am-text-xs am-icon-info-circle" style="font-size: 12px;"></i>题名 title </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-9-j_idt40-2-j_idt42':'j_idt9-9-j_idt40-2-j_idt42'},'');return false"> <i class="am-text-xs am-icon-user" style="font-size: 12px;"></i>创建者 create </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-9-j_idt40-3-j_idt42':'j_idt9-9-j_idt40-3-j_idt42'},'');return false"> <i class="am-text-xs am-icon-check-circle" style="font-size: 12px;"></i>类型 tag </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-9-j_idt40-4-j_idt42':'j_idt9-9-j_idt40-4-j_idt42'},'');return false"> <i class="am-text-xs am-icon-font" style="font-size: 12px;"></i>出版 publish </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-9-j_idt40-5-j_idt42':'j_idt9-9-j_idt40-5-j_idt42'},'');return false"> <i class="am-text-xs am-icon-cube" style="font-size: 12px;"></i>格式 format </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-9-j_idt40-6-j_idt42':'j_idt9-9-j_idt40-6-j_idt42'},'');return false"> <i class="am-text-xs am-icon-unlock" style="font-size: 12px;"></i>授权 right </a></li>
+                            </ul>
+                        </div>
+                    </div></div></td>
+            </tr>
+            <tr>
+                <td>252</td>
+                <td>专业素材</td>
+                <td>垫片_伴奏音乐</td>
+                <td>完全公开</td>
+                <td>永久</td>
+                <td>139</td>
+                <td>冯阳</td>
+                <td>2017-11-02 18:02</td>
+                <td><div class="am-btn-toolbar">
+                    <div class="am-btn-group am-btn-group-xs">
+                        <div class="am-dropdown" data-am-dropdown="">
+                            <button id="docTypeBtn" class="am-btn am-btn-link am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle="">编辑  <span class="am-icon-caret-down"></span></button>
+                            <ul class="am-dropdown-content">
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-10-j_idt40-0-j_idt42':'j_idt9-10-j_idt40-0-j_idt42'},'');return false"> <i class="am-text-xs am-icon-file" style="font-size: 12px;"></i>文件 file </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-10-j_idt40-1-j_idt42':'j_idt9-10-j_idt40-1-j_idt42'},'');return false"> <i class="am-text-xs am-icon-info-circle" style="font-size: 12px;"></i>题名 title </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-10-j_idt40-2-j_idt42':'j_idt9-10-j_idt40-2-j_idt42'},'');return false"> <i class="am-text-xs am-icon-user" style="font-size: 12px;"></i>创建者 create </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-10-j_idt40-3-j_idt42':'j_idt9-10-j_idt40-3-j_idt42'},'');return false"> <i class="am-text-xs am-icon-check-circle" style="font-size: 12px;"></i>类型 tag </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-10-j_idt40-4-j_idt42':'j_idt9-10-j_idt40-4-j_idt42'},'');return false"> <i class="am-text-xs am-icon-font" style="font-size: 12px;"></i>出版 publish </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-10-j_idt40-5-j_idt42':'j_idt9-10-j_idt40-5-j_idt42'},'');return false"> <i class="am-text-xs am-icon-cube" style="font-size: 12px;"></i>格式 format </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-10-j_idt40-6-j_idt42':'j_idt9-10-j_idt40-6-j_idt42'},'');return false"> <i class="am-text-xs am-icon-unlock" style="font-size: 12px;"></i>授权 right </a></li>
+                            </ul>
+                        </div>
+                    </div></div></td>
+            </tr>
+            <tr>
+                <td>251</td>
+                <td>专业素材</td>
+                <td>垫片_亡灵序曲</td>
+                <td>完全公开</td>
+                <td>永久</td>
+                <td>320</td>
+                <td>冯阳</td>
+                <td>2017-11-02 18:01</td>
+                <td><div class="am-btn-toolbar">
+                    <div class="am-btn-group am-btn-group-xs">
+                        <div class="am-dropdown" data-am-dropdown="">
+                            <button id="docTypeBtn" class="am-btn am-btn-link am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle="">编辑  <span class="am-icon-caret-down"></span></button>
+                            <ul class="am-dropdown-content">
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-11-j_idt40-0-j_idt42':'j_idt9-11-j_idt40-0-j_idt42'},'');return false"> <i class="am-text-xs am-icon-file" style="font-size: 12px;"></i>文件 file </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-11-j_idt40-1-j_idt42':'j_idt9-11-j_idt40-1-j_idt42'},'');return false"> <i class="am-text-xs am-icon-info-circle" style="font-size: 12px;"></i>题名 title </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-11-j_idt40-2-j_idt42':'j_idt9-11-j_idt40-2-j_idt42'},'');return false"> <i class="am-text-xs am-icon-user" style="font-size: 12px;"></i>创建者 create </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-11-j_idt40-3-j_idt42':'j_idt9-11-j_idt40-3-j_idt42'},'');return false"> <i class="am-text-xs am-icon-check-circle" style="font-size: 12px;"></i>类型 tag </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-11-j_idt40-4-j_idt42':'j_idt9-11-j_idt40-4-j_idt42'},'');return false"> <i class="am-text-xs am-icon-font" style="font-size: 12px;"></i>出版 publish </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-11-j_idt40-5-j_idt42':'j_idt9-11-j_idt40-5-j_idt42'},'');return false"> <i class="am-text-xs am-icon-cube" style="font-size: 12px;"></i>格式 format </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-11-j_idt40-6-j_idt42':'j_idt9-11-j_idt40-6-j_idt42'},'');return false"> <i class="am-text-xs am-icon-unlock" style="font-size: 12px;"></i>授权 right </a></li>
+                            </ul>
+                        </div>
+                    </div></div></td>
+            </tr>
+            <tr>
+                <td>250</td>
+                <td>专题</td>
+                <td>测试_长时间</td>
+                <td>完全公开</td>
+                <td>永久</td>
+                <td>842</td>
+                <td>冯阳</td>
+                <td>2017-11-02 18:00</td>
+                <td><div class="am-btn-toolbar">
+                    <div class="am-btn-group am-btn-group-xs">
+                        <div class="am-dropdown" data-am-dropdown="">
+                            <button id="docTypeBtn" class="am-btn am-btn-link am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle="">编辑  <span class="am-icon-caret-down"></span></button>
+                            <ul class="am-dropdown-content">
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-12-j_idt40-0-j_idt42':'j_idt9-12-j_idt40-0-j_idt42'},'');return false"> <i class="am-text-xs am-icon-file" style="font-size: 12px;"></i>文件 file </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-12-j_idt40-1-j_idt42':'j_idt9-12-j_idt40-1-j_idt42'},'');return false"> <i class="am-text-xs am-icon-info-circle" style="font-size: 12px;"></i>题名 title </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-12-j_idt40-2-j_idt42':'j_idt9-12-j_idt40-2-j_idt42'},'');return false"> <i class="am-text-xs am-icon-user" style="font-size: 12px;"></i>创建者 create </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-12-j_idt40-3-j_idt42':'j_idt9-12-j_idt40-3-j_idt42'},'');return false"> <i class="am-text-xs am-icon-check-circle" style="font-size: 12px;"></i>类型 tag </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-12-j_idt40-4-j_idt42':'j_idt9-12-j_idt40-4-j_idt42'},'');return false"> <i class="am-text-xs am-icon-font" style="font-size: 12px;"></i>出版 publish </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-12-j_idt40-5-j_idt42':'j_idt9-12-j_idt40-5-j_idt42'},'');return false"> <i class="am-text-xs am-icon-cube" style="font-size: 12px;"></i>格式 format </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-12-j_idt40-6-j_idt42':'j_idt9-12-j_idt40-6-j_idt42'},'');return false"> <i class="am-text-xs am-icon-unlock" style="font-size: 12px;"></i>授权 right </a></li>
+                            </ul>
+                        </div>
+                    </div></div></td>
+            </tr>
+            <tr>
+                <td>249</td>
+                <td>新闻</td>
+                <td>测试_长时间</td>
+                <td>完全公开</td>
+                <td>永久</td>
+                <td>2506</td>
+                <td>冯阳</td>
+                <td>2017-11-02 17:55</td>
+                <td><div class="am-btn-toolbar">
+                    <div class="am-btn-group am-btn-group-xs">
+                        <div class="am-dropdown" data-am-dropdown="">
+                            <button id="docTypeBtn" class="am-btn am-btn-link am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle="">编辑  <span class="am-icon-caret-down"></span></button>
+                            <ul class="am-dropdown-content">
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-13-j_idt40-0-j_idt42':'j_idt9-13-j_idt40-0-j_idt42'},'');return false"> <i class="am-text-xs am-icon-file" style="font-size: 12px;"></i>文件 file </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-13-j_idt40-1-j_idt42':'j_idt9-13-j_idt40-1-j_idt42'},'');return false"> <i class="am-text-xs am-icon-info-circle" style="font-size: 12px;"></i>题名 title </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-13-j_idt40-2-j_idt42':'j_idt9-13-j_idt40-2-j_idt42'},'');return false"> <i class="am-text-xs am-icon-user" style="font-size: 12px;"></i>创建者 create </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-13-j_idt40-3-j_idt42':'j_idt9-13-j_idt40-3-j_idt42'},'');return false"> <i class="am-text-xs am-icon-check-circle" style="font-size: 12px;"></i>类型 tag </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-13-j_idt40-4-j_idt42':'j_idt9-13-j_idt40-4-j_idt42'},'');return false"> <i class="am-text-xs am-icon-font" style="font-size: 12px;"></i>出版 publish </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-13-j_idt40-5-j_idt42':'j_idt9-13-j_idt40-5-j_idt42'},'');return false"> <i class="am-text-xs am-icon-cube" style="font-size: 12px;"></i>格式 format </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-13-j_idt40-6-j_idt42':'j_idt9-13-j_idt40-6-j_idt42'},'');return false"> <i class="am-text-xs am-icon-unlock" style="font-size: 12px;"></i>授权 right </a></li>
+                            </ul>
+                        </div>
+                    </div></div></td>
+            </tr>
+            <tr>
+                <td>248</td>
+                <td>文献</td>
+                <td>徐良、孙羽幽 - 情话</td>
+                <td>完全公开</td>
+                <td>永久</td>
+                <td>238</td>
+                <td>冯阳</td>
+                <td>2017-11-02 17:48</td>
+                <td><div class="am-btn-toolbar">
+                    <div class="am-btn-group am-btn-group-xs">
+                        <div class="am-dropdown" data-am-dropdown="">
+                            <button id="docTypeBtn" class="am-btn am-btn-link am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle="">编辑  <span class="am-icon-caret-down"></span></button>
+                            <ul class="am-dropdown-content">
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-14-j_idt40-0-j_idt42':'j_idt9-14-j_idt40-0-j_idt42'},'');return false"> <i class="am-text-xs am-icon-file" style="font-size: 12px;"></i>文件 file </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-14-j_idt40-1-j_idt42':'j_idt9-14-j_idt40-1-j_idt42'},'');return false"> <i class="am-text-xs am-icon-info-circle" style="font-size: 12px;"></i>题名 title </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-14-j_idt40-2-j_idt42':'j_idt9-14-j_idt40-2-j_idt42'},'');return false"> <i class="am-text-xs am-icon-user" style="font-size: 12px;"></i>创建者 create </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-14-j_idt40-3-j_idt42':'j_idt9-14-j_idt40-3-j_idt42'},'');return false"> <i class="am-text-xs am-icon-check-circle" style="font-size: 12px;"></i>类型 tag </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-14-j_idt40-4-j_idt42':'j_idt9-14-j_idt40-4-j_idt42'},'');return false"> <i class="am-text-xs am-icon-font" style="font-size: 12px;"></i>出版 publish </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-14-j_idt40-5-j_idt42':'j_idt9-14-j_idt40-5-j_idt42'},'');return false"> <i class="am-text-xs am-icon-cube" style="font-size: 12px;"></i>格式 format </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-14-j_idt40-6-j_idt42':'j_idt9-14-j_idt40-6-j_idt42'},'');return false"> <i class="am-text-xs am-icon-unlock" style="font-size: 12px;"></i>授权 right </a></li>
+                            </ul>
+                        </div>
+                    </div></div></td>
+            </tr>
+            <tr>
+                <td>247</td>
+                <td>文献</td>
+                <td>徐良、阿悄 - 犯贱</td>
+                <td>完全公开</td>
+                <td>永久</td>
+                <td>213</td>
+                <td>冯阳</td>
+                <td>2017-11-02 17:48</td>
+                <td><div class="am-btn-toolbar">
+                    <div class="am-btn-group am-btn-group-xs">
+                        <div class="am-dropdown" data-am-dropdown="">
+                            <button id="docTypeBtn" class="am-btn am-btn-link am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle="">编辑  <span class="am-icon-caret-down"></span></button>
+                            <ul class="am-dropdown-content">
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-15-j_idt40-0-j_idt42':'j_idt9-15-j_idt40-0-j_idt42'},'');return false"> <i class="am-text-xs am-icon-file" style="font-size: 12px;"></i>文件 file </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-15-j_idt40-1-j_idt42':'j_idt9-15-j_idt40-1-j_idt42'},'');return false"> <i class="am-text-xs am-icon-info-circle" style="font-size: 12px;"></i>题名 title </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-15-j_idt40-2-j_idt42':'j_idt9-15-j_idt40-2-j_idt42'},'');return false"> <i class="am-text-xs am-icon-user" style="font-size: 12px;"></i>创建者 create </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-15-j_idt40-3-j_idt42':'j_idt9-15-j_idt40-3-j_idt42'},'');return false"> <i class="am-text-xs am-icon-check-circle" style="font-size: 12px;"></i>类型 tag </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-15-j_idt40-4-j_idt42':'j_idt9-15-j_idt40-4-j_idt42'},'');return false"> <i class="am-text-xs am-icon-font" style="font-size: 12px;"></i>出版 publish </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-15-j_idt40-5-j_idt42':'j_idt9-15-j_idt40-5-j_idt42'},'');return false"> <i class="am-text-xs am-icon-cube" style="font-size: 12px;"></i>格式 format </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-15-j_idt40-6-j_idt42':'j_idt9-15-j_idt40-6-j_idt42'},'');return false"> <i class="am-text-xs am-icon-unlock" style="font-size: 12px;"></i>授权 right </a></li>
+                            </ul>
+                        </div>
+                    </div></div></td>
+            </tr>
+            <tr>
+                <td>246</td>
+                <td>文献</td>
+                <td>徐良 - 电话里的秘密</td>
+                <td>完全公开</td>
+                <td>永久</td>
+                <td>243</td>
+                <td>冯阳</td>
+                <td>2017-11-02 17:48</td>
+                <td><div class="am-btn-toolbar">
+                    <div class="am-btn-group am-btn-group-xs">
+                        <div class="am-dropdown" data-am-dropdown="">
+                            <button id="docTypeBtn" class="am-btn am-btn-link am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle="">编辑  <span class="am-icon-caret-down"></span></button>
+                            <ul class="am-dropdown-content">
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-16-j_idt40-0-j_idt42':'j_idt9-16-j_idt40-0-j_idt42'},'');return false"> <i class="am-text-xs am-icon-file" style="font-size: 12px;"></i>文件 file </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-16-j_idt40-1-j_idt42':'j_idt9-16-j_idt40-1-j_idt42'},'');return false"> <i class="am-text-xs am-icon-info-circle" style="font-size: 12px;"></i>题名 title </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-16-j_idt40-2-j_idt42':'j_idt9-16-j_idt40-2-j_idt42'},'');return false"> <i class="am-text-xs am-icon-user" style="font-size: 12px;"></i>创建者 create </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-16-j_idt40-3-j_idt42':'j_idt9-16-j_idt40-3-j_idt42'},'');return false"> <i class="am-text-xs am-icon-check-circle" style="font-size: 12px;"></i>类型 tag </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-16-j_idt40-4-j_idt42':'j_idt9-16-j_idt40-4-j_idt42'},'');return false"> <i class="am-text-xs am-icon-font" style="font-size: 12px;"></i>出版 publish </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-16-j_idt40-5-j_idt42':'j_idt9-16-j_idt40-5-j_idt42'},'');return false"> <i class="am-text-xs am-icon-cube" style="font-size: 12px;"></i>格式 format </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-16-j_idt40-6-j_idt42':'j_idt9-16-j_idt40-6-j_idt42'},'');return false"> <i class="am-text-xs am-icon-unlock" style="font-size: 12px;"></i>授权 right </a></li>
+                            </ul>
+                        </div>
+                    </div></div></td>
+            </tr>
+            <tr>
+                <td>245</td>
+                <td>文献</td>
+                <td>小暖、徐良 - 在回忆中死去</td>
+                <td>完全公开</td>
+                <td>永久</td>
+                <td>214</td>
+                <td>冯阳</td>
+                <td>2017-11-02 17:48</td>
+                <td><div class="am-btn-toolbar">
+                    <div class="am-btn-group am-btn-group-xs">
+                        <div class="am-dropdown" data-am-dropdown="">
+                            <button id="docTypeBtn" class="am-btn am-btn-link am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle="">编辑  <span class="am-icon-caret-down"></span></button>
+                            <ul class="am-dropdown-content">
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-17-j_idt40-0-j_idt42':'j_idt9-17-j_idt40-0-j_idt42'},'');return false"> <i class="am-text-xs am-icon-file" style="font-size: 12px;"></i>文件 file </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-17-j_idt40-1-j_idt42':'j_idt9-17-j_idt40-1-j_idt42'},'');return false"> <i class="am-text-xs am-icon-info-circle" style="font-size: 12px;"></i>题名 title </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-17-j_idt40-2-j_idt42':'j_idt9-17-j_idt40-2-j_idt42'},'');return false"> <i class="am-text-xs am-icon-user" style="font-size: 12px;"></i>创建者 create </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-17-j_idt40-3-j_idt42':'j_idt9-17-j_idt40-3-j_idt42'},'');return false"> <i class="am-text-xs am-icon-check-circle" style="font-size: 12px;"></i>类型 tag </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-17-j_idt40-4-j_idt42':'j_idt9-17-j_idt40-4-j_idt42'},'');return false"> <i class="am-text-xs am-icon-font" style="font-size: 12px;"></i>出版 publish </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-17-j_idt40-5-j_idt42':'j_idt9-17-j_idt40-5-j_idt42'},'');return false"> <i class="am-text-xs am-icon-cube" style="font-size: 12px;"></i>格式 format </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-17-j_idt40-6-j_idt42':'j_idt9-17-j_idt40-6-j_idt42'},'');return false"> <i class="am-text-xs am-icon-unlock" style="font-size: 12px;"></i>授权 right </a></li>
+                            </ul>
+                        </div>
+                    </div></div></td>
+            </tr>
+            <tr>
+                <td>244</td>
+                <td>文献</td>
+                <td>夏婉安 - 一个人</td>
+                <td>完全公开</td>
+                <td>永久</td>
+                <td>194</td>
+                <td>冯阳</td>
+                <td>2017-11-02 17:47</td>
+                <td><div class="am-btn-toolbar">
+                    <div class="am-btn-group am-btn-group-xs">
+                        <div class="am-dropdown" data-am-dropdown="">
+                            <button id="docTypeBtn" class="am-btn am-btn-link am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle="">编辑  <span class="am-icon-caret-down"></span></button>
+                            <ul class="am-dropdown-content">
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-18-j_idt40-0-j_idt42':'j_idt9-18-j_idt40-0-j_idt42'},'');return false"> <i class="am-text-xs am-icon-file" style="font-size: 12px;"></i>文件 file </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-18-j_idt40-1-j_idt42':'j_idt9-18-j_idt40-1-j_idt42'},'');return false"> <i class="am-text-xs am-icon-info-circle" style="font-size: 12px;"></i>题名 title </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-18-j_idt40-2-j_idt42':'j_idt9-18-j_idt40-2-j_idt42'},'');return false"> <i class="am-text-xs am-icon-user" style="font-size: 12px;"></i>创建者 create </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-18-j_idt40-3-j_idt42':'j_idt9-18-j_idt40-3-j_idt42'},'');return false"> <i class="am-text-xs am-icon-check-circle" style="font-size: 12px;"></i>类型 tag </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-18-j_idt40-4-j_idt42':'j_idt9-18-j_idt40-4-j_idt42'},'');return false"> <i class="am-text-xs am-icon-font" style="font-size: 12px;"></i>出版 publish </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-18-j_idt40-5-j_idt42':'j_idt9-18-j_idt40-5-j_idt42'},'');return false"> <i class="am-text-xs am-icon-cube" style="font-size: 12px;"></i>格式 format </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-18-j_idt40-6-j_idt42':'j_idt9-18-j_idt40-6-j_idt42'},'');return false"> <i class="am-text-xs am-icon-unlock" style="font-size: 12px;"></i>授权 right </a></li>
+                            </ul>
+                        </div>
+                    </div></div></td>
+            </tr>
+            <tr>
+                <td>243</td>
+                <td>文献</td>
+                <td>夏婉安 - 梦游人的梦</td>
+                <td>完全公开</td>
+                <td>永久</td>
+                <td>251</td>
+                <td>冯阳</td>
+                <td>2017-11-02 17:47</td>
+                <td><div class="am-btn-toolbar">
+                    <div class="am-btn-group am-btn-group-xs">
+                        <div class="am-dropdown" data-am-dropdown="">
+                            <button id="docTypeBtn" class="am-btn am-btn-link am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle="">编辑  <span class="am-icon-caret-down"></span></button>
+                            <ul class="am-dropdown-content">
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-19-j_idt40-0-j_idt42':'j_idt9-19-j_idt40-0-j_idt42'},'');return false"> <i class="am-text-xs am-icon-file" style="font-size: 12px;"></i>文件 file </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-19-j_idt40-1-j_idt42':'j_idt9-19-j_idt40-1-j_idt42'},'');return false"> <i class="am-text-xs am-icon-info-circle" style="font-size: 12px;"></i>题名 title </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-19-j_idt40-2-j_idt42':'j_idt9-19-j_idt40-2-j_idt42'},'');return false"> <i class="am-text-xs am-icon-user" style="font-size: 12px;"></i>创建者 create </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-19-j_idt40-3-j_idt42':'j_idt9-19-j_idt40-3-j_idt42'},'');return false"> <i class="am-text-xs am-icon-check-circle" style="font-size: 12px;"></i>类型 tag </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-19-j_idt40-4-j_idt42':'j_idt9-19-j_idt40-4-j_idt42'},'');return false"> <i class="am-text-xs am-icon-font" style="font-size: 12px;"></i>出版 publish </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-19-j_idt40-5-j_idt42':'j_idt9-19-j_idt40-5-j_idt42'},'');return false"> <i class="am-text-xs am-icon-cube" style="font-size: 12px;"></i>格式 format </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt9-19-j_idt40-6-j_idt42':'j_idt9-19-j_idt40-6-j_idt42'},'');return false"> <i class="am-text-xs am-icon-unlock" style="font-size: 12px;"></i>授权 right </a></li>
+                            </ul>
+                        </div>
+                    </div></div></td>
+            </tr>
+            </tbody>
+        </table>
+        </div><span class="pagination   clear am-fr">
+                <span>总条数：<b>201</b> <i class="am-margin-horizontal-sm"></i> 页码：<b>1</b> / 11页 <i class="am-margin-horizontal-sm"></i></span><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt46-j_idt49':'j_idt46-j_idt49'},'');return false"><i class="am-icon-angle-double-up am-text-success"></i> 首页</a><a href="#" onclick="jsf.util.chain(this,event,'return false','mojarra.jsfcljs(document.getElementById(\'frm\'),{\'j_idt46-j_idt51\':\'j_idt46-j_idt51\'},\'\')');return false"><i class="am-icon-angle-up am-text-success"></i> 上页</a><a href="#" onclick="jsf.util.chain(this,event,'return true','mojarra.jsfcljs(document.getElementById(\'frm\'),{\'j_idt46-j_idt53\':\'j_idt46-j_idt53\'},\'\')');return false">
+                <i class="am-icon-angle-down am-text-success"></i> 下页</a><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt46-j_idt55':'j_idt46-j_idt55'},'');return false"><i class="am-icon-angle-double-down am-text-success"></i> 尾页</a>
+                <span class="grey am-margin-horizontal-xs am-text-xs grey">| </span>
+                <span class="go am-margin-left-sm"> 第<input type="text" name="j_idt46-j_idt58" value="1" />页</span><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt46-j_idt60':'j_idt46-j_idt60'},'');return false"> 确定 </a></span>
+    </div></div><input type="hidden" name="javax.faces.ViewState" id="j_id1-javax.faces.ViewState-0" value="-1225851121517244976:2786847769788398387" autocomplete="off" />
+</form></body>
+
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:com="http://xmlns.jcp.org/jsf/composite/composite"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+<ui:composition template="template.xhtml">
+    <ui:param name="title" value="资源库管理 - 权利"/>
+    <ui:define name="content">
+        <h:panelGroup id="tabs">
+            <com:resTab ctrl="#{resRightController}"/>
+        </h:panelGroup>
+
+        <h:panelGroup id="table">
+
+            <h:panelGroup layout="block" styleClass="am-g am-margin">
+                <h:panelGroup layout="block" styleClass="am-u-sm-8">
+                    <h2>来源(Source)</h2>
+                    <p>音频资料的获取途径和提供者信息</p>
+                </h:panelGroup>
+                <h:panelGroup layout="block" styleClass="am-u-sm-4">
+                    <h:commandLink styleClass="am-btn am-btn-default am-btn-warning am-btn-sm am-fr am-margin-right" action="#{resRightController.save()}" rendered="#{resController.editable(resRightController.bean)}"> <i class="am-icon-save"></i> <f:param name="idx" value="#{param.idx}"></f:param> 保存 </h:commandLink>
+                </h:panelGroup>
+            </h:panelGroup>
+
+            <h:panelGrid columns="2" styleClass="am-table tableForm" columnClasses="w60,w300">
+                <h:outputText value="资料获取方式" title="获得音频资料的途径和方法，包含购买、自采、交换、受赠、合作、委托制作、其他" styleClass="itemLabel"/>
+                <h:inputText id="source_acquired" value="#{resRightController.bean.source_acquired}" styleClass="am-form-field am-input-sm"></h:inputText>
+                <h:outputText value="资料提供者" title="提供音频资料的单位或个人的名称" styleClass="itemLabel"/>
+                <h:inputText id="source_provider" value="#{resRightController.bean.source_provider}" styleClass="am-form-field am-input-sm"></h:inputText>
+            </h:panelGrid>
+
+
+            <h:panelGroup styleClass="am-margin">
+                <h2>已有权利(Right)</h2>
+                <p>音频资料授权者和被授权使用权限</p>
+            </h:panelGroup>
+
+
+            <h:panelGroup id="list">
+                <h:dataTable value="#{resRightController.list}" var="row" styleClass="am-table am-table-compact am-table-striped admin-content-table am-table-hover">
+                    <h:column>
+                        <f:facet name="header">授权者</f:facet>
+                        <h:outputText value="#{row.owner}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">被授权者</f:facet>
+                        <h:outputText value="#{row.user}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">权利</f:facet>
+                        <h:outputText value="#{row.type}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">开始结束时间</f:facet>
+                        <h:outputText value="#{row.starttime}/#{row.endtime}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">授权使用地域</f:facet>
+                        <h:outputText value="#{row.area}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                        </f:facet>
+                        <h:panelGroup styleClass="am-btn-toolbar" layout="block">
+                            <div class="am-btn-group am-btn-group-xs">
+                                <div class="am-dropdown" data-am-dropdown="">
+                                    <h:commandButton value="编辑" styleClass="am-btn am-btn-link am-btn-sm" action="#{resRightController.edit(row)}"></h:commandButton>
+                                    <h:commandButton value="删除" styleClass="am-btn am-btn-link am-btn-sm" action="#{resRightController.delete(row)}"></h:commandButton>
+                                </div>
+                            </div>
+                        </h:panelGroup>
+                    </h:column>
+                </h:dataTable>
+            </h:panelGroup>
+
+            <h:panelGroup styleClass="am-margin" rendered="#{resController.editable(resController.bean)}">
+                <h2>添加权利(Right)</h2>
+            </h:panelGroup>
+
+            <h:panelGrid columns="2" styleClass="am-table tableForm" columnClasses="w60,w300" rendered="#{resController.editable(resController.bean)}">
+                <h:outputText value="版权授权者名称" title="享有版权，并有权授权他人使用在编音频资料的团体或个人的名称" styleClass="itemLabel"/>
+                <h:inputText id="subject_lyrics" value="#{resRightController.rightBean.owner}" styleClass="am-form-field am-input-sm"></h:inputText>
+                <h:outputText value="被授权使用者名称" title="被授权使用音频资料的个人或团体的名称" styleClass="itemLabel"/>
+                <h:inputText id="subject_term" value="#{resRightController.rightBean.user}" styleClass="am-form-field am-input-sm"></h:inputText>
+                <h:outputText value="权利类型" title="按照法律规定，音频资料可被授权使用的类型。包括广播权、信息网络传播权、摄制权、表演权、放映权、发行权、出租权、翻译权、改编权、复制权、展览权、汇编权等" styleClass="itemLabel"/>
+                <h:panelGroup layout="block" id="dropdown" styleClass="am-input-group">
+                    <span class="am-input-group-label am-dropdown-toggle"><i class="am-icon-lock am-icon-caret-down"></i></span>
+                    <ul class="am-dropdown-content">
+                        <li class="am-dropdown-header">请选择对应的权利</li>
+                        <li><a href="#">广播权</a></li>
+                        <li><a href="#">信息网络传播权</a></li>
+                        <li><a href="#">表演权</a></li>
+                        <li><a href="#">放映权</a></li>
+                        <li><a href="#">发行权</a></li>
+                        <li><a href="#">出租权</a></li>
+                        <li><a href="#">翻译权</a></li>
+                        <li><a href="#">改编权</a></li>
+                        <li><a href="#">复制权</a></li>
+                        <li><a href="#">展览权</a></li>
+                        <li><a href="#">汇编权</a></li>
+                    </ul>
+                    <h:inputText id="right_type" value="#{resRightController.rightBean.type}" styleClass="dropdown-text am-form-field am-input-sm"></h:inputText>
+                </h:panelGroup>
+                <h:outputText value="授权起始日期" styleClass="itemLabel"/>
+                <h:inputText id="right_starttime" value="#{resRightController.rightBean.starttime}" p:data-am-datepicker="" styleClass="am-form-field am-input-sm" converter="timestampSimpleConverter"></h:inputText>
+                <h:outputText value="授权截止日期" styleClass="itemLabel"/>
+                <h:inputText id="right_endtime" value="#{resRightController.rightBean.endtime}" p:data-am-datepicker="" styleClass="am-form-field am-input-sm" converter="timestampSimpleConverter"></h:inputText>
+                <h:outputText value="授权使用地域" styleClass="itemLabel"/>
+                <h:inputText id="right_area" value="#{resRightController.rightBean.area}" styleClass="am-form-field am-input-sm"></h:inputText>
+            </h:panelGrid>
+
+        </h:panelGroup>
+
+    </ui:define>
+
+</ui:composition>
+</html>

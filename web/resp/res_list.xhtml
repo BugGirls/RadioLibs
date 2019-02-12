@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:composite="http://xmlns.jcp.org/jsf/composite/composite" xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+
+<ui:composition template="template.xhtml">
+    <ui:param name="title" value="资源管理 -> #{common.categoryLabel(param.category)}"/>
+    <ui:define name="content">
+
+        <div>
+            <composite:searchbox keyword="#{resController.keyword}" ctrl="#{resController}"/>
+        </div>
+
+        <h:dataTable value="#{resController.pageBean.list}" var="row" styleClass="am-table am-table-compact am-table-striped admin-content-table am-table-hover">
+            <h:column>
+                <f:facet name="header">ID</f:facet>
+                <h:outputText value="#{row.id}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">类别</f:facet>
+                <h:outputText value="#{common.categoryLabel(row.category)}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">题名</f:facet>
+                <h:outputText value="#{row.title_proper}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">演唱</f:facet>
+                <h:outputText value="#{row.singer}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">标签</f:facet>
+                <h:panelGroup layout="block" class="am-dropdown" p:data-am-dropdown="">
+                    <h:outputText class="am-badge am-badge-default am-radius am-margin-xs am-dropdown-toggle" p:data-am-dropdown-toggle="" value="#{row.tagBeanList.size()}" rendered="#{row.tagBeanList.size() gt 0}"/>
+                    <div class="am-dropdown-content" style="width: 500px;">
+                        <h:outputText escape="false" value="#{common.resTagAsDescription(row)}"/>
+                    </div>
+                </h:panelGroup>
+            </h:column>
+            <h:column>
+                <f:facet name="header">可见</f:facet>
+                <h:outputText value="#{common.visibilityLabel(row.visibility)}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">生命期</f:facet>
+                <h:outputText value="#{common.lifeLabel(row.lifetime)}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">时长</f:facet>
+                <h:outputText value="#{common.duration(row.format_duration)}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">上传人</f:facet>
+                <h:outputText value="#{common.manager(row.manager_id).name}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">创建时间</f:facet>
+                <h:outputText value="#{row.createtime}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <a href="res_edit_file.xhtml?category=#{resController.category}" class="am-btn am-btn-default am-btn-sm am-btn-warning"><span class="am-icon-plus"> </span> 新资源 </a>
+                </f:facet>
+                <h:panelGroup styleClass="am-btn-toolbar" layout="block">
+
+                    <div class="am-btn-group am-btn-group-xs">
+                        <div class="am-dropdown" data-am-dropdown="">
+                            <button id="docTypeBtn" class="am-btn am-btn-link am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle=""><h:outputText value="#{resController.editable(row)?'编辑':'详情'} "/>   <span class="am-icon-caret-down"></span></button>
+                            <ul class="am-dropdown-content">
+                                <ui:repeat value="#{common.fromEnum('Section')}" var="section">
+                                    <li><h:commandLink action="#{resController.tab(row,section)}"> <i class="am-text-xs am-icon-#{section.icon}" style="font-size: 12px;"></i>#{section.name} #{section.code} </h:commandLink> </li>
+                                </ui:repeat>
+                                <li><h:commandLink styleClass="am-text-danger" rendered="#{resController.editable(row)}" onclick="return confirm('删除后不可恢复，确认吗？')" action="#{resController.delete(row)}"><i class="am-text-xs am-icon-remove" style="font-size: 12px;"></i>删除此文件 </h:commandLink></li>
+                            </ul>
+                        </div>
+                    </div>
+                </h:panelGroup>
+            </h:column>
+        </h:dataTable>
+
+        <composite:pagination ctrl="#{resController}"/>
+    </ui:define>
+
+</ui:composition>
+</html>

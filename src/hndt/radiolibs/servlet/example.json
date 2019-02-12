@@ -1,0 +1,62 @@
+[
+  {
+    "name": "钟型名称",
+    "duration": 90,
+    "playlist": [
+      {
+        "id": 222,
+        "uuid": "17fAOWJL",
+        "name": "title_proper",
+        "duration": "format_duration",
+        "size": "size",
+        "path": "path",
+        "starting": "format_starting_point",
+        "singing": "演唱",
+        "lyrics": "词",
+        "music": "曲"
+      },
+      {
+        "id": 222,
+        "uuid": "17fAOWJL",
+        "name": "title_proper",
+        "duration": "format_duration",
+        "size": "size",
+        "path": "path",
+        "starting": "format_starting_point",
+        "singing": "演唱",
+        "lyrics": "词",
+        "music": "曲"
+      }
+    ]
+  },
+  {
+    "name": "钟型名称",
+    "duration": 90,
+    "playlist": [
+      {
+        "id": 222,
+        "uuid": "17fAOWJL",
+        "name": "title_proper",
+        "duration": "format_duration",
+        "size": "size",
+        "path": "path",
+        "starting": "format_starting_point",
+        "singing": "演唱",
+        "lyrics": "词",
+        "music": "曲"
+      },
+      {
+        "id": 222,
+        "uuid": "17fAOWJL",
+        "name": "title_proper",
+        "duration": "format_duration",
+        "size": "size",
+        "path": "path",
+        "starting": "format_starting_point",
+        "singing": "演唱",
+        "lyrics": "词",
+        "music": "曲"
+      }
+    ]
+  }
+]

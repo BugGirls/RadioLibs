@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:com="http://xmlns.jcp.org/jsf/composite/composite">
+<ui:composition template="template.xhtml">
+    <ui:param name="title" value="规则管理 -> #{typedController.createView() ? '添加' : '更新'}规则"/>
+
+    <ui:define name="content">
+        <h:panelGroup id="tabs">
+            <com:typedTab ctrl="#{typedController}"/>
+        </h:panelGroup>
+
+        <h:panelGroup layout="block" styleClass="am-margin am-g">
+            <h:panelGroup layout="block" styleClass="am-u-sm-8">
+                <h2>规则（Type）</h2>
+                <p>定义播放资源文件时的顺序策略和间隔策略</p>
+            </h:panelGroup>
+            <h:panelGroup layout="block" styleClass="am-u-sm-4">
+                <h:commandLink styleClass="am-btn am-btn-default am-btn-sm am-btn-warning am-margin-right am-fr" action="#{typedController.save()}"> <i class="am-icon-save"></i> 保存 </h:commandLink>
+            </h:panelGroup>
+        </h:panelGroup>
+
+        <h:panelGroup layout="block" id="table">
+            <h:panelGrid columns="2" styleClass="am-table tableForm" columnClasses="w90,w300">
+                <h:outputText value="所属管理员" styleClass="itemLabel"/>
+                <h:outputLabel id="typedManager" value="#{common.manager(typedController.bean.manager_id).name}"/>
+
+                <h:outputText value="所属频率" styleClass="itemLabel"/>
+                <h:selectOneMenu id="typedChannel" value="#{typedController.bean.channel_id}" styleClass="am-form-field am-input-sm">
+                    <f:selectItem itemValue="0" itemLabel="所有频率"/>
+                    <f:selectItems value="#{typedController.channels}" var="bean" itemLabel="#{bean.name}" itemValue="#{bean.id}"></f:selectItems>
+                </h:selectOneMenu>
+
+                <h:outputText value="顺序策略" styleClass="itemLabel"/>
+                <h:selectOneMenu id="typedOrdinal" value="#{typedController.bean.ordinal}" styleClass="am-form-field am-input-sm">
+                    <f:selectItems value="#{common.fromEnum('Ordinal')}" var="item" itemLabel="#{item.name}" itemValue="#{item.code}"/>
+                    <f:ajax render="groupInterval"/>
+                </h:selectOneMenu>
+
+                <h:outputText value="间隔策略" styleClass="itemLabel" id="labelInterval"/>
+                <h:panelGroup id="groupInterval" layout="block" styleClass="am-input-group w350">
+                    <h:inputText id="typedInterval" value="#{typedController.bean.intervals}" styleClass="am-form-field am-input-sm #{(typedController.bean.ordinal!=3)?'am-disabled':''}"/>
+                    <span class="am-input-group-label am-text-sm">多少天内不重复。只在随机顺序里有效</span>
+                </h:panelGroup>
+
+                <h:outputText value="预留或占位" styleClass="itemLabel" id="labelPlaceholder"/>
+                <h:panelGrid id="groupPlaceholder" layout="block" styleClass="am-input-group" columns="2">
+                    <h:selectOneRadio id="typedPlaceholder" value="#{typedController.bean.placeholder}" styleClass="tableItems">
+                        <f:selectItems value="#{common.fromEnum('YesNo')}" var="item" itemLabel="#{item.name}" itemValue="#{item.code}"/>
+                        <f:ajax execute="table" render="typedOrdinal groupUnitary typedAmount groupDuration" listener="#{typedController.onChange()}"/>
+                    </h:selectOneRadio>
+                    <span class="">如果是预留节目：①顺序规则强制为倒序(最新上传的节目优先取到)；②资源类别和上传的资源类别保持一致；③保持完整不截断为是；④选取个数为1</span>
+                </h:panelGrid>
+
+                <h:outputText value="占位时长" styleClass="itemLabel" id="labelDuration"/>
+                <h:panelGroup id="groupDuration" layout="block" styleClass="am-input-group w350">
+                    <h:inputText id="typedDuration" value="#{typedController.bean.duration}" styleClass="am-form-field am-input-sm"/>
+                    <span class="am-input-group-label am-text-sm">秒</span>
+                </h:panelGroup>
+
+                <h:outputText value="保持完整(不截断)" styleClass="itemLabel" id="labelUnitary"/>
+                <h:panelGrid id="groupUnitary" layout="block" styleClass="am-input-group" columns="2">
+                    <h:selectOneRadio id="typedUnitary" value="#{typedController.bean.unitary}" styleClass="tableItems">
+                        <f:selectItems value="#{common.fromEnum('YesNo')}" var="item" itemLabel="#{item.name}" itemValue="#{item.code}"/>
+                    </h:selectOneRadio>
+                    <span class="am-text-sm">此设置项暂不起作用</span>
+                </h:panelGrid>
+
+                <h:outputText value="选取个数" styleClass="itemLabel"/>
+                <h:panelGroup layout="block" styleClass="am-input-group w350">
+                    <h:inputText id="typedAmount" value="#{typedController.bean.amount}" styleClass="am-form-field am-input-sm"/>
+                    <span class="am-input-group-label am-text-sm">每次应用规则时选取的资源个数</span>
+                </h:panelGroup>
+
+                <h:outputText value="指示色" styleClass="itemLabel"/>
+                <h:panelGrid id="groupColor" layout="block" styleClass="" columns="2">
+                    <h:selectOneMenu id="typedColor" value="#{typedController.bean.color}" styleClass="am-form-field am-input-sm w120">
+                        <f:selectItems value="#{common.fromEnum('Color')}" var="item" itemLabel="#{item.name}" itemValue="#{item.code}"/>
+                        <f:ajax render="groupColor"/>
+                    </h:selectOneMenu>
+                    <div style="background-color: #{typedController.bean.color}; width: 33px; height: 33px;" class="am-margin-left am-radius"></div>
+                </h:panelGrid>
+
+                <h:outputText value="资源类别" styleClass="itemLabel"/>
+                <h:panelGroup>
+                    <h:selectOneRadio value="#{typedController.bean.res_category}" styleClass="tableItems">
+                        <f:selectItems value="#{common.fromEnum('Category')}" var="item" itemLabel="#{item.name}" itemValue="#{item.code}"/>
+                    </h:selectOneRadio>
+                </h:panelGroup>
+
+                <h:outputText value="规则状态" styleClass="itemLabel"/>
+                <h:selectOneRadio styleClass="tableItems" value="#{typedController.bean.status}">
+                    <f:selectItems value="#{common.fromEnum('Status')}" var="item" itemValue="#{item.code}" itemLabel="#{item.name}"/>
+                </h:selectOneRadio>
+
+            </h:panelGrid>
+        </h:panelGroup>
+
+    </ui:define>
+
+</ui:composition>
+
+</html>

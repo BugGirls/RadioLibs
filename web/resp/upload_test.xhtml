@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:com="http://xmlns.jcp.org/jsf/composite/composite" xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+<ui:composition template="/resp/template.xhtml">
+    <ui:define name="headExtra">
+        <script src="${pageContext.request.contextPath}/resources/jquery_upload/js/vendor/jquery.ui.widget.js"></script>
+        <script src="${pageContext.request.contextPath}/resources/jquery_upload/js/jquery.iframe-transport.js"></script>
+        <script src="${pageContext.request.contextPath}/resources/jquery_upload/js/jquery.fileupload.js"></script>
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/jquery_upload/css/jquery.fileupload.css"/>
+    </ui:define>
+
+    <ui:param name="title" value="资源库创建"/>
+    <ui:define name="content">
+        <h3 class="am-margin">音频上传组件开发</h3>
+        <p>
+            <com:upload></com:upload>
+        </p>
+        <h:commandButton action="#{radioController.test()}" value="测试" styleClass="am-btn am-btn-xs"/>
+        <div style="height: 800px;"></div>
+    </ui:define>
+
+</ui:composition>
+</html>

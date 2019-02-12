@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:com="http://xmlns.jcp.org/jsf/composite/composite" xmlns:p="http://xmlns.jcp.org/jsf/passthrough" xmlns:c="http://java.sun.com/jsp/jstl/core">
+<ui:composition template="template.xhtml">
+    <ui:param name="title" value="资源库管理 - 出版者"/>
+    <ui:define name="tools">
+        <h:commandLink styleClass="am-btn am-btn-default am-btn-sm am-btn-warning" action="#{resPublishController.save()}"> <i class="am-icon-save"></i> 保存 </h:commandLink>
+    </ui:define>
+    <ui:define name="content">
+        <h:panelGroup id="tabs">
+            <com:resTab ctrl="#{resTitleController}"/>
+        </h:panelGroup>
+
+        <h:panelGroup id="table">
+            <h:panelGroup styleClass="am-margin">
+                <h2>描述(Description) ， 主题词(Subject Term)</h2>
+                <p>对音频资料的说明解释；揭示音频资料内容主要特征的规范化的词或词组</p>
+            </h:panelGroup>
+
+            <h:panelGrid columns="2" styleClass="am-table tableForm" columnClasses="w60,w300">
+                <h:outputText value="文稿/歌词" styleClass="itemLabel"/>
+                <h:inputText id="subject_lyrics" value="#{resPublishController.bean.subject_lyrics}" styleClass="am-form-field am-input-sm"></h:inputText>
+                <h:outputText value="主题词" title="揭示音频资料内容主要特征的规范化的词或词组" styleClass="itemLabel"/>
+                <h:inputText id="subject_term" value="#{resPublishController.bean.subject_term}" styleClass="am-form-field am-input-sm"></h:inputText>
+                <h:outputText value="关键字" title="揭示音频资料主要内容且具有检索意义的未经控制或只作少量控制的词或词组" styleClass="itemLabel"/>
+                <h:inputText id="subject_keyword" value="#{resPublishController.bean.subject_keyword}" styleClass="am-form-field am-input-sm"></h:inputText>
+                <h:outputText value="摘要" title="概括地说明音频资料的内容要点" styleClass="itemLabel"/>
+                <h:inputText id="desc_abstract" value="#{resPublishController.bean.desc_abstract}" styleClass="am-form-field am-input-sm"></h:inputText>
+                <h:outputText value="附注" title="说明音频资料的性质、特征、用途以及范围等的文字" styleClass="itemLabel"/>
+                <h:inputText id="desc_note" value="#{resPublishController.bean.desc_note}" styleClass="am-form-field am-input-sm"></h:inputText>
+                <h:outputText value="获奖情况" title="音频资料的获奖情况" styleClass="itemLabel"/>
+                <h:inputText id="desc_awards" value="#{resPublishController.bean.desc_awards}" styleClass="am-form-field am-input-sm"></h:inputText>
+            </h:panelGrid>
+
+            <h:panelGroup styleClass="am-margin">
+                <h2>出版者(Publisher)，日期(Date)</h2>
+                <p>使音频资料可以获得和利用的责任实体，与音频资料生命周期中的事件相关的日期，包括但不限于音频资料的录制、出版和首播日期</p>
+            </h:panelGroup>
+            <h:panelGrid columns="2" styleClass="am-table tableForm" columnClasses="w60,w300">
+                <h:outputText value="出版者" title="音频资料可以获得和利用的责任实体" styleClass="itemLabel"/>
+                <h:inputText id="publisher" value="#{resPublishController.bean.publisher}" styleClass="am-form-field am-input-sm"></h:inputText>
+                <h:outputText value="出版日期" styleClass="itemLabel"/>
+                <h:inputText id="date_published" value="#{resPublishController.bean.date_published}" p:data-am-datepicker="" styleClass="am-form-field am-input-sm data-am-datepicker"></h:inputText>
+                <h:outputText value="录制日期" styleClass="itemLabel"/>
+                <h:inputText id="date_recorded" value="#{resPublishController.bean.date_recorded}" p:data-am-datepicker="" styleClass="am-form-field am-input-sm data-am-datepicker"></h:inputText>
+                <h:outputText value="首播日期" styleClass="itemLabel"/>
+                <h:inputText id="date_debut" value="#{resPublishController.bean.date_debut}" p:data-am-datepicker="" styleClass="am-form-field am-input-sm data-am-datepicker"></h:inputText>
+                <h:outputText value="首播栏目" styleClass="itemLabel"/>
+                <h:inputText id="subject_debut_column" value="#{resPublishController.bean.subject_debut_column}" styleClass="am-form-field am-input-sm"></h:inputText>
+            </h:panelGrid>
+
+            <h:panelGroup styleClass="am-margin">
+                <h2>标识符(Identifier)</h2>
+            </h:panelGroup>
+
+            <h:panelGrid columns="2" styleClass="am-table tableForm" columnClasses="w60,w300">
+                <h:outputText value="国际标准音像制品编码" title="国际标准音像制品编码" styleClass="itemLabel"/>
+                <h:inputText id="id_isrc" value="#{resPublishController.bean.id_isrc}" styleClass="am-form-field am-input-sm"></h:inputText>
+                <h:outputText value="国际标准书号" title="国际标准书号" styleClass="itemLabel"/>
+                <h:inputText id="id_isbn" value="#{resPublishController.bean.id_isbn}" styleClass="am-form-field am-input-sm"></h:inputText>
+                <h:outputText value="音频资料的原始出版编号" title="音频资料的原始出版编号" styleClass="itemLabel"/>
+                <h:inputText id="id_original" value="#{resPublishController.bean.id_original}" styleClass="am-form-field am-input-sm"></h:inputText>
+            </h:panelGrid>
+
+            <h:panelGroup styleClass="am-margin">
+                <h2>主题(Subject)</h2>
+                <p>描述音频资料的主要内容</p>
+            </h:panelGroup>
+            <h:panelGrid columns="2" styleClass="am-table tableForm" columnClasses="w60,w300">
+                <h:outputText value="事件责任者" title="事件主要责任者或新闻发布者或所涉及的主要对象" styleClass="itemLabel"/>
+                <h:inputText id="subject_contributor" value="#{resPublishController.bean.subject_contributor}" styleClass="am-form-field am-input-sm"></h:inputText>
+                <h:outputText value="事发日期" title="音频资料主要内容所表述的事件发生的日期" styleClass="itemLabel"/>
+                <h:inputText id="subject_event_date" value="#{resPublishController.bean.subject_event_date}" p:data-am-datepicker="" styleClass="am-form-field am-input-sm data-am-datepicker"></h:inputText>
+                <h:outputText value="事发地点" title="音频资料主要内容所表述的事件发生的地点" styleClass="itemLabel"/>
+                <h:inputText id="subject_event_place" value="#{resPublishController.bean.subject_event_place}" styleClass="am-form-field am-input-sm"></h:inputText>
+            </h:panelGrid>
+
+
+        </h:panelGroup>
+
+
+    </ui:define>
+
+</ui:composition>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:composite="http://xmlns.jcp.org/jsf/composite/composite">
+
+<ui:composition template="template.xhtml">
+    <ui:param name="title" value="我的节目单"/>
+
+    <ui:define name="content">
+        <h:panelGroup layout="block" styleClass="am-g am-margin">
+            <h:panelGroup styleClass="am-u-sm-2">
+                <composite:switch ctrl="#{programController}" property="#{programController.channel_id}" items="#{common.fromChannels()}" source="entity" firstItem="请选择频率"/>
+            </h:panelGroup>
+            <h:panelGroup styleClass="am-u-sm-2">
+                <composite:searchbox keyword="#{programController.keyword}" ctrl="#{programController}"/>
+            </h:panelGroup>
+            <h:panelGroup styleClass="am-u-sm-8"/>
+        </h:panelGroup>
+
+        <c:set var="program" value="#{programController.current()}" scope="request"/>
+        <hr class="am-list"/>
+        <h:panelGroup layout="block" id="table_list">
+            <h:dataTable value="#{programController.pageBean.list}" var="row" styleClass="am-table am-table-compact am-table-striped admin-content-table am-table-hover">
+                <h:column styleClass="w60">
+                    <f:facet name="header">ID</f:facet>
+                    <h:outputText value="#{row.id}" styleClass="#{(program.id==row.id)?'am-badge am-badge-warning am-radius am-margin-xs':''} "/>
+                </h:column>
+                <h:column styleClass="w180">
+                    <f:facet name="header">频率</f:facet>
+                    <h:panelGroup>
+                        <h:outputText value="#{common.channel(row.channel_id).name}"/>
+                        <h:panelGroup>
+                            <h:outputLabel value="[#{row.channel_id}]"/>
+                            <h:panelGroup rendered="#{program.id==row.id}">
+                            <a href="player.jsp?channel_id=#{row.channel_id}" target="blank"><i class="am-icon-music"></i></a>
+                            </h:panelGroup>
+                            <br/>
+                            <h:outputLabel styleClass="am-text-secondary" value="#{common.channel(row.channel_id).uuid}"/>
+                        </h:panelGroup>
+                    </h:panelGroup>
+                </h:column>
+                <h:column styleClass="w150">
+                    <f:facet name="header">节目单名称</f:facet>
+                    <h:panelGroup>
+                        <h:outputText value="#{row.name}"  styleClass="#{(program.id==row.id)?'am-badge am-badge-warning am-radius am-margin-xs':''} "/>
+                        <br/>
+                        <h:outputText value="#{row.description}" styleClass="am-text-secondary"/>
+                        <br/>
+                        <h:outputText value="#{row.startdate}" converter="timestampSimpleConverter"/>
+                        <br/>
+                        <h:outputText value="#{row.enddate}" converter="timestampSimpleConverter"/>
+                    </h:panelGroup>
+                </h:column>
+                <h:column styleClass="w380">
+                    <f:facet name="header">钟型列表</f:facet>
+                    <h:panelGroup styleClass="am-scrollable-vertical" style="width:300px; height: 90px;" layout="block">
+                        #{common.asString(row.clockBeanList, 'name')}
+                    </h:panelGroup>
+                </h:column>
+                <h:column styleClass="w100">
+                    <f:facet name="header">计划</f:facet>
+                    <h:outputText value="#{programController.getWeekByDay(row.days)}"/>
+                </h:column>
+                <h:column styleClass="w120">
+                    <f:facet name="header">播放时间</f:facet>
+                    <h:outputText value="#{row.starttime}" converter="timestampTimeConverter"/>-<h:outputText value="#{row.endtime}" converter="timestampTimeConverter"/>
+                </h:column>
+                <h:column styleClass="w50">
+                    <f:facet name="header">启用</f:facet>
+                    <h:outputText styleClass="#{row.status==0?'am-text-danger':''}" value="#{common.yesnoLabel(row.status)}"/>
+                </h:column>
+                <h:column styleClass="w200">
+                    <f:facet name="header">
+                        <h:commandLink action="program_edit.xhtml" class="am-btn am-btn-default am-btn-xs am-btn-warning"><span class="am-icon-plus"> </span> 创建节目单 </h:commandLink>
+                    </f:facet>
+                    <h:panelGroup styleClass="am-btn-toolbar" layout="block">
+                        <div class="am-btn-group am-btn-group-xs">
+                            <h:commandLink action="#{programController.tab(row)}" styleClass="am-btn am-btn-link am-padding-right-0"><h:outputText value="编辑"/></h:commandLink>
+                            <h:commandLink action="#{programController.view(row)}" styleClass="am-btn am-btn-link am-padding-right-0"><h:outputText value="预览"/></h:commandLink>
+                            <div class="am-dropdown" data-am-dropdown="">
+                                <button id="docTypeBtn" class="am-btn am-btn-link am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle=""><h:outputText value="更多"/> <span class="am-icon-caret-down"></span></button>
+                                <ul class="am-dropdown-content">
+                                    <li><h:commandLink value="#{row.status==1?'禁用':'启用'}" action="#{programController.toggle(row)}" onclick="return confirm('确认改变状态吗')" styleClass="am-btn-xs"/></li>
+                                    <h:commandLink action="#{programController.delete(row)}" onclick="return confirm('确认要删除此节目吗？')" styleClass="am-btn am-btn-link am-btn-xs"><h:outputText value="删除"/></h:commandLink>
+                                </ul>
+                            </div>
+                        </div>
+                    </h:panelGroup>
+                </h:column>
+            </h:dataTable>
+        </h:panelGroup>
+
+        <composite:pagination ctrl="#{programController}"/>
+    </ui:define>
+</ui:composition>
+
+</html>

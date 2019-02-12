@@ -1,0 +1,25 @@
+<faces-config
+              xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_3.xsd"
+              version="2.3">
+    <application>
+        
+    </application>
+
+    <converter>
+        <description>默认的时间格式</description>
+        <converter-for-class>java.sql.Timestamp</converter-for-class>
+        <converter-class>hndt.radiolibs.jsf.TimestampConverter</converter-class>
+    </converter>
+    <converter>
+        <description>默认Double格式化</description>
+        <converter-for-class>java.lang.Double</converter-for-class>
+        <converter-class>hndt.radiolibs.jsf.DoubleConverter</converter-class>
+    </converter>
+    <!--<converter>-->
+        <!--<description>整型 null to 0 </description>-->
+        <!--<converter-for-class>java.lang.Integer</converter-for-class>-->
+        <!--<converter-class>hnrcms.util.IntegerConverter</converter-class>-->
+    <!--</converter>-->
+</faces-config>

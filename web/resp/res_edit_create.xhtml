@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:com="http://xmlns.jcp.org/jsf/composite/composite" xmlns:p="http://xmlns.jcp.org/jsf/passthrough" xmlns:c="http://java.sun.com/jsp/jstl/core">
+<ui:composition template="template.xhtml">
+    <ui:param name="title" value="资源库管理 - 创建者"/>
+    <ui:define name="tools">
+        <h:commandLink styleClass="am-btn am-btn-default am-btn-sm am-btn-warning" action="#{resCreateController.save()}"> <i class="am-icon-save"></i> <f:param name="idx" value="#{param.idx}"></f:param> 保存 </h:commandLink>
+    </ui:define>
+    <ui:define name="content">
+        <h:panelGroup id="tabs">
+            <com:resTab ctrl="#{resCreateController}"/>
+        </h:panelGroup>
+
+        <h:panelGroup styleClass="am-margin">
+            <h2>创建者(Creator)</h2>
+            <p>创建及制作音频资料内容的主要责任者</p>
+        </h:panelGroup>
+
+        <h:panelGroup id="list">
+            <h:dataTable value="#{resCreateController.list}" var="row" styleClass="am-table am-table-compact am-table-striped admin-content-table am-table-hover">
+                <h:column>
+                    <f:facet name="header">创作者名称</f:facet>
+                    <h:outputText value="#{row.name}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">创作行为</f:facet>
+
+                    <h:outputText value="#{row.action}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">创作附加说明</f:facet>
+                    <h:outputText value="#{row.info}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                    </f:facet>
+                    <h:panelGroup styleClass="am-btn-toolbar" layout="block">
+                        <div class="am-btn-group am-btn-group-xs">
+                            <div class="am-dropdown" data-am-dropdown="">
+                                <h:commandButton value="编辑" styleClass="am-btn am-btn-link am-btn-sm" action="#{resCreateController.edit(row)}"></h:commandButton>
+                                <h:commandButton value="删除" styleClass="am-btn am-btn-link am-btn-sm" action="#{resCreateController.delete(row)}"></h:commandButton>
+                            </div>
+                        </div>
+                    </h:panelGroup>
+                </h:column>
+            </h:dataTable>
+        </h:panelGroup>
+
+        <p>添加创作者</p>
+
+        <h:panelGroup id="table">
+            <h:panelGrid columns="2" styleClass="am-table tableForm" columnClasses="w60,w300">
+                <h:outputText value="创作者名称" title="对音频资料创建负责的个人、团体、会议" styleClass="itemLabel"/>
+                <h:inputText id="creator_name" value="#{resCreateController.creatorBean.name}" styleClass="am-form-field am-input-sm"></h:inputText>
+                <h:outputText value="创作行为" title="对音频资料内容进行创造、整理的职责属性。如：作词 作曲 演唱 指挥 伴奏 播音 编辑 演播 表演 监制 作者 编配" styleClass="itemLabel"/>
+                <h:panelGroup layout="block" id="dropdown" styleClass="am-input-group">
+                    <span class="am-input-group-label am-dropdown-toggle"><i class="am-icon-lock am-icon-caret-down"></i></span>
+                    <ul class="am-dropdown-content">
+                        <li class="am-dropdown-header">请选择对应的行为</li>
+                        <li><a href="#">演唱</a></li>
+                        <li><a href="#">作词</a></li>
+                        <li><a href="#">作曲</a></li>
+                        <li class="am-divider"></li>
+                        <li><a href="#">指挥</a></li>
+                        <li><a href="#">伴奏</a></li>
+                        <li><a href="#">表演</a></li>
+                        <li><a href="#">监制</a></li>
+                        <li><a href="#">演播</a></li>
+                        <li class="am-divider"></li>
+                        <li><a href="#">播音</a></li>
+                        <li><a href="#">编辑</a></li>
+                        <li><a href="#">作者</a></li>
+                        <li><a href="#">编配</a></li>
+                    </ul>
+                    <h:inputText id="creator_action" value="#{resCreateController.creatorBean.action}" styleClass="dropdown-text am-form-field am-input-sm"></h:inputText>
+                </h:panelGroup>
+                <h:outputText value="创作附加说明" title="创作附加说明" styleClass="itemLabel"/>
+                <h:inputText id="creator_info" value="#{resCreateController.creatorBean.info}" styleClass="am-form-field am-input-sm"></h:inputText>
+            </h:panelGrid>
+        </h:panelGroup>
+
+
+    </ui:define>
+
+</ui:composition>
+</html>

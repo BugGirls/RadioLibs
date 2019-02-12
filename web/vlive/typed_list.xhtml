@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:composite="http://xmlns.jcp.org/jsf/composite/composite">
+
+<ui:composition template="template.xhtml">
+    <ui:param name="title" value="规则管理"/>
+    <ui:define name="content">
+        <h:panelGroup layout="block" styleClass="am-g am-margin">
+            <h:panelGroup styleClass="am-u-sm-2">
+                <composite:switch ctrl="#{typedController}" property="#{typedController.channel_id}" items="#{common.fromChannels()}" source="entity" firstItem="请选择频率"/>
+            </h:panelGroup>
+            <h:panelGroup styleClass="am-u-sm-2">
+                <composite:switch ctrl="#{typedController}" property="#{typedController.res_category}" items="#{common.fromEnum('Category')}" source="enum" firstItem="请选择资源类型"/>
+            </h:panelGroup>
+            <h:panelGroup styleClass="am-u-sm-8"/>
+        </h:panelGroup>
+        <hr class="am-list"/>
+        <h:panelGroup layout="block" id="table_list">
+            <h:dataTable value="#{typedController.pageBean.list}" var="row" styleClass="am-table am-table-compact am-table-striped am-table-hover">
+                <h:column styleClass="w70">
+                    <f:facet name="header">ID</f:facet>
+                    <h:panelGroup  style="background-color: ${row.color};height:22px; width:32px; font-size:12px;" layout="block" styleClass="am-radius am-text-center am-text-sm">
+                        <h:outputText value="#{row.id}" style="color: white"/>
+                    </h:panelGroup>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">频率</f:facet>
+                    <h:outputText value="#{common.channel(row.channel_id).name}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">资源类别</f:facet>
+                    <h:outputText value="#{common.categoryLabel(row.res_category)}"/>
+                </h:column>
+                <h:column styleClass="w380">
+                    <f:facet name="header">内容</f:facet>
+                    <h:outputText value="#{common.typedAsDescription(row)}" escape="false"/>
+                </h:column>
+                <h:column styleClass="w100">
+                    <f:facet name="header">预留</f:facet>
+                    <h:outputText styleClass="#{row.placeholder==0?'':'am-text-danger'}" value="#{common.yesnoLabel(row.placeholder)}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">顺序</f:facet>
+                    <h:outputText value="#{common.ordinal(row.ordinal)}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">间隔</f:facet>
+                    <h:outputText value="#{common.intervals(row.intervals)}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">选取个数</f:facet>
+                    <h:outputText value="#{row.amount} 个"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">保持完整</f:facet>
+                    <h:outputText styleClass="#{row.unitary==0?'':'am-text-danger'}" value="#{common.yesnoLabel(row.unitary)}"/>
+                </h:column>
+                <h:column styleClass="w100">
+                    <f:facet name="header">启用</f:facet>
+                    <h:outputText styleClass="#{row.status==0?'am-text-danger':''}" value="#{common.yesnoLabel(row.status)}"/>
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">创建时间</f:facet>
+                    <h:outputText value="#{row.createtime}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:commandLink action="typed_edit_basic.xhtml" class="am-btn am-btn-default am-btn-sm am-btn-warning">
+                            <span class="am-icon-plus"> </span> 新规则
+                        </h:commandLink>
+                    </f:facet>
+
+                    <h:panelGroup styleClass="am-btn-toolbar" layout="block">
+                        <div class="am-btn-group am-btn-group-xs">
+                            <div class="am-dropdown" data-am-dropdown="">
+                                <button id="docTypeBtn" class="am-btn am-btn-link am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle=""><h:outputText value="操作"/> <span class="am-icon-caret-down"></span></button>
+                                <ul class="am-dropdown-content">
+                                    <ui:repeat value="#{common.fromEnum('SectionTyped')}" var="SectionTyped">
+                                        <li><h:commandLink action="#{typedController.tab(SectionTyped, row)}"> <i class="am-text-xs am-icon-#{SectionTyped.icon}" style="font-size: 12px;"></i>#{SectionTyped.name} #{SectionTyped.code} </h:commandLink></li>
+                                    </ui:repeat>
+                                    <li><h:commandLink action="#{typedController.copy(row)}" onclick="return confirm('确认要复制此规则吗？')" > <i class="am-text-xs am-icon-copy" style="font-size: 12px;"></i>复制</h:commandLink></li>
+                                    <li><h:commandLink action="#{typedController.delete(row)}" rendered="#{typedController.isSpecial(row)}" onclick="return confirm('确认要删除此规则吗？')" ><i class="am-text-xs am-icon-remove" style="font-size: 12px;"></i>删除</h:commandLink></li>
+                                </ul>
+                            </div>
+                            <h:commandLink action="#{typedController.resList(row)}" styleClass="am-btn am-btn-xs">资源仓</h:commandLink>
+                        </div>
+                    </h:panelGroup>
+                </h:column>
+            </h:dataTable>
+        </h:panelGroup>
+
+        <composite:pagination ctrl="#{typedController}"/>
+    </ui:define>
+</ui:composition>
+
+</html>

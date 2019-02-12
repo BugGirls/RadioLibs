@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:composite="http://xmlns.jcp.org/jsf/composite/composite" xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+<ui:composition template="template.xhtml">
+    <ui:param name="title" value="首页"/>
+    <ui:define name="content">
+
+        <h3>音频的标签</h3>
+        一个音频的标签，分两部分：客观标签和主观标签。
+        <p><b>客观标签:</b>表示这个音频本身具备的自然属性，如年代、地区、音调、唱法等。是不依赖个人看法的标签，这部分标签由资料管理员录入。</p>
+        <p><b>主观标签:</b>带有个人色彩的标签，每个人的看法可能不一致的标签，如情绪、能量、风格等，这部分标签由每个频率的管理员维护。</p>
+
+        为了区分每个频率管理员的主观性，系统对每个频率管理员和每首音频都存储了一套标签。比如对于音频X，A认为情绪值是甜蜜，B认为情绪值是安静。AB之间互不干扰。
+
+        <h3>新闻上传</h3>
+        <ul class="am-list am-list-static">
+            <li>上传的新闻，放到新闻类别里；占位规则分类选择新闻；按照钟型安排，提前5分钟上传新闻音频。</li>
+        </ul>
+
+        <h3>频率和节目单</h3>
+        <ul class="am-list am-list-static">
+            <li>同一时刻，一个频率只有一个节目单被采用。可以建多个节目单，用星期、启用日期、截止日期决定让那个节目单被采用。</li>
+            <li>根据频率对应节目单的规则：当前用户+当前频率+启用状态+星期几+生效时间范围</li>
+            <li>节目单查询列表里橙色背景行，表示当前频率正在使用的节目单</li>
+        </ul>
+
+        <h3>节目单生效的开始和结束时间</h3>
+        <ul class="am-list am-list-static">
+            <li>
+                <button type="button" class="am-btn am-btn-xs am-btn-default am-round">1</button>
+                都不设定表示一直可用
+            </li>
+            <li>
+                <button type="button" class="am-btn am-btn-xs am-btn-default am-round">2</button>
+                设置生效开始时间无生效结束时间，表示在开始时间后一直可用
+            </li>
+            <li>
+                <button type="button" class="am-btn am-btn-xs am-btn-default am-round">3</button>
+                设置生效结束时间无生效开始时间，表示在结束时间前一直可用
+            </li>
+            <li>
+                <button type="button" class="am-btn am-btn-xs am-btn-default am-round">4</button>
+                都设置表示只在一个阶段里可用。
+            </li>
+
+            <li>选择节目单的优先级：同时设定节目单生效时间和结束时间 ＞ 只设定生效时间 ＞ 只设定结束时间 ＞ 都不设定 。规律是，<b>描述的越准确，优先级越大</b> </li>
+        </ul>
+
+        <h3>规则、钟型</h3>
+        <ul class="am-list am-list-static">
+            <li>在创建规则和钟型的时候，请正确选择所属频率。所属频率不要留空以免数据混乱</li>
+            <li>规则的重复选项是针对规则本身而言的，为了避免重复抓歌，请谨慎使用多个相同的规则。可多次使用同一规则。如
+                <pre>
+86 声乐顺序-从先到后/不重复/4/通俗、男中音
+82 新闻倒序-从新到旧/不重复/1/预留、保持完整、资讯速览
+87 声乐顺序-从先到后/不重复/4/通俗、男中音
+                </pre>
+                在86、87两个规则每次都同时成对出现的时候，这样的钟型可能会导致86和87两个规则抓取的音频一样。通过多次使用同一规则可避免这个问题：
+                <pre>
+87 声乐顺序-从先到后/不重复/4/通俗、男中音
+82 新闻倒序-从新到旧/不重复/1/预留、保持完整、资讯速览
+87 声乐顺序-从先到后/不重复/4/通俗、男中音
+                </pre>
+                上面的钟型使用了两次87规则，规则里有'不重复'选项，假设库里有a-z 26个音频，第一次使用87规则抓的音频为[a,b,c,d]，第二次使用时抓的音频为[d,e,f,g]
+            </li>
+        </ul>
+
+
+        <h3>排单的时候，能不能预判断钟型未满或溢出？</h3>
+        大概能，但不太准确。因为每天播放的具体内容不确定。如果要判断，只能靠估算。
+
+
+        <h3>系统定时处理</h3>
+        <ul class="am-list am-list-static">
+            <li> 23:55 <i class="am-margin"></i>停止所有频道的流播放(wowza)</li>
+            <li> 23:56 <i class="am-margin"></i>生成第二天节目单(web)</li>
+            <li> 23:57 <i class="am-margin"></i>获取第二天节目单(wowza)，保留备份日志</li>
+            <li> 00:00 <i class="am-margin"></i>切换到当天的节目单，开始播放</li>
+        </ul>
+
+    </ui:define>
+</ui:composition>
+</html>

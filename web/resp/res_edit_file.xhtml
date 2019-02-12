@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:com="http://xmlns.jcp.org/jsf/composite/composite" xmlns:p="http://xmlns.jcp.org/jsf/passthrough" xmlns:c="http://java.sun.com/jsp/jstl/core">
+<ui:composition template="template.xhtml">
+    <ui:param name="title" value="资源库管理 - 文件"/>
+    <ui:define name="headExtra">
+        <f:metadata><f:viewAction action="#{resFileController.setSystem()}" immediate="true"/></f:metadata>
+        <script src="${pageContext.request.contextPath}/resources/jquery_upload/js/vendor/jquery.ui.widget.js"></script>
+        <script src="${pageContext.request.contextPath}/resources/jquery_upload/js/jquery.iframe-transport.js"></script>
+        <script src="${pageContext.request.contextPath}/resources/jquery_upload/js/jquery.fileupload.js"></script>
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/jquery_upload/css/jquery.fileupload.css"/>
+    </ui:define>
+    <ui:define name="tools">
+        <h:commandLink styleClass="am-btn am-btn-default am-btn-sm am-btn-warning" action="#{resFileController.save()}"> <i class="am-icon-save"></i> 保存 <f:ajax render="table tabs"/> </h:commandLink>
+    </ui:define>
+    <ui:define name="content">
+        <h:panelGroup id="tabs">
+            <com:resTab ctrl="#{resFileController}"/>
+        </h:panelGroup>
+
+        <h:panelGroup styleClass="am-margin">
+            <h2>文件(File)</h2>
+            <p>上传文件、分类、可见性和声明周期</p>
+        </h:panelGroup>
+
+        <h:inputText id="fileInfo" value="#{resFileController.info}" styleClass="am-hide">
+            <f:ajax render="table tabs" listener="#{resFileController.onInfoChange}"/>
+        </h:inputText>
+
+        <h:panelGroup id="base0" layout="block" styleClass="am-g am-g-collapse am-margin-top">
+            <com:upload></com:upload>
+        </h:panelGroup>
+
+        <h:panelGroup id="table">
+            <h:panelGrid columns="2" styleClass="am-table tableForm" columnClasses="w60,w300">
+
+                <h:outputText value="文件大小" styleClass="itemLabel"/>
+                <h:inputText id="fileSize" value="#{resFileController.bean.size}" styleClass="am-form-field am-input-sm w200" readonly="true"></h:inputText>
+
+                <h:outputText value="播放时长" styleClass="itemLabel"/>
+                <h:inputText id="fileDuration" value="#{resFileController.bean.format_duration}" styleClass="am-form-field am-input-sm w200" readonly="true"></h:inputText>
+
+                <h:outputText value="码率" styleClass="itemLabel"/>
+                <h:inputText id="fileBitrate" value="#{resFileController.bean.format_coding}" styleClass="am-form-field am-input-sm w200" readonly="true"></h:inputText>
+
+                <h:outputText value="所属分类" styleClass="itemLabel"/>
+                <h:selectOneRadio value="#{resFileController.bean.category}" styleClass="tableItems">
+                    <f:ajax/>
+                    <f:selectItems value="#{common.fromEnum('Category')}" var="item" itemLabel="#{item.name}" itemValue="#{item.code}"/>
+                </h:selectOneRadio>
+
+                <h:outputText value="可见性" styleClass="itemLabel"/>
+                <h:selectOneRadio value="#{resFileController.bean.visibility}" styleClass="tableItems">
+                    <f:ajax/>
+                    <f:selectItems value="#{common.fromEnum('Visibility')}" var="item" itemLabel="#{item.name}" itemValue="#{item.code}"/>
+                </h:selectOneRadio>
+
+                <h:outputText value="生命期" styleClass="itemLabel"/>
+                <h:selectOneRadio value="#{resFileController.bean.lifetime}" styleClass="tableItems">
+                    <f:ajax/>
+                    <f:selectItems value="#{common.fromEnum('LifeTime')}" var="item" itemLabel="#{item.name}" itemValue="#{item.code}"/>
+                </h:selectOneRadio>
+
+            </h:panelGrid>
+        </h:panelGroup>
+
+
+    </ui:define>
+
+</ui:composition>
+</html>

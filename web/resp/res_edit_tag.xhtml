@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:com="http://xmlns.jcp.org/jsf/composite/composite" xmlns:p="http://xmlns.jcp.org/jsf/passthrough" xmlns:c="http://java.sun.com/jsp/jstl/core">
+<ui:composition template="template.xhtml">
+    <ui:param name="title" value="资源库管理 - 类型"/>
+    <ui:define name="tools">
+        <h:commandLink styleClass="am-btn am-btn-default am-btn-sm am-btn-warning" action="#{resTagController.saveForLib()}"> <i class="am-icon-save"></i> 保存 <f:ajax render="table tabs"/> </h:commandLink>
+    </ui:define>
+    <ui:define name="content">
+        <h:panelGroup id="tabs">
+            <com:resTab ctrl="#{resTitleController}"/>
+        </h:panelGroup>
+
+        <h:panelGroup styleClass="am-margin">
+            <h2>类型(Type)</h2>
+            <p>描述音频资料内容的特征、种类、风格、流派等</p>
+        </h:panelGroup>
+
+        <h:panelGroup id="table">
+            <h:panelGrid columns="2" styleClass="am-table tableForm" columnClasses="w60,w300">
+                <c:forEach items="#{resTagController.groups}" var="group">
+                    <h:outputText value="#{group.name}" title="" styleClass="itemLabel"/>
+                    <h:panelGroup id="group_#{group.id}">
+                        <c:forEach items="#{group.children}" var="tag">
+                            <h:commandLink id="tag_#{tag.code}" value="#{tag.name}" title="#{tag.code}" class="am-btn am-btn-sm am-margin-xs am-btn-primary am-btn-hollow am-round #{resTagController.isActive(group,tag)?'am-active':''}" action="#{resTagController.selectTag(group,tag)}" rendered="#{tag.status==1}">
+                                <f:ajax render="group_#{group.id}"/>
+                            </h:commandLink>
+                        </c:forEach>
+                    </h:panelGroup>
+                </c:forEach>
+            </h:panelGrid>
+        </h:panelGroup>
+
+    </ui:define>
+
+</ui:composition>
+</html>

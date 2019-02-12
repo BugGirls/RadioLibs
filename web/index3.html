@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"><head id="j_idt2">
+    <title>后台管理</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="renderer" content="webkit" />
+    <script src="/resources/js/jquery-1.9.1.min.js"></script>
+    <script src="/resources/amazeui/js/amazeui.min.js"></script>
+    <script src="/resources/layer/layer.js"></script>
+    <link rel="stylesheet" href="/resources/amazeui/css/amazeui.min.css" />
+    <link rel="stylesheet" href="/resources/css/system.css" />
+    <link rel="stylesheet" href="/resources/css/width.css" />
+    <script src="/resources/amazeui/js/system.js"></script>
+    <script src="/resources/layer/layer.js"></script><script type="text/javascript" src="/javax.faces.resource/jsf.js.xhtml?ln=javax.faces&amp;stage=Development"></script></head><body>
+<form id="frm" name="frm" method="post" action="/vlive/typed_list.xhtml" class="am-form" accept-charset="utf-8" enctype="multipart/form-data">
+    <input type="hidden" name="frm" value="frm" />
+
+    <div class="am-g" style="background-color: #fffcfc; height: 45px; line-height: 30px;">
+        <div class="am-u-md-4 am-padding-xs am-margin-left-sm am-text-nowrap">
+            <span class="am-text-primary am-text-sm">规则管理</span>
+        </div>
+        <div class="am-u-md-6 am-padding-xs">
+            <div class="am-cf am-text-right am-padding-right">
+            </div>
+        </div>
+    </div><div id="form" class="">
+    <div class="am-margin-xs"><div class="am-g am-margin"><span class="am-u-sm-2"><select id="j_idt10-select" name="j_idt10-select" class="am-input-sm am-inline " size="1" onchange="mojarra.ab(this,event,'valueChange',0,'table_list')">	<option value="-1" selected="selected">请选择频率</option>
+	<option value="68">新闻广播</option>
+	<option value="72">陈翔六点半</option>
+	<option value="77">虚拟直播测试频道</option>
+	<option value="80">新频率</option>
+</select></span><span class="am-u-sm-2"><select id="j_idt14-select" name="j_idt14-select" class="am-input-sm  am-inline " size="1" onchange="mojarra.ab(this,event,'valueChange',0,'table_list')">	<option value="-1" selected="selected">请选择资源类型</option>
+	<option value="1">新闻</option>
+	<option value="2">专题</option>
+	<option value="3">声乐</option>
+	<option value="4">器乐</option>
+	<option value="5">文学</option>
+	<option value="6">戏剧</option>
+	<option value="7">戏曲</option>
+	<option value="8">曲艺</option>
+	<option value="9">广播剧/电影/电视剧</option>
+	<option value="10">综艺</option>
+	<option value="11">音响</option>
+	<option value="12">配乐</option>
+	<option value="13">专业素材</option>
+	<option value="14">文献</option>
+</select></span><span class="am-u-sm-8"></span></div>
+        <hr class="am-list" /><div id="table_list"><table class="am-table am-table-compact am-table-striped am-table-hover">
+            <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">频率</th>
+                <th scope="col">资源类别</th>
+                <th scope="col">预留</th>
+                <th scope="col">顺序</th>
+                <th scope="col">间隔</th>
+                <th scope="col">选取个数</th>
+                <th scope="col">保持完整</th>
+                <th scope="col">启用</th>
+                <th scope="col">创建时间</th>
+                <th scope="col"><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt19-j_idt51':'j_idt19-j_idt51'},'');return false" class="am-btn am-btn-default am-btn-sm am-btn-warning">
+                    <span class="am-icon-plus"> </span> 新规则
+                </a></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td class="w70">53</td>
+                <td>所有频率</td>
+                <td></td>
+                <td class="w100">是</td>
+                <td>顺序</td>
+                <td>不重复</td>
+                <td>1 个</td>
+                <td>是</td>
+                <td class="w100"><span class="">是</span></td>
+                <td>2017-11-22 10:20</td>
+                <td><div class="am-btn-toolbar">
+                    <div class="am-btn-group am-btn-group-xs">
+                        <div class="am-dropdown" data-am-dropdown="">
+                            <button id="docTypeBtn" class="am-btn am-btn-link am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle="">编辑 <span class="am-icon-caret-down"></span></button>
+                            <ul class="am-dropdown-content">
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt19-0-j_idt57-0-j_idt59':'j_idt19-0-j_idt57-0-j_idt59'},'');return false"> <i class="am-text-xs am-icon-user" style="font-size: 12px;"></i>基础 basic </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt19-0-j_idt57-1-j_idt59':'j_idt19-0-j_idt57-1-j_idt59'},'');return false"> <i class="am-text-xs am-icon-check-circle" style="font-size: 12px;"></i>类型 tag </a></li>
+                            </ul>
+                        </div><a href="#" onclick="jsf.util.chain(this,event,'return confirm(\'确认要复制此规则吗？\')','mojarra.jsfcljs(document.getElementById(\'frm\'),{\'j_idt19-0-j_idt63\':\'j_idt19-0-j_idt63\'},\'\')');return false" class="am-btn am-btn-link">复制</a><a href="#" onclick="jsf.util.chain(this,event,'return confirm(\'确认要删除此规则吗？\')','mojarra.jsfcljs(document.getElementById(\'frm\'),{\'j_idt19-0-j_idt65\':\'j_idt19-0-j_idt65\'},\'\')');return false" class="am-btn am-btn-link">删除</a>
+                    </div></div></td>
+            </tr>
+            <tr>
+                <td class="w70">52</td>
+                <td>所有频率</td>
+                <td>文献</td>
+                <td class="w100">否</td>
+                <td>顺序</td>
+                <td>不重复</td>
+                <td>10 个</td>
+                <td>否</td>
+                <td class="w100"><span class="">是</span></td>
+                <td>2017-11-02 17:44</td>
+                <td><div class="am-btn-toolbar">
+                    <div class="am-btn-group am-btn-group-xs">
+                        <div class="am-dropdown" data-am-dropdown="">
+                            <button id="docTypeBtn" class="am-btn am-btn-link am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle="">编辑 <span class="am-icon-caret-down"></span></button>
+                            <ul class="am-dropdown-content">
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt19-1-j_idt57-0-j_idt59':'j_idt19-1-j_idt57-0-j_idt59'},'');return false"> <i class="am-text-xs am-icon-user" style="font-size: 12px;"></i>基础 basic </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt19-1-j_idt57-1-j_idt59':'j_idt19-1-j_idt57-1-j_idt59'},'');return false"> <i class="am-text-xs am-icon-check-circle" style="font-size: 12px;"></i>类型 tag </a></li>
+                            </ul>
+                        </div><a href="#" onclick="jsf.util.chain(this,event,'return confirm(\'确认要复制此规则吗？\')','mojarra.jsfcljs(document.getElementById(\'frm\'),{\'j_idt19-1-j_idt63\':\'j_idt19-1-j_idt63\'},\'\')');return false" class="am-btn am-btn-link">复制</a><a href="#" onclick="jsf.util.chain(this,event,'return confirm(\'确认要删除此规则吗？\')','mojarra.jsfcljs(document.getElementById(\'frm\'),{\'j_idt19-1-j_idt65\':\'j_idt19-1-j_idt65\'},\'\')');return false" class="am-btn am-btn-link">删除</a>
+                    </div></div></td>
+            </tr>
+            <tr>
+                <td class="w70">50</td>
+                <td>所有频率</td>
+                <td>配乐</td>
+                <td class="w100">否</td>
+                <td>顺序</td>
+                <td>不重复</td>
+                <td>10 个</td>
+                <td>否</td>
+                <td class="w100"><span class="">是</span></td>
+                <td>2017-11-02 17:41</td>
+                <td><div class="am-btn-toolbar">
+                    <div class="am-btn-group am-btn-group-xs">
+                        <div class="am-dropdown" data-am-dropdown="">
+                            <button id="docTypeBtn" class="am-btn am-btn-link am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle="">编辑 <span class="am-icon-caret-down"></span></button>
+                            <ul class="am-dropdown-content">
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt19-2-j_idt57-0-j_idt59':'j_idt19-2-j_idt57-0-j_idt59'},'');return false"> <i class="am-text-xs am-icon-user" style="font-size: 12px;"></i>基础 basic </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt19-2-j_idt57-1-j_idt59':'j_idt19-2-j_idt57-1-j_idt59'},'');return false"> <i class="am-text-xs am-icon-check-circle" style="font-size: 12px;"></i>类型 tag </a></li>
+                            </ul>
+                        </div><a href="#" onclick="jsf.util.chain(this,event,'return confirm(\'确认要复制此规则吗？\')','mojarra.jsfcljs(document.getElementById(\'frm\'),{\'j_idt19-2-j_idt63\':\'j_idt19-2-j_idt63\'},\'\')');return false" class="am-btn am-btn-link">复制</a><a href="#" onclick="jsf.util.chain(this,event,'return confirm(\'确认要删除此规则吗？\')','mojarra.jsfcljs(document.getElementById(\'frm\'),{\'j_idt19-2-j_idt65\':\'j_idt19-2-j_idt65\'},\'\')');return false" class="am-btn am-btn-link">删除</a>
+                    </div></div></td>
+            </tr>
+            <tr>
+                <td class="w70">49</td>
+                <td>所有频率</td>
+                <td>音响</td>
+                <td class="w100">否</td>
+                <td>顺序</td>
+                <td>不重复</td>
+                <td>14 个</td>
+                <td>否</td>
+                <td class="w100"><span class="">是</span></td>
+                <td>2017-11-02 17:30</td>
+                <td><div class="am-btn-toolbar">
+                    <div class="am-btn-group am-btn-group-xs">
+                        <div class="am-dropdown" data-am-dropdown="">
+                            <button id="docTypeBtn" class="am-btn am-btn-link am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle="">编辑 <span class="am-icon-caret-down"></span></button>
+                            <ul class="am-dropdown-content">
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt19-3-j_idt57-0-j_idt59':'j_idt19-3-j_idt57-0-j_idt59'},'');return false"> <i class="am-text-xs am-icon-user" style="font-size: 12px;"></i>基础 basic </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt19-3-j_idt57-1-j_idt59':'j_idt19-3-j_idt57-1-j_idt59'},'');return false"> <i class="am-text-xs am-icon-check-circle" style="font-size: 12px;"></i>类型 tag </a></li>
+                            </ul>
+                        </div><a href="#" onclick="jsf.util.chain(this,event,'return confirm(\'确认要复制此规则吗？\')','mojarra.jsfcljs(document.getElementById(\'frm\'),{\'j_idt19-3-j_idt63\':\'j_idt19-3-j_idt63\'},\'\')');return false" class="am-btn am-btn-link">复制</a><a href="#" onclick="jsf.util.chain(this,event,'return confirm(\'确认要删除此规则吗？\')','mojarra.jsfcljs(document.getElementById(\'frm\'),{\'j_idt19-3-j_idt65\':\'j_idt19-3-j_idt65\'},\'\')');return false" class="am-btn am-btn-link">删除</a>
+                    </div></div></td>
+            </tr>
+            <tr>
+                <td class="w70">48</td>
+                <td>所有频率</td>
+                <td>曲艺</td>
+                <td class="w100">否</td>
+                <td>顺序</td>
+                <td>不重复</td>
+                <td>10 个</td>
+                <td>否</td>
+                <td class="w100"><span class="">是</span></td>
+                <td>2017-11-02 17:08</td>
+                <td><div class="am-btn-toolbar">
+                    <div class="am-btn-group am-btn-group-xs">
+                        <div class="am-dropdown" data-am-dropdown="">
+                            <button id="docTypeBtn" class="am-btn am-btn-link am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle="">编辑 <span class="am-icon-caret-down"></span></button>
+                            <ul class="am-dropdown-content">
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt19-4-j_idt57-0-j_idt59':'j_idt19-4-j_idt57-0-j_idt59'},'');return false"> <i class="am-text-xs am-icon-user" style="font-size: 12px;"></i>基础 basic </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt19-4-j_idt57-1-j_idt59':'j_idt19-4-j_idt57-1-j_idt59'},'');return false"> <i class="am-text-xs am-icon-check-circle" style="font-size: 12px;"></i>类型 tag </a></li>
+                            </ul>
+                        </div><a href="#" onclick="jsf.util.chain(this,event,'return confirm(\'确认要复制此规则吗？\')','mojarra.jsfcljs(document.getElementById(\'frm\'),{\'j_idt19-4-j_idt63\':\'j_idt19-4-j_idt63\'},\'\')');return false" class="am-btn am-btn-link">复制</a><a href="#" onclick="jsf.util.chain(this,event,'return confirm(\'确认要删除此规则吗？\')','mojarra.jsfcljs(document.getElementById(\'frm\'),{\'j_idt19-4-j_idt65\':\'j_idt19-4-j_idt65\'},\'\')');return false" class="am-btn am-btn-link">删除</a>
+                    </div></div></td>
+            </tr>
+            <tr>
+                <td class="w70">47</td>
+                <td>所有频率</td>
+                <td>戏曲</td>
+                <td class="w100">否</td>
+                <td>顺序</td>
+                <td>不重复</td>
+                <td>7 个</td>
+                <td>否</td>
+                <td class="w100"><span class="">是</span></td>
+                <td>2017-11-02 17:00</td>
+                <td><div class="am-btn-toolbar">
+                    <div class="am-btn-group am-btn-group-xs">
+                        <div class="am-dropdown" data-am-dropdown="">
+                            <button id="docTypeBtn" class="am-btn am-btn-link am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle="">编辑 <span class="am-icon-caret-down"></span></button>
+                            <ul class="am-dropdown-content">
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt19-5-j_idt57-0-j_idt59':'j_idt19-5-j_idt57-0-j_idt59'},'');return false"> <i class="am-text-xs am-icon-user" style="font-size: 12px;"></i>基础 basic </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt19-5-j_idt57-1-j_idt59':'j_idt19-5-j_idt57-1-j_idt59'},'');return false"> <i class="am-text-xs am-icon-check-circle" style="font-size: 12px;"></i>类型 tag </a></li>
+                            </ul>
+                        </div><a href="#" onclick="jsf.util.chain(this,event,'return confirm(\'确认要复制此规则吗？\')','mojarra.jsfcljs(document.getElementById(\'frm\'),{\'j_idt19-5-j_idt63\':\'j_idt19-5-j_idt63\'},\'\')');return false" class="am-btn am-btn-link">复制</a><a href="#" onclick="jsf.util.chain(this,event,'return confirm(\'确认要删除此规则吗？\')','mojarra.jsfcljs(document.getElementById(\'frm\'),{\'j_idt19-5-j_idt65\':\'j_idt19-5-j_idt65\'},\'\')');return false" class="am-btn am-btn-link">删除</a>
+                    </div></div></td>
+            </tr>
+            <tr>
+                <td class="w70">46</td>
+                <td>所有频率</td>
+                <td>戏剧</td>
+                <td class="w100">否</td>
+                <td>顺序</td>
+                <td>不重复</td>
+                <td>10 个</td>
+                <td>否</td>
+                <td class="w100"><span class="">是</span></td>
+                <td>2017-11-02 16:56</td>
+                <td><div class="am-btn-toolbar">
+                    <div class="am-btn-group am-btn-group-xs">
+                        <div class="am-dropdown" data-am-dropdown="">
+                            <button id="docTypeBtn" class="am-btn am-btn-link am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle="">编辑 <span class="am-icon-caret-down"></span></button>
+                            <ul class="am-dropdown-content">
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt19-6-j_idt57-0-j_idt59':'j_idt19-6-j_idt57-0-j_idt59'},'');return false"> <i class="am-text-xs am-icon-user" style="font-size: 12px;"></i>基础 basic </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt19-6-j_idt57-1-j_idt59':'j_idt19-6-j_idt57-1-j_idt59'},'');return false"> <i class="am-text-xs am-icon-check-circle" style="font-size: 12px;"></i>类型 tag </a></li>
+                            </ul>
+                        </div><a href="#" onclick="jsf.util.chain(this,event,'return confirm(\'确认要复制此规则吗？\')','mojarra.jsfcljs(document.getElementById(\'frm\'),{\'j_idt19-6-j_idt63\':\'j_idt19-6-j_idt63\'},\'\')');return false" class="am-btn am-btn-link">复制</a><a href="#" onclick="jsf.util.chain(this,event,'return confirm(\'确认要删除此规则吗？\')','mojarra.jsfcljs(document.getElementById(\'frm\'),{\'j_idt19-6-j_idt65\':\'j_idt19-6-j_idt65\'},\'\')');return false" class="am-btn am-btn-link">删除</a>
+                    </div></div></td>
+            </tr>
+            <tr>
+                <td class="w70">42</td>
+                <td>新闻广播</td>
+                <td>新闻</td>
+                <td class="w100">否</td>
+                <td>顺序</td>
+                <td>不重复</td>
+                <td>2 个</td>
+                <td>否</td>
+                <td class="w100"><span class="">是</span></td>
+                <td>2017-08-29 09:13</td>
+                <td><div class="am-btn-toolbar">
+                    <div class="am-btn-group am-btn-group-xs">
+                        <div class="am-dropdown" data-am-dropdown="">
+                            <button id="docTypeBtn" class="am-btn am-btn-link am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle="">编辑 <span class="am-icon-caret-down"></span></button>
+                            <ul class="am-dropdown-content">
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt19-7-j_idt57-0-j_idt59':'j_idt19-7-j_idt57-0-j_idt59'},'');return false"> <i class="am-text-xs am-icon-user" style="font-size: 12px;"></i>基础 basic </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt19-7-j_idt57-1-j_idt59':'j_idt19-7-j_idt57-1-j_idt59'},'');return false"> <i class="am-text-xs am-icon-check-circle" style="font-size: 12px;"></i>类型 tag </a></li>
+                            </ul>
+                        </div><a href="#" onclick="jsf.util.chain(this,event,'return confirm(\'确认要复制此规则吗？\')','mojarra.jsfcljs(document.getElementById(\'frm\'),{\'j_idt19-7-j_idt63\':\'j_idt19-7-j_idt63\'},\'\')');return false" class="am-btn am-btn-link">复制</a><a href="#" onclick="jsf.util.chain(this,event,'return confirm(\'确认要删除此规则吗？\')','mojarra.jsfcljs(document.getElementById(\'frm\'),{\'j_idt19-7-j_idt65\':\'j_idt19-7-j_idt65\'},\'\')');return false" class="am-btn am-btn-link">删除</a>
+                    </div></div></td>
+            </tr>
+            <tr>
+                <td class="w70">40</td>
+                <td>虚拟直播测试频道</td>
+                <td>专题</td>
+                <td class="w100">否</td>
+                <td>随机</td>
+                <td>不重复</td>
+                <td>3 个</td>
+                <td>否</td>
+                <td class="w100"><span class="">是</span></td>
+                <td>2017-09-28 16:56</td>
+                <td><div class="am-btn-toolbar">
+                    <div class="am-btn-group am-btn-group-xs">
+                        <div class="am-dropdown" data-am-dropdown="">
+                            <button id="docTypeBtn" class="am-btn am-btn-link am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle="">编辑 <span class="am-icon-caret-down"></span></button>
+                            <ul class="am-dropdown-content">
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt19-8-j_idt57-0-j_idt59':'j_idt19-8-j_idt57-0-j_idt59'},'');return false"> <i class="am-text-xs am-icon-user" style="font-size: 12px;"></i>基础 basic </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt19-8-j_idt57-1-j_idt59':'j_idt19-8-j_idt57-1-j_idt59'},'');return false"> <i class="am-text-xs am-icon-check-circle" style="font-size: 12px;"></i>类型 tag </a></li>
+                            </ul>
+                        </div><a href="#" onclick="jsf.util.chain(this,event,'return confirm(\'确认要复制此规则吗？\')','mojarra.jsfcljs(document.getElementById(\'frm\'),{\'j_idt19-8-j_idt63\':\'j_idt19-8-j_idt63\'},\'\')');return false" class="am-btn am-btn-link">复制</a><a href="#" onclick="jsf.util.chain(this,event,'return confirm(\'确认要删除此规则吗？\')','mojarra.jsfcljs(document.getElementById(\'frm\'),{\'j_idt19-8-j_idt65\':\'j_idt19-8-j_idt65\'},\'\')');return false" class="am-btn am-btn-link">删除</a>
+                    </div></div></td>
+            </tr>
+            <tr>
+                <td class="w70">39</td>
+                <td>虚拟直播测试频道</td>
+                <td></td>
+                <td class="w100">是</td>
+                <td>顺序</td>
+                <td>不重复</td>
+                <td>1 个</td>
+                <td>是</td>
+                <td class="w100"><span class="">是</span></td>
+                <td>2017-09-28 16:56</td>
+                <td><div class="am-btn-toolbar">
+                    <div class="am-btn-group am-btn-group-xs">
+                        <div class="am-dropdown" data-am-dropdown="">
+                            <button id="docTypeBtn" class="am-btn am-btn-link am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle="">编辑 <span class="am-icon-caret-down"></span></button>
+                            <ul class="am-dropdown-content">
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt19-9-j_idt57-0-j_idt59':'j_idt19-9-j_idt57-0-j_idt59'},'');return false"> <i class="am-text-xs am-icon-user" style="font-size: 12px;"></i>基础 basic </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt19-9-j_idt57-1-j_idt59':'j_idt19-9-j_idt57-1-j_idt59'},'');return false"> <i class="am-text-xs am-icon-check-circle" style="font-size: 12px;"></i>类型 tag </a></li>
+                            </ul>
+                        </div><a href="#" onclick="jsf.util.chain(this,event,'return confirm(\'确认要复制此规则吗？\')','mojarra.jsfcljs(document.getElementById(\'frm\'),{\'j_idt19-9-j_idt63\':\'j_idt19-9-j_idt63\'},\'\')');return false" class="am-btn am-btn-link">复制</a><a href="#" onclick="jsf.util.chain(this,event,'return confirm(\'确认要删除此规则吗？\')','mojarra.jsfcljs(document.getElementById(\'frm\'),{\'j_idt19-9-j_idt65\':\'j_idt19-9-j_idt65\'},\'\')');return false" class="am-btn am-btn-link">删除</a>
+                    </div></div></td>
+            </tr>
+            <tr>
+                <td class="w70">38</td>
+                <td>虚拟直播测试频道</td>
+                <td>器乐</td>
+                <td class="w100">否</td>
+                <td>顺序</td>
+                <td>不重复</td>
+                <td>20 个</td>
+                <td>否</td>
+                <td class="w100"><span class="">是</span></td>
+                <td>2017-09-28 16:55</td>
+                <td><div class="am-btn-toolbar">
+                    <div class="am-btn-group am-btn-group-xs">
+                        <div class="am-dropdown" data-am-dropdown="">
+                            <button id="docTypeBtn" class="am-btn am-btn-link am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle="">编辑 <span class="am-icon-caret-down"></span></button>
+                            <ul class="am-dropdown-content">
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt19-10-j_idt57-0-j_idt59':'j_idt19-10-j_idt57-0-j_idt59'},'');return false"> <i class="am-text-xs am-icon-user" style="font-size: 12px;"></i>基础 basic </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt19-10-j_idt57-1-j_idt59':'j_idt19-10-j_idt57-1-j_idt59'},'');return false"> <i class="am-text-xs am-icon-check-circle" style="font-size: 12px;"></i>类型 tag </a></li>
+                            </ul>
+                        </div><a href="#" onclick="jsf.util.chain(this,event,'return confirm(\'确认要复制此规则吗？\')','mojarra.jsfcljs(document.getElementById(\'frm\'),{\'j_idt19-10-j_idt63\':\'j_idt19-10-j_idt63\'},\'\')');return false" class="am-btn am-btn-link">复制</a><a href="#" onclick="jsf.util.chain(this,event,'return confirm(\'确认要删除此规则吗？\')','mojarra.jsfcljs(document.getElementById(\'frm\'),{\'j_idt19-10-j_idt65\':\'j_idt19-10-j_idt65\'},\'\')');return false" class="am-btn am-btn-link">删除</a>
+                    </div></div></td>
+            </tr>
+            <tr>
+                <td class="w70">31</td>
+                <td>所有频率</td>
+                <td>文献</td>
+                <td class="w100">否</td>
+                <td>顺序</td>
+                <td>不重复</td>
+                <td>3 个</td>
+                <td>否</td>
+                <td class="w100"><span class="">是</span></td>
+                <td>2017-09-05 17:26</td>
+                <td><div class="am-btn-toolbar">
+                    <div class="am-btn-group am-btn-group-xs">
+                        <div class="am-dropdown" data-am-dropdown="">
+                            <button id="docTypeBtn" class="am-btn am-btn-link am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle="">编辑 <span class="am-icon-caret-down"></span></button>
+                            <ul class="am-dropdown-content">
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt19-11-j_idt57-0-j_idt59':'j_idt19-11-j_idt57-0-j_idt59'},'');return false"> <i class="am-text-xs am-icon-user" style="font-size: 12px;"></i>基础 basic </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt19-11-j_idt57-1-j_idt59':'j_idt19-11-j_idt57-1-j_idt59'},'');return false"> <i class="am-text-xs am-icon-check-circle" style="font-size: 12px;"></i>类型 tag </a></li>
+                            </ul>
+                        </div><a href="#" onclick="jsf.util.chain(this,event,'return confirm(\'确认要复制此规则吗？\')','mojarra.jsfcljs(document.getElementById(\'frm\'),{\'j_idt19-11-j_idt63\':\'j_idt19-11-j_idt63\'},\'\')');return false" class="am-btn am-btn-link">复制</a><a href="#" onclick="jsf.util.chain(this,event,'return confirm(\'确认要删除此规则吗？\')','mojarra.jsfcljs(document.getElementById(\'frm\'),{\'j_idt19-11-j_idt65\':\'j_idt19-11-j_idt65\'},\'\')');return false" class="am-btn am-btn-link">删除</a>
+                    </div></div></td>
+            </tr>
+            <tr>
+                <td class="w70">26</td>
+                <td>新闻广播</td>
+                <td>专业素材</td>
+                <td class="w100">否</td>
+                <td>顺序</td>
+                <td>不重复</td>
+                <td>4 个</td>
+                <td>否</td>
+                <td class="w100"><span class="">是</span></td>
+                <td>2017-08-29 09:29</td>
+                <td><div class="am-btn-toolbar">
+                    <div class="am-btn-group am-btn-group-xs">
+                        <div class="am-dropdown" data-am-dropdown="">
+                            <button id="docTypeBtn" class="am-btn am-btn-link am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle="">编辑 <span class="am-icon-caret-down"></span></button>
+                            <ul class="am-dropdown-content">
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt19-12-j_idt57-0-j_idt59':'j_idt19-12-j_idt57-0-j_idt59'},'');return false"> <i class="am-text-xs am-icon-user" style="font-size: 12px;"></i>基础 basic </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt19-12-j_idt57-1-j_idt59':'j_idt19-12-j_idt57-1-j_idt59'},'');return false"> <i class="am-text-xs am-icon-check-circle" style="font-size: 12px;"></i>类型 tag </a></li>
+                            </ul>
+                        </div><a href="#" onclick="jsf.util.chain(this,event,'return confirm(\'确认要复制此规则吗？\')','mojarra.jsfcljs(document.getElementById(\'frm\'),{\'j_idt19-12-j_idt63\':\'j_idt19-12-j_idt63\'},\'\')');return false" class="am-btn am-btn-link">复制</a><a href="#" onclick="jsf.util.chain(this,event,'return confirm(\'确认要删除此规则吗？\')','mojarra.jsfcljs(document.getElementById(\'frm\'),{\'j_idt19-12-j_idt65\':\'j_idt19-12-j_idt65\'},\'\')');return false" class="am-btn am-btn-link">删除</a>
+                    </div></div></td>
+            </tr>
+            <tr>
+                <td class="w70">25</td>
+                <td>新闻广播</td>
+                <td>综艺</td>
+                <td class="w100">否</td>
+                <td>随机</td>
+                <td>1天内不重复</td>
+                <td>7 个</td>
+                <td>否</td>
+                <td class="w100"><span class="">是</span></td>
+                <td>2017-08-29 09:28</td>
+                <td><div class="am-btn-toolbar">
+                    <div class="am-btn-group am-btn-group-xs">
+                        <div class="am-dropdown" data-am-dropdown="">
+                            <button id="docTypeBtn" class="am-btn am-btn-link am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle="">编辑 <span class="am-icon-caret-down"></span></button>
+                            <ul class="am-dropdown-content">
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt19-13-j_idt57-0-j_idt59':'j_idt19-13-j_idt57-0-j_idt59'},'');return false"> <i class="am-text-xs am-icon-user" style="font-size: 12px;"></i>基础 basic </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt19-13-j_idt57-1-j_idt59':'j_idt19-13-j_idt57-1-j_idt59'},'');return false"> <i class="am-text-xs am-icon-check-circle" style="font-size: 12px;"></i>类型 tag </a></li>
+                            </ul>
+                        </div><a href="#" onclick="jsf.util.chain(this,event,'return confirm(\'确认要复制此规则吗？\')','mojarra.jsfcljs(document.getElementById(\'frm\'),{\'j_idt19-13-j_idt63\':\'j_idt19-13-j_idt63\'},\'\')');return false" class="am-btn am-btn-link">复制</a><a href="#" onclick="jsf.util.chain(this,event,'return confirm(\'确认要删除此规则吗？\')','mojarra.jsfcljs(document.getElementById(\'frm\'),{\'j_idt19-13-j_idt65\':\'j_idt19-13-j_idt65\'},\'\')');return false" class="am-btn am-btn-link">删除</a>
+                    </div></div></td>
+            </tr>
+            <tr>
+                <td class="w70">24</td>
+                <td>新闻广播</td>
+                <td>广播剧/电影/电视剧</td>
+                <td class="w100">否</td>
+                <td>顺序</td>
+                <td>不重复</td>
+                <td>15 个</td>
+                <td>否</td>
+                <td class="w100"><span class="">是</span></td>
+                <td>2017-08-29 09:27</td>
+                <td><div class="am-btn-toolbar">
+                    <div class="am-btn-group am-btn-group-xs">
+                        <div class="am-dropdown" data-am-dropdown="">
+                            <button id="docTypeBtn" class="am-btn am-btn-link am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle="">编辑 <span class="am-icon-caret-down"></span></button>
+                            <ul class="am-dropdown-content">
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt19-14-j_idt57-0-j_idt59':'j_idt19-14-j_idt57-0-j_idt59'},'');return false"> <i class="am-text-xs am-icon-user" style="font-size: 12px;"></i>基础 basic </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt19-14-j_idt57-1-j_idt59':'j_idt19-14-j_idt57-1-j_idt59'},'');return false"> <i class="am-text-xs am-icon-check-circle" style="font-size: 12px;"></i>类型 tag </a></li>
+                            </ul>
+                        </div><a href="#" onclick="jsf.util.chain(this,event,'return confirm(\'确认要复制此规则吗？\')','mojarra.jsfcljs(document.getElementById(\'frm\'),{\'j_idt19-14-j_idt63\':\'j_idt19-14-j_idt63\'},\'\')');return false" class="am-btn am-btn-link">复制</a><a href="#" onclick="jsf.util.chain(this,event,'return confirm(\'确认要删除此规则吗？\')','mojarra.jsfcljs(document.getElementById(\'frm\'),{\'j_idt19-14-j_idt65\':\'j_idt19-14-j_idt65\'},\'\')');return false" class="am-btn am-btn-link">删除</a>
+                    </div></div></td>
+            </tr>
+            <tr>
+                <td class="w70">23</td>
+                <td>新闻广播</td>
+                <td>文学</td>
+                <td class="w100">否</td>
+                <td>顺序</td>
+                <td>不重复</td>
+                <td>4 个</td>
+                <td>否</td>
+                <td class="w100"><span class="">是</span></td>
+                <td>2017-08-29 09:20</td>
+                <td><div class="am-btn-toolbar">
+                    <div class="am-btn-group am-btn-group-xs">
+                        <div class="am-dropdown" data-am-dropdown="">
+                            <button id="docTypeBtn" class="am-btn am-btn-link am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle="">编辑 <span class="am-icon-caret-down"></span></button>
+                            <ul class="am-dropdown-content">
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt19-15-j_idt57-0-j_idt59':'j_idt19-15-j_idt57-0-j_idt59'},'');return false"> <i class="am-text-xs am-icon-user" style="font-size: 12px;"></i>基础 basic </a></li>
+                                <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt19-15-j_idt57-1-j_idt59':'j_idt19-15-j_idt57-1-j_idt59'},'');return false"> <i class="am-text-xs am-icon-check-circle" style="font-size: 12px;"></i>类型 tag </a></li>
+                            </ul>
+                        </div><a href="#" onclick="jsf.util.chain(this,event,'return confirm(\'确认要复制此规则吗？\')','mojarra.jsfcljs(document.getElementById(\'frm\'),{\'j_idt19-15-j_idt63\':\'j_idt19-15-j_idt63\'},\'\')');return false" class="am-btn am-btn-link">复制</a><a href="#" onclick="jsf.util.chain(this,event,'return confirm(\'确认要删除此规则吗？\')','mojarra.jsfcljs(document.getElementById(\'frm\'),{\'j_idt19-15-j_idt65\':\'j_idt19-15-j_idt65\'},\'\')');return false" class="am-btn am-btn-link">删除</a>
+                    </div></div></td>
+            </tr>
+            </tbody>
+        </table>
+        </div><span class="pagination   clear am-fr">
+                <span>总条数：<b>16</b> <i class="am-margin-horizontal-sm"></i> 页码：<b>1</b> / 1页 <i class="am-margin-horizontal-sm"></i></span><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt68-j_idt71':'j_idt68-j_idt71'},'');return false"><i class="am-icon-angle-double-up am-text-success"></i> 首页</a><a href="#" onclick="jsf.util.chain(this,event,'return false','mojarra.jsfcljs(document.getElementById(\'frm\'),{\'j_idt68-j_idt73\':\'j_idt68-j_idt73\'},\'\')');return false"><i class="am-icon-angle-up am-text-success"></i> 上页</a><a href="#" onclick="jsf.util.chain(this,event,'return false','mojarra.jsfcljs(document.getElementById(\'frm\'),{\'j_idt68-j_idt75\':\'j_idt68-j_idt75\'},\'\')');return false">
+                <i class="am-icon-angle-down am-text-success"></i> 下页</a><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt68-j_idt77':'j_idt68-j_idt77'},'');return false"><i class="am-icon-angle-double-down am-text-success"></i> 尾页</a>
+                <span class="grey am-margin-horizontal-xs am-text-xs grey">| </span>
+                <span class="go am-margin-left-sm"> 第<input type="text" name="j_idt68-j_idt80" value="1" />页</span><a href="#" onclick="mojarra.jsfcljs(document.getElementById('frm'),{'j_idt68-j_idt82':'j_idt68-j_idt82'},'');return false"> 确定 </a></span>
+    </div></div><input type="hidden" name="javax.faces.ViewState" id="j_id1-javax.faces.ViewState-0" value="6357868209164827129:-8668347265178337536" autocomplete="off" />
+</form></body>
+
+</html>

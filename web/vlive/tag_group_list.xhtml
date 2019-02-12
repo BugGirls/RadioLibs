@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:composite="http://xmlns.jcp.org/jsf/composite/composite" xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions" xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+<ui:composition template="template.xhtml">
+    <ui:param name="title" value="标签组管理"/>
+    <ui:define name="content">
+
+        <h:dataTable value="#{tagGroupController.pageBean.list}" var="row" styleClass="am-table am-table-compact am-table-striped admin-content-table am-table-hover">
+            <h:column>
+                <f:facet name="header">组名称</f:facet>
+                <h:outputText value="#{row.name}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">属于</f:facet>
+                <h:outputText value="#{row.manager_id}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">可重复</f:facet>
+                <h:outputText styleClass="#{row.repeatable==0?'am-text-danger':''}" value="#{common.yesnoLabel(row.repeatable)}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">客观属性</f:facet>
+                <h:outputText styleClass="#{row.naturally==0?'am-text-danger':''}" value="#{common.yesnoLabel(row.naturally)}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">启用</f:facet>
+                <h:outputText styleClass="#{row.status==0?'am-text-danger':''}" value="#{common.yesnoLabel(row.status)}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">创建时间</f:facet>
+                <h:outputText value="#{row.createtime}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <a href="tag_group_edit.xhtml" class="am-btn am-btn-default am-btn-sm am-btn-warning"><span class="am-icon-plus"> </span> 新标签组</a>
+                </f:facet>
+                <h:panelGroup styleClass="am-btn-toolbar" layout="block">
+                    <div class="am-btn-group am-btn-group-xs">
+                        <h:commandButton value="编辑" styleClass="am-btn am-btn-link am-margin-0 am-padding-horizontal-0" action="#{tagGroupController.edit(row)}"></h:commandButton>
+                        <h:commandButton value="标签" styleClass="am-btn am-btn-link am-margin-0 am-padding-horizontal-xs" action="#{tagGroupController.tags(row)}"></h:commandButton>
+                        <div class="am-dropdown" data-am-dropdown="" >
+                            <button id="docTypeBtn" class="am-btn am-btn-link am-btn-xs am-dropdown-toggle am-margin-0 am-padding-horizontal-0" data-am-dropdown-toggle=""><h:outputText value="更多"/> <span class="am-icon-caret-down"></span></button>
+                            <ul class="am-dropdown-content">
+                                <li><h:commandLink value="拷贝并新建" action="#{tagGroupController.copy(row)}"/></li>
+                                <li><h:commandLink value="清空数据" action="#{tagGroupController.clear(row)}" onclick="return confirm('确认清空数据吗')"/></li>
+                                <li><h:commandLink value="删除此标签组" action="#{tagGroupController.delete(row)}" onclick="return confirm('确认要删除此标签组和所有标签吗？')"/></li>
+                                <li><h:commandLink value="#{row.status==1?'禁用':'启用'}"  action="#{tagGroupController.toggle(row)}" onclick="return confirm('确认改变状态吗')"/></li>
+                            </ul>
+                        </div>
+                    </div>
+                </h:panelGroup>
+            </h:column>
+        </h:dataTable>
+
+        <composite:pagination ctrl="#{tagGroupController}"/>
+
+    </ui:define>
+
+</ui:composition>
+</html>
