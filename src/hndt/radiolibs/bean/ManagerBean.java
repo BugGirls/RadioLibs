@@ -25,6 +25,7 @@ public class ManagerBean implements Serializable {
     int status = 1;//禁用启用
 
     //transient
+    String selectedUserId;
     List<RoleBean> roleList = new ArrayList<>();
     List<String> urlList;// 用户能操作的url地址列表
     List<Long> selectedId = new ArrayList<>();// 用于保存复选框中选择的角色
@@ -44,6 +45,14 @@ public class ManagerBean implements Serializable {
     @Override
     public int hashCode() {
         return (int) (id ^ (id >>> 32));
+    }
+
+    public String getSelectedUserId() {
+        return selectedUserId;
+    }
+
+    public void setSelectedUserId(String selectedUserId) {
+        this.selectedUserId = selectedUserId;
     }
 
     public String getName() {

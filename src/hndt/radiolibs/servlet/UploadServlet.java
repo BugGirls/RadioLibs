@@ -1,10 +1,5 @@
 package hndt.radiolibs.servlet;
 
-import hndt.radiolibs.bean.ManagerBean;
-import hndt.radiolibs.bean.RoleBean;
-import hndt.radiolibs.biz.AppBusiness;
-import hndt.radiolibs.biz.EnumValue;
-import hndt.radiolibs.biz.ResBusiness;
 import hndt.radiolibs.util.GSON;
 import hndt.radiolibs.util.IDGen;
 import hndt.radiolibs.util.Logger;
@@ -13,13 +8,10 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
-import javax.faces.context.FacesContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -28,13 +20,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static hndt.radiolibs.util.Utils.DATEFORMAT3;
-import static hndt.radiolibs.util.Utils.DATEFORMAT4;
-import static hndt.radiolibs.util.Utils.DATEFORMAT5;
 
 
 @WebServlet("/manager/file/*")

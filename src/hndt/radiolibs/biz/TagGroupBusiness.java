@@ -5,6 +5,7 @@ import hndt.radiolibs.bean.RoleBean;
 import hndt.radiolibs.bean.TagBean;
 import hndt.radiolibs.bean.TagGroupBean;
 import hndt.radiolibs.util.DBTool;
+import hndt.radiolibs.util.Logger;
 import hndt.radiolibs.util.PageBean;
 import hndt.radiolibs.util.SQL;
 
@@ -46,6 +47,7 @@ public class TagGroupBusiness {
     public List<TagGroupBean> listForManager(Long manager_id) {
         String managers = ManagerGroupBusiness.getInstance().group(manager_id);
         SQL sql = SQL.of("SELECT * FROM tag_group").and("manager_id in", managers).append(" AND status=1 ").append("ORDER BY sequence ASC");
+        Logger.info("---------------------////" + sql.toString());
         List<TagGroupBean> list = DBTool.list(TagGroupBean.class, sql.sql(), sql.params());
         return list;
     }

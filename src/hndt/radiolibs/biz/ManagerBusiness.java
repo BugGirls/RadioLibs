@@ -10,11 +10,11 @@ import okhttp3.Request;
 import okhttp3.Response;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.math.NumberUtils;
 
-import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpServletRequest;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 public class ManagerBusiness {
 
@@ -120,6 +120,10 @@ public class ManagerBusiness {
         return r;
     }
 
+    public List<ManagerBean> listByIds(List<Long> idList) {
+        return DBTool.list(ManagerBean.class, "SELECT * FROM manager WHERE id IN(" + SQL.toInString(idList) + ") AND status=1");
+    }
+
     public int delete(ManagerBean bean) {
         int r = DBTool.update("DELETE FROM manager WHERE id=?", bean.getId());
         return r;
@@ -139,6 +143,20 @@ public class ManagerBusiness {
         ManagerBean bean = DBTool.find(ManagerBean.class, "SELECT * FROM role WHERE id=?", id);
         return bean;
     }
+
+    public List<ManagerBean> list() {
+        List<ManagerBean> managerBeanList = DBTool.list(ManagerBean.class, "select * from manager where status=1");
+        for (ManagerBean managerBean : managerBeanList) {
+            if (managerBean.getRole_ids() != null) {
+                List<Long> roleIds = GSON.toList(managerBean.getRole_ids(), Utils.typeLong);
+                managerBean.setRoleList(RoleBusiness.getInstance().listByIds(roleIds));
+            }
+
+        }
+        return managerBeanList;
+    }
+
+
 
     /**
      * 获取管理员ID列表
@@ -184,7 +202,7 @@ public class ManagerBusiness {
     }
 
     public boolean containRole(ManagerBean bean, int role_id) {
-        Optional<RoleBean> any = bean.getRoleList().stream().filter(x -> role_id==x.getId().intValue()).findAny();
+        Optional<RoleBean> any = bean.getRoleList().stream().filter(x -> role_id == x.getId().intValue()).findAny();
         return any.isPresent();
     }
 

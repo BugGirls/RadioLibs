@@ -8,6 +8,11 @@ import org.apache.commons.lang3.math.NumberUtils;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+import javax.servlet.http.HttpServletResponse;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -105,6 +110,15 @@ public class ResController extends BaseController {
             }
         }
         return false;
+    }
+
+    /**
+     * 资源文件下载
+     *
+     * @param row
+     */
+    public void download(ResBean row) {
+        redirect("/manager/file/download?fileName=" + row.getPath());
     }
 
     /**

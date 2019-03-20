@@ -1,10 +1,6 @@
 package hndt.radiolibs.bean;
 
-import hndt.radiolibs.util.GSON;
-
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 用户组
@@ -16,6 +12,9 @@ public class ManagerGroupBean implements Serializable {
     Long id;
     String name;
     String manager_ids;
+    /**
+     * 领导者
+     */
     String leader;
 
     public Long getId() {

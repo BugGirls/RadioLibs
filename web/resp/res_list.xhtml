@@ -69,6 +69,7 @@
                                 <ui:repeat value="#{common.fromEnum('Section')}" var="section">
                                     <li><h:commandLink action="#{resController.tab(row,section)}"> <i class="am-text-xs am-icon-#{section.icon}" style="font-size: 12px;"></i>#{section.name} #{section.code} </h:commandLink> </li>
                                 </ui:repeat>
+                                <li><h:commandLink action="#{resController.download(row)}"> <i class="am-text-xs am-icon-download" style="font-size: 12px;"></i> 下载 </h:commandLink></li>
                                 <li><h:commandLink styleClass="am-text-danger" rendered="#{resController.editable(row)}" onclick="return confirm('删除后不可恢复，确认吗？')" action="#{resController.delete(row)}"><i class="am-text-xs am-icon-remove" style="font-size: 12px;"></i>删除此文件 </h:commandLink></li>
                             </ul>
                         </div>

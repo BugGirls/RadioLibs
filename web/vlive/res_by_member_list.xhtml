@@ -6,9 +6,9 @@
     <ui:define name="content">
         <h:panelGroup id="group" layout="block" styleClass="am-g am-margin">
 
-            <div class="am-u-sm-10 am-form-inline" role="form">
+            <div class="am-u-sm-8 am-form-inline" role="form">
                 <div class="am-form-group am-input-group-sm">
-                    <h:selectOneMenu value="#{resController.range}" styleClass="am-form-field">
+                    <h:selectOneMenu value="#{resController.range}" styleClass="am-form-field" style="width: 175px;">
                         <f:selectItem itemLabel="只显示我上传的" itemValue="2"/>
                         <f:selectItem itemLabel="显示所有" itemValue="4"/>
                     </h:selectOneMenu>
@@ -35,8 +35,8 @@
                     <h:commandLink styleClass="am-btn am-btn-default am-btn-sm am-btn-primary" action="#{resController.pagination()}"> <i class="am-icon-search"></i> 检索 </h:commandLink>
                 </div>
             </div>
-            <h:panelGroup styleClass="am-u-sm-2 am-text-right">
-                <audio id="player" style="width:80px;" src="" controls="controls" autoplay="autoplay"></audio>
+            <h:panelGroup styleClass="am-u-sm-2 am-text-right" style="margin-right: 120px;">
+                <audio id="player"  controls="controls" autoplay="autoplay"></audio>
             </h:panelGroup>
 
         </h:panelGroup>
@@ -99,8 +99,8 @@
                                     <ui:repeat value="#{common.fromEnum('Section')}" var="section">
                                         <li><h:commandLink action="#{resController.tab(row,section)}"> <i class="am-text-xs am-icon-#{section.icon}" style="font-size: 12px;"></i>#{section.name} #{section.code} </h:commandLink></li>
                                     </ui:repeat>
-                                    <li class="am-slider-item"></li>
-                                    <li><h:commandLink rendered="#{resController.editable(row)}" action="#{resController.delete(row)}" onclick="return confirm('删除后不可恢复，确认要删除吗？');"> <i class="am-text-xs am-icon-remove" style="font-size: 12px;"></i> <b class="am-text-danger">删除</b> </h:commandLink></li>
+                                    <li><h:commandLink action="#{resController.download(row)}"> <i class="am-text-xs am-icon-download" style="font-size: 12px;"></i> 下载 </h:commandLink></li>
+                                    <li><h:commandLink rendered="#{resController.editable(row)}" action="#{resController.delete(row)}" onclick="return confirm('删除后不可恢复，确认要删除吗123？');"> <i class="am-text-xs am-icon-remove" style="font-size: 12px;"></i> <b class="am-text-danger">删除</b> </h:commandLink></li>
                                 </ul>
                             </div>
                             <a class="resPathForPlay am-btn am-btn-link" data-url="${row.path}" title="播放"><i class="am-icon-play-circle am-text-xs"></i></a>

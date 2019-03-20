@@ -2,16 +2,15 @@ package hndt.radiolibs.biz;
 
 import hndt.radiolibs.bean.*;
 import hndt.radiolibs.util.DBTool;
-import hndt.radiolibs.util.GSON;
 import hndt.radiolibs.util.SQL;
 import hndt.radiolibs.util.Utils;
-import org.apache.commons.lang3.StringUtils;
 
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Hystar
@@ -208,12 +207,24 @@ public class RuntimeBusiness {
         DBTool.update("DELETE FROM runtime WHERE channel_id=? AND createtime=?", channel_id, nowday);
     }
 
-    //清除runtime表中未播的记录
+    /**
+     * 清除runtime表中未播的记录
+     *
+     * @param now
+     */
     public void clear(LocalDateTime now) {
         DBTool.update("DELETE FROM runtime WHERE playdate IS NULL AND createtime <=?", Timestamp.valueOf(now));
     }
 
-    //预留规则选取数量只能是1
+    /**
+     * 预留规则选取数量只能是1
+     *
+     * @param manager_id
+     * @param channel_id
+     * @param typed
+     * @param now
+     * @return
+     */
     public List<ResBean> resByTyped(Long manager_id, Long channel_id, TypedBean typed, LocalDateTime now) {
         List<ResBean> result = new ArrayList<>();
         TypedBusiness.getInstance().attachTagList(typed);

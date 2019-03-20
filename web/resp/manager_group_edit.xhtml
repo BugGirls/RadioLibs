@@ -4,36 +4,82 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <ui:composition template="template.xhtml">
-        <ui:param name="title" value="用户管理 -> #{managerController.createView() ? '添加' : '更新'}用户"/>
+<ui:composition template="template.xhtml">
+    <ui:param name="title" value="用户管理 -> #{managerGroupController.createView() ? '添加' : '更新'}用户组"/>
 
-        <ui:define name="content">
-            <h:panelGroup layout="block" styleClass="am-margin am-g">
-                <h:panelGroup layout="block" styleClass="am-u-sm-8">
-                    <h2>用户（Role）</h2>
-                    <p>登录后的人员信息</p>
-                </h:panelGroup>
-
-                <h:panelGroup layout="block" styleClass="am-u-sm-4">
-                    <h:commandLink styleClass="am-btn am-btn-default am-btn-sm am-btn-warning" action="#{managerController.save()}"> <i class="am-icon-save"></i> 保存 </h:commandLink>
-                </h:panelGroup>
+    <ui:define name="content">
+        <h:panelGroup layout="block" styleClass="am-margin am-g">
+            <h:panelGroup layout="block" styleClass="am-u-sm-8">
+                <h2>用户组（group）</h2>
+                <p>登录后的人员分组信息</p>
             </h:panelGroup>
 
-            <h:panelGrid columns="2" styleClass="am-table tableForm" columnClasses="w60,w300">
-                <h:outputText value="名称" styleClass="itemLabel"/>
-                <h:inputText value="#{managerController.bean.name}" styleClass="am-form-field am-input-sm"></h:inputText>
+            <h:panelGroup layout="block" styleClass="am-u-sm-4">
+                <h:commandLink styleClass="am-btn am-btn-default am-btn-sm am-btn-warning"
+                               action="#{managerGroupController.save()}"> <i class="am-icon-save"></i> 保存
+                </h:commandLink>
+            </h:panelGroup>
+        </h:panelGroup>
 
-                <h:outputText value="角色" styleClass="itemLabel"/>
-                <h:selectManyCheckbox id="managerRole" value="#{managerController.bean.selectedId}" styleClass="tableItems">
-                    <f:selectItems value="#{managerController.bean.roleList}" var="bean" itemLabel="#{bean.name}" itemValue="#{bean.id}" />
-                </h:selectManyCheckbox>
+        <h:panelGrid columns="2" styleClass="am-table tableForm" columnClasses="w60,w300">
+            <h:outputText value="组名称" styleClass="itemLabel"/>
+            <h:inputText value="#{managerGroupController.bean.name}" styleClass="am-form-field am-input-sm"></h:inputText>
 
-                <h:outputText value="启用" styleClass="itemLabel"/>
-                <h:selectOneRadio value="#{managerController.bean.status}" styleClass="tableItems">
-                    <f:selectItems value="#{common.fromEnum('YesNo')}" var="item" itemLabel="#{item.name}" itemValue="#{item.code}"/>
-                </h:selectOneRadio>
-            </h:panelGrid>
+            <h:outputText value="选择用户" styleClass="itemLabel"/>
+            <h:outputText ></h:outputText>
+            <h:commandButton type="button" value="选择用户" styleClass="selectManagers am-btn am-btn-warning am-btn-sm am-fr"/>
 
-        </ui:define>
-    </ui:composition>
+            <h:outputText value="负责人" styleClass="itemLabel"/>
+            <h:commandButton type="button" value="选取用户" styleClass="selectManager am-btn am-btn-warning am-btn-sm am-fr"/>
+
+            <h:inputText value="#{managerController.bean.selectedUserId}" id="selectManagers" styleClass="am-hide">
+                <!--当执行完成getCheckTypedList()方法后，刷新id为typed_list的panelGroup-->
+                <!--<f:ajax render="typedList" listener="#{clockController.getCheckTypedList()}"/>-->
+            </h:inputText>
+        </h:panelGrid>
+
+        <script>
+            $(function () {
+                $(".selectManagers").on('click', function () {
+                    var primaryId = $("#selectManagers").val()
+                    console.log(primaryId)
+
+                    // 页面层
+                    layer.open({
+                        type: 2,// 层类型
+                        skin: 'layer-ext-moon', // 皮肤
+                        area: ['80%', '80%'], // 宽高
+                        title: "规则选取",// 标题
+                        closeBtn: 2,// 关闭按钮样式
+                        shadeClose: false,// 是否点击遮罩关闭
+                        anim: 2,// 弹出动画
+                        btn: ['确定'],
+                        content: "manager_select.xhtml",// 内容
+                        yes: function (index, layero) {// 点击确定按钮后的回调函数
+                            var body = layer.getChildFrame('body', index)
+                            var inputList = body.find('input:checkbox')
+                            var ids = []
+                            if (primaryId.length > 0) {
+                                ids.push(primaryId)
+                            }
+                            inputList.each(function (index, obj) {
+                                if ($(this).is(':checked')) {
+                                    ids.push($(this).val())
+                                }
+                            })
+
+                            console.log(ids)
+
+                            // trigger()方法：当值改变时触发
+                            $("#selectManagers").val(ids).trigger("change")
+
+                            layer.close(index);
+                        }
+                    });
+                });
+
+            })
+        </script>
+    </ui:define>
+</ui:composition>
 </html>

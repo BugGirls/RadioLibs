@@ -76,6 +76,11 @@ public class ManagerController extends BaseController {
         afterAction(r);
     }
 
+    public List<ManagerBean> listByStatus() {
+        List<ManagerBean> managerBeanList = ManagerBusiness.getInstance().list();
+        return managerBeanList;
+    }
+
     /**
      * 删除记录
      * @param row
@@ -117,6 +122,13 @@ public class ManagerController extends BaseController {
         if (r > 0) {
             redirect("manager_list.xhtml");
         }
+    }
+
+    public void managerIdsToName(String managerIds) {
+        List<Long> idList = Utils.asListLong(managerIds);
+        List<ManagerBean> managerBeanList = ManagerBusiness.getInstance().listByIds(idList);
+        List<String> nameList = new ArrayList<>();
+        managerBeanList.forEach(managerBean -> nameList.add(managerBean.getName()));
     }
 
     public ManagerBean getBean() {

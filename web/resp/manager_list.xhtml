@@ -15,6 +15,10 @@
 
             <h:dataTable value="#{managerController.pageBean.list}" var="row" styleClass="am-table am-table-compact am-table-striped admin-content-table am-table-hover">
                 <h:column>
+                    <f:facet name="header">ID</f:facet>
+                    <h:outputText value="#{row.id}"/>
+                </h:column>
+                <h:column>
                     <f:facet name="header">名称</f:facet>
                     <h:outputText value="#{row.name}"/>
                 </h:column>

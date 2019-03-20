@@ -1,21 +1,17 @@
 package hndt.radiolibs.biz;
 
 import hndt.radiolibs.bean.ChannelBean;
-import hndt.radiolibs.bean.LogBean;
-import hndt.radiolibs.bean.ManagerBean;
 import hndt.radiolibs.servlet.VlivePlayItemServlet;
-import hndt.radiolibs.util.DBTool;
 import hndt.radiolibs.util.Logger;
-import hndt.radiolibs.util.PageBean;
-import hndt.radiolibs.util.SQL;
 
 import javax.servlet.ServletContext;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 生成节目单信息
+ */
 public class ExtractBusiness implements Runnable {
     private ServletContext servletContext;
 
@@ -34,16 +30,22 @@ public class ExtractBusiness implements Runnable {
             try {
                 List<ChannelBean> list = ChannelBusiness.getInstance().list();
                 for (ChannelBean cbean : list) {
-                    Logger.info("生成3日内节目单，频率ID：" + cbean.getId() + "，频率名称：" + cbean.getName());
-                    // 生成3日内节目单，如有已有就不再生成
-                    if (RuntimeBusiness.getInstance().none(cbean.getId(), now.plusDays(1).toLocalDate())) {
-                        RuntimeBusiness.getInstance().generate(cbean.getId(), Timestamp.valueOf(now.plusDays(1)));
-                    }
-                    if (RuntimeBusiness.getInstance().none(cbean.getId(), now.plusDays(2).toLocalDate())) {
-                        RuntimeBusiness.getInstance().generate(cbean.getId(), Timestamp.valueOf(now.plusDays(2)));
-                    }
-                    if (RuntimeBusiness.getInstance().none(cbean.getId(), now.plusDays(3).toLocalDate())) {
-                        RuntimeBusiness.getInstance().generate(cbean.getId(), Timestamp.valueOf(now.plusDays(3)));
+                    // 有声文摘特定需求：生成一个月的节目单
+                    if (cbean.getId() == 96) {
+                        Logger.info("有声文摘生成一个月的节目单");
+                        for (int i = 1; i <= now.getDayOfMonth(); i++) {
+                            if (RuntimeBusiness.getInstance().none(cbean.getId(), now.plusDays(i).toLocalDate())) {
+                                RuntimeBusiness.getInstance().generate(cbean.getId(), Timestamp.valueOf(now.plusDays(i)));
+                            }
+                        }
+                    } else {
+                        Logger.info("生成3日内节目单，频率ID：" + cbean.getId() + "，频率名称：" + cbean.getName());
+                        for (int i = 1; i <= 3; i++) {
+                            // 生成3日内节目单，如果已有就不再生成
+                            if (RuntimeBusiness.getInstance().none(cbean.getId(), now.plusDays(i).toLocalDate())) {
+                                RuntimeBusiness.getInstance().generate(cbean.getId(), Timestamp.valueOf(now.plusDays(i)));
+                            }
+                        }
                     }
                 }
                 //清除播放API的缓存
@@ -52,6 +54,7 @@ public class ExtractBusiness implements Runnable {
                 Logger.error(e);
             }
         } else if (now.getHour() == 23 && now.getMinute() == 57) {
+            // 删除过期的资源文件
             ResBusiness.deleteOnLifetime();
         }
     }

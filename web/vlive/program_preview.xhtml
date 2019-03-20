@@ -73,7 +73,7 @@
                                         <a class="am-btn am-btn-link am-padding-right-0" data-url="${runtime.resBean.path}" title="播放"><i class="am-icon-play-circle am-text-xs"></i></a>
                                         <h:commandLink styleClass="am-btn am-btn-link am-padding-right-0 "   onclick="updown(this)" action="#{programController.upRes(runtime)}" title="向上移动" ><i class="am-icon-arrow-circle-up" dataid="anchor_#{common.hour(clock.starttime)}"></i></h:commandLink>
                                         <h:commandLink styleClass="am-btn am-btn-link am-padding-right-0" onclick="updown(this)" action="#{programController.downRes(runtime)}" title="向下移动"><i class="am-icon-arrow-circle-down"  dataid="anchor_#{common.hour(clock.starttime)}"></i></h:commandLink>
-                                        <h:commandLink styleClass="am-btn am-btn-link am-padding-right del"  action="#{programController.removeRuntimeById(runtime.id)}" onclick="return confirm('确认要删除该信息吗？')" title="删除资源"><i class="am-icon-remove" dataid="anchor_#{common.hour(clock.starttime)}"></i></h:commandLink>
+                                        <h:commandLink styleClass="am-btn am-btn-link am-padding-right del"  action="#{programController.removeRuntimeById(runtime)}" onclick="return confirm('确认要删除该信息吗？')" title="删除资源"><i class="am-icon-remove" dataid="anchor_#{common.hour(clock.starttime)}"></i></h:commandLink>
                                     </div>
                                 </li>
                             </ui:repeat>

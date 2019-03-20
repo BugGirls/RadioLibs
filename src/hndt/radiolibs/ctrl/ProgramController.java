@@ -3,7 +3,6 @@ package hndt.radiolibs.ctrl;
 import hndt.radiolibs.bean.*;
 import hndt.radiolibs.biz.*;
 import hndt.radiolibs.jsf.TimestampTimeConverter;
-import hndt.radiolibs.util.DBTool;
 import hndt.radiolibs.util.Flash;
 import hndt.radiolibs.util.GSON;
 import hndt.radiolibs.util.Utils;
@@ -18,7 +17,6 @@ import java.sql.Timestamp;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
-import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 /**
@@ -62,7 +60,6 @@ public class ProgramController extends BaseController {
             // 填充所属频率下拉框
             ProgramBusiness.getInstance().attachChannelBeanList(bean);
             ProgramBusiness.getInstance().attachOrderClockIdsList(bean);
-
         } else if (previewView()) {
             bean = ProgramBusiness.getInstance().load(id);
             channel_id = bean.getChannel_id();
@@ -539,13 +536,13 @@ public class ProgramController extends BaseController {
     /**
      * 通过id删除一条runtime表中的数据
      *
-     * @param id
+     * @param runtimeBean
      */
-    public void removeRuntimeById(long id) {
-        int r = RuntimeBusiness.getInstance().removeRuntimeById(id);
+    public void removeRuntimeById(RuntimeBean runtimeBean) {
+        int r = RuntimeBusiness.getInstance().removeRuntimeById(runtimeBean.getId());
         if (r > 0) {
             addTip("信息删除成功");
-            redirect("program_preview.xhtml?id=" + id + "&selectDate=" + dateValue);
+            redirect("program_preview.xhtml?id=" + runtimeBean.getProgram_id() + "&selectDate=" + dateValue);
         } else {
             addTip("信息删除失败");
         }
