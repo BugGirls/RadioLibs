@@ -190,6 +190,12 @@ public class RuntimeBusiness {
                 List<ResBean> result = resByTyped(managerId, channel_id, typed, now);
                 clock.getResList().addAll(result);
                 for (ResBean rb : result) {
+                    // 如果当前频率开启了“审核”功能，并且资源文件“审核未通过”，则不生成记录
+                    if (EnumValue.OpenAudit.OPEN.equals(channelBean.getAudit())) {
+                        if (EnumValue.AuditStatus.NOT_PASS.equals(rb.getAudit_status())) {
+                            break;
+                        }
+                    }
                     Long res_id = rb.getId();
                     int duration = rb.getFormat_duration().intValue();
                     if (typed.getPlaceholder() == 1) {

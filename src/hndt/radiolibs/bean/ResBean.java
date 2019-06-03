@@ -60,6 +60,8 @@ public class ResBean implements Serializable {
     Integer lifetime; //生命期(天) 0永久
     Timestamp createtime; //创建时间
     Timestamp updatetime; //创建时间
+    Integer audit_status;// 审核状态 初始值为null-未审核 0-未通过 1-通过
+    String reject_cause;// 驳回原因
 
     // transient
     Long duration; //servlet里用
@@ -534,6 +536,22 @@ public class ResBean implements Serializable {
 
     public void setTagBeanList(List<TagBean> tagBeanList) {
         this.tagBeanList = tagBeanList;
+    }
+
+    public Integer getAudit_status() {
+        return audit_status;
+    }
+
+    public void setAudit_status(Integer audit_status) {
+        this.audit_status = audit_status;
+    }
+
+    public String getReject_cause() {
+        return reject_cause;
+    }
+
+    public void setReject_cause(String reject_cause) {
+        this.reject_cause = reject_cause;
     }
 
     @Override

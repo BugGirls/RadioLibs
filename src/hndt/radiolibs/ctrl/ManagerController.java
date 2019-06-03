@@ -1,20 +1,18 @@
 package hndt.radiolibs.ctrl;
 
 import hndt.radiolibs.bean.ManagerBean;
-import hndt.radiolibs.bean.RoleBean;
+import hndt.radiolibs.bean.ManagerGroupBean;
 import hndt.radiolibs.biz.EnumValue;
 import hndt.radiolibs.biz.ManagerBusiness;
-import hndt.radiolibs.biz.RoleBusiness;
+import hndt.radiolibs.biz.ManagerGroupBusiness;
 import hndt.radiolibs.util.Flash;
 import hndt.radiolibs.util.GSON;
 import hndt.radiolibs.util.Utils;
-import org.apache.commons.lang3.StringUtils;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -76,6 +74,11 @@ public class ManagerController extends BaseController {
         afterAction(r);
     }
 
+    /**
+     * 获取可用的用户列表
+     *
+     * @return
+     */
     public List<ManagerBean> listByStatus() {
         List<ManagerBean> managerBeanList = ManagerBusiness.getInstance().list();
         return managerBeanList;
@@ -83,6 +86,7 @@ public class ManagerController extends BaseController {
 
     /**
      * 删除记录
+     *
      * @param row
      */
     public void delete(ManagerBean row) {
@@ -92,6 +96,7 @@ public class ManagerController extends BaseController {
 
     /**
      * 清除角色
+     *
      * @param bean
      */
     public void clear(ManagerBean bean) {
@@ -102,6 +107,7 @@ public class ManagerController extends BaseController {
 
     /**
      * 是否禁用
+     *
      * @param bean
      */
     public void toggle(ManagerBean bean) {
@@ -111,6 +117,7 @@ public class ManagerController extends BaseController {
 
     /**
      * 跳转到编辑页面
+     *
      * @param row
      */
     public void edit(ManagerBean row) {

@@ -51,6 +51,10 @@
                     <f:facet name="header">启用</f:facet>
                     <h:outputText styleClass="#{row.status==0?'am-text-danger':''}" value="#{common.yesnoLabel(row.status)}"/>
                 </h:column>
+                <h:column styleClass="w100">
+                    <f:facet name="header">开启审核</f:facet>
+                    <h:outputText styleClass="#{row.audit==0?'am-text-danger':''}" value="#{common.openAuditLabel(row.audit)}"/>
+                </h:column>
                 <h:column styleClass="w150">
                     <f:facet name="header">创建时间</f:facet>
                     <h:outputText value="#{row.createtime}"/>

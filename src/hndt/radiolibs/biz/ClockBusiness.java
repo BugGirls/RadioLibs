@@ -126,7 +126,10 @@ public class ClockBusiness {
         List<Long> typedIds = GSON.toList(bean.getTyped_ids(), Utils.typeLong);
         List<TypedBean> list = new ArrayList<>();
         typedIds.forEach(x -> {
-            list.add(TypedBusiness.getInstance().load(x));
+            TypedBean typedBean = TypedBusiness.getInstance().load(x);
+            if (typedBean != null) {
+                list.add(typedBean);
+            }
         });
         bean.setTypedList(list);
     }

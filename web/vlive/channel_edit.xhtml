@@ -62,6 +62,11 @@
                     <f:selectItems value="#{common.fromEnum('Status')}" var="item" itemValue="#{item.code}" itemLabel="#{item.name}"/>
                 </h:selectOneRadio>
 
+                <h:outputText value="开启审核" styleClass="itemLabel"/>
+                <h:selectOneRadio styleClass="tableItems" value="#{channelController.bean.audit}">
+                    <f:selectItems value="#{common.fromEnum('Audit')}" var="item" itemValue="#{item.code}" itemLabel="#{item.name}"/>
+                </h:selectOneRadio>
+
             </h:panelGrid>
         </h:panelGroup>
     </ui:define>

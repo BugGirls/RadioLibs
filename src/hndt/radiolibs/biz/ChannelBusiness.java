@@ -33,7 +33,7 @@ public class ChannelBusiness {
 
     public PageBean pagination(Long manager_id, String keyword, PageBean pageBean) {
         pageBean = pageBean == null ? new PageBean() : pageBean;
-        SQL sql = SQL.of("SELECT id, uuid, manager_id, name, description, logo, status, createtime FROM channel")
+        SQL sql = SQL.of("SELECT id, uuid, manager_id, name, description, logo, status, audit, createtime FROM channel")
                 .and("manager_id=", manager_id)
                 .and("name LIKE", keyword)
                 .append("ORDER BY id DESC")
@@ -47,7 +47,7 @@ public class ChannelBusiness {
     public int save(ChannelBean bean) {
         int r = 0;
         if (bean.getId() == null || bean.getId() == 0) {
-            long id = DBTool.insert("INSERT INTO channel(uuid, manager_id, name, description, logo, status, createtime) VALUES(?,?,?,?,?,?,?)", bean.getUuid(), bean.getManager_id(), bean.getName(), bean.getDescription(), bean.getLogo(), bean.getStatus(), bean.getCreatetime());
+            long id = DBTool.insert("INSERT INTO channel(uuid, manager_id, name, description, logo, status, audit, createtime) VALUES(?,?,?,?,?,?,?,?)", bean.getUuid(), bean.getManager_id(), bean.getName(), bean.getDescription(), bean.getLogo(), bean.getStatus(), bean.getAudit(), bean.getCreatetime());
             if (id > 0) {
                 bean.setId(id);
                 r = 1;
@@ -57,7 +57,7 @@ public class ChannelBusiness {
             if (managerBean == null) {
                 bean.setManager_id(new BaseController().getManagerIdParam());
             }
-            r = DBTool.update("UPDATE channel SET name=?, description=?, logo=?, status=?, createtime=?, manager_id=? WHERE id=?", bean.getName(), bean.getDescription(), bean.getLogo(), bean.getStatus(), bean.getCreatetime(), bean.getManager_id(), bean.getId());
+            r = DBTool.update("UPDATE channel SET name=?, description=?, logo=?, status=?, audit=?, createtime=?, manager_id=? WHERE id=?", bean.getName(), bean.getDescription(), bean.getLogo(), bean.getStatus(), bean.getAudit(), bean.getCreatetime(), bean.getManager_id(), bean.getId());
         }
         return r;
     }
@@ -73,16 +73,16 @@ public class ChannelBusiness {
     }
 
     public ChannelBean load(long id) {
-        ChannelBean channelBean = DBTool.find(ChannelBean.class, "SELECT id, uuid, manager_id, name, description, logo, status, createtime FROM channel WHERE id=?", id);
+        ChannelBean channelBean = DBTool.find(ChannelBean.class, "SELECT id, uuid, manager_id, name, description, logo, status, audit, createtime FROM channel WHERE id=?", id);
         return channelBean;
     }
 
     public List<ChannelBean> list() {
-        return DBTool.list(ChannelBean.class, "SELECT id, uuid, manager_id, name, description, logo, status, createtime FROM channel WHERE status=1 ORDER BY id DESC");
+        return DBTool.list(ChannelBean.class, "SELECT id, uuid, manager_id, name, description, logo, status, audit, createtime FROM channel WHERE status=1 ORDER BY id DESC");
     }
 
     public List<ChannelBean> list(Long manager_id) {
-        return DBTool.list(ChannelBean.class, "SELECT id, uuid, manager_id, name, description, logo, status, createtime FROM channel WHERE manager_id=? AND status=1", manager_id);
+        return DBTool.list(ChannelBean.class, "SELECT id, uuid, manager_id, name, description, logo, status, audit, createtime FROM channel WHERE manager_id=? AND status=1", manager_id);
     }
 
     public List<ChannelBean> list(Timestamp nowDate) {

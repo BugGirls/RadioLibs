@@ -258,7 +258,76 @@ public class EnumValue {
         }
     }
 
-    //
+    /**
+     * 是否开启审核
+     */
+    public enum OpenAudit {
+        OPEN(1, "开启"),
+        NO_OPEN(0, "不开启");
+
+        private int code;
+        private String name;
+
+        OpenAudit(int code, String name) {
+            this.code = code;
+            this.name = name;
+        }
+
+        public static OpenAudit instances(int code) {
+            for (OpenAudit f : OpenAudit.values()) {
+                if (Objects.equals(f.getCode(), code)) {
+                    return f;
+                }
+            }
+            return null;
+        }
+
+        public int getCode() {
+            return code;
+        }
+
+        public String getName() {
+            return name;
+        }
+    }
+
+    /**
+     * 审核状态
+     */
+    public enum AuditStatus {
+        NULL_AUDIT(2, "未审核"),
+        PASS(1, "通过"),
+        NOT_PASS(0, "未通过");
+
+        private Integer code;
+        private String name;
+
+        AuditStatus(Integer code, String name) {
+            this.code = code;
+            this.name = name;
+        }
+
+        public static AuditStatus instances(Integer code) {
+            for (AuditStatus f : AuditStatus.values()) {
+                if (Objects.equals(f.getCode(), code)) {
+                    return f;
+                }
+            }
+            return null;
+        }
+
+        public Integer getCode() {
+            return code;
+        }
+
+        public String getName() {
+            return name;
+        }
+    }
+
+    /**
+     * 是否有效
+     */
     public enum YesNo {
         YES(1, "是"),
         NO(0, "否");

@@ -2,22 +2,21 @@ package hndt.radiolibs.ctrl;
 
 import hndt.radiolibs.bean.*;
 import hndt.radiolibs.biz.*;
-import hndt.radiolibs.util.*;
+import hndt.radiolibs.util.Flash;
+import hndt.radiolibs.util.IDGen;
+import hndt.radiolibs.util.Logger;
+import hndt.radiolibs.util.Utils;
 import org.apache.commons.lang3.math.NumberUtils;
 
-import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
-import javax.servlet.http.HttpServletResponse;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author Empress
@@ -29,6 +28,8 @@ public class ResController extends BaseController {
     ResBean bean;
     int range = 2; //1仅系统资源、2仅用户上传的资源、3所有、4组内成员所有的
     int category = 0;
+    long managerId = 0;
+    Integer auditStatus = null;
     List<TagGroupBean> tagGroups = null;
     List<Integer> selectedTags = null;
     private static String BY_MEMBER = "_by_member_list";
@@ -44,6 +45,9 @@ public class ResController extends BaseController {
             range = 3;
         } else if (viewId.contains("/vlive/res_list_search.xhtml") || viewId.contains("/vlive/res_list_select.xhtml")) {
             range = 3;
+        } else if (viewId.contains("/vlive/audit_list")) {
+            range = 2;
+            managerId = -1;
         }
 
         if (listView()) {
@@ -59,7 +63,12 @@ public class ResController extends BaseController {
             bean = ResBusiness.getInstance().load(id);
             CustomTagBean customTags = ResBusiness.getInstance().loadCustomTag(getManager_id(), id);
             if (customTags != null) {
-                bean.setType_tags(customTags.getType_tags());
+                List<Integer> customTagList = Utils.asListInteger(customTags.getType_tags());
+                List<Integer> typeTagList = Utils.asListInteger(bean.getType_tags());
+                Set<Integer> tagSet = new HashSet<>();
+                tagSet.addAll(customTagList);
+                tagSet.addAll(typeTagList);
+                bean.setType_tags(Utils.asString(new ArrayList<>(tagSet)));
             }
         } else if (createView()) {
             bean = new ResBean();
@@ -69,6 +78,31 @@ public class ResController extends BaseController {
             bean.setManager_id(getManagerIdParam());
             bean.setUuid(IDGen.id());
         }
+    }
+
+    /**
+     * 通过当前登录用户获取所在用户组的用户列表
+     *
+     * @return
+     */
+    public List getManagerListByGroup() {
+        // 获取当前登录用户ID
+        long currentManagerId = getManager_id();
+
+        // 获取当前登录用户所在的用户组
+        ManagerGroupBean managerGroupBean = ManagerGroupBusiness.getInstance().find(currentManagerId);
+
+        List<Long> idList = new ArrayList<>();
+        if (managerGroupBean != null) {
+            // 获取当前用户组的所有用户ID
+            idList = Utils.asListLong(managerGroupBean.getManager_ids());
+        } else {
+            idList.add(currentManagerId);
+        }
+
+        // 转换成list
+        List<ManagerBean> managerBeanList = ManagerBusiness.getInstance().listByIds(idList);
+        return managerBeanList;
     }
 
     public void delete(ResBean row) {
@@ -122,6 +156,27 @@ public class ResController extends BaseController {
     }
 
     /**
+     * 审核通过
+     *
+     * @param resBean
+     */
+    public void auditPass(ResBean resBean) {
+        resBean.setAudit_status(EnumValue.AuditStatus.PASS.getCode());
+        resBean.setReject_cause(null);
+        int r = ResBusiness.getInstance().auditOperator(resBean);
+        afterAction(r);
+    }
+
+    /**
+     * 审核不通过
+     */
+    public void auditNotPass(ResBean resBean) {
+        resBean.setAudit_status(EnumValue.AuditStatus.NOT_PASS.getCode());
+        int r = ResBusiness.getInstance().auditOperator(resBean);
+        afterAction(r);
+    }
+
+    /**
      * 需要判断登录用户的角色
      * 如果是库管理员登录，则可以查看所有上传的资源文件
      * 如果不是库管理员登录，只能查看自己上传的资源文件
@@ -129,7 +184,11 @@ public class ResController extends BaseController {
     @Override
     public void pagination() {
         setParamPage();
-        pageBean = ResBusiness.getInstance().pagination(category, range, getManagerIdParam(), selectedTags, keyword, pageBean);
+
+        if (managerId == 0) {
+            managerId = getManagerIdParam();
+        }
+        pageBean = ResBusiness.getInstance().pagination(category, range, managerId, selectedTags, keyword, auditStatus, pageBean);
         List<Long> res_ids = new ArrayList<>();
         pageBean.getList().forEach(x -> {
             ResBean row = (ResBean) x;
@@ -149,6 +208,8 @@ public class ResController extends BaseController {
         if (r > 0) {
             if (getViewId().contains("/vlive/res_by_member_list")) {
                 redirect("res_by_memberlist.xhtml?category=" + bean.getCategory());
+            } else if (getViewId().contains("/vlive/audit_list")) {
+                redirect("audit_list.xhtml");
             } else {
                 redirect("res_list.xhtml?category=" + bean.getCategory());
             }
@@ -222,6 +283,22 @@ public class ResController extends BaseController {
 
     public void setRange(int range) {
         this.range = range;
+    }
+
+    public long getManagerId() {
+        return managerId;
+    }
+
+    public void setManagerId(long managerId) {
+        this.managerId = managerId;
+    }
+
+    public Integer getAuditStatus() {
+        return auditStatus;
+    }
+
+    public void setAuditStatus(Integer auditStatus) {
+        this.auditStatus = auditStatus;
     }
 
     public int getCategory() {

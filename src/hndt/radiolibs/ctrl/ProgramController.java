@@ -29,7 +29,7 @@ import java.util.stream.Collectors;
 @ViewScoped
 public class ProgramController extends BaseController {
 
-    private Long channel_id;
+    private Long channelId;
     private ProgramBean bean;
 
     /**
@@ -93,7 +93,7 @@ public class ProgramController extends BaseController {
     @Override
     public void pagination() {
         setParamPage();
-        pageBean = ProgramBusiness.getInstance().pagination(getManagerIdParam(), channel_id, keyword, pageBean);
+        pageBean = ProgramBusiness.getInstance().pagination(getManagerIdParam(), channelId, keyword, pageBean);
 
         List<ProgramBean> programBeanList = pageBean.getList();
         if (Utils.isNotEmpty(programBeanList)) {
@@ -526,9 +526,11 @@ public class ProgramController extends BaseController {
         return nextRuntime == null ? false : true;
     }
 
-    //生成次日节目单，会重取文件会重新挑选音频资源并覆盖现有数据
+    /**
+     * 生成次日节目单，会重取文件会重新挑选音频资源并覆盖现有数据
+     */
     public void pick() {
-        LocalDateTime now = LocalDateTime.now().plusDays(1);
+        LocalDateTime now = new Date(Long.parseLong(dateValue)).toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime().plusDays(1);
         RuntimeBusiness.getInstance().clear(channel_id, now);
         RuntimeBusiness.getInstance().generate(channel_id, Timestamp.valueOf(now));
     }
@@ -666,5 +668,13 @@ public class ProgramController extends BaseController {
 
     public void setSelectFormatDate(String selectFormatDate) {
         this.selectFormatDate = selectFormatDate;
+    }
+
+    public Long getChannelId() {
+        return channelId;
+    }
+
+    public void setChannelId(Long channelId) {
+        this.channelId = channelId;
     }
 }

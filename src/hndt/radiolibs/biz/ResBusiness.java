@@ -362,7 +362,18 @@ public class ResBusiness {
         return bean;
     }
 
-    public PageBean pagination(int category, long range, Long managerId, List<Integer> selectedTags, String keyword, PageBean pageBean) {
+    /**
+     * 审核操作
+     *
+     * @param resBean
+     * @return
+     */
+    public int auditOperator(ResBean resBean) {
+        int r = DBTool.update("UPDATE respository SET audit_status=?,reject_cause=? WHERE id=?", resBean.getAudit_status(), resBean.getReject_cause(), resBean.getId());
+        return r;
+    }
+
+    public PageBean pagination(int category, long range, Long managerId, List<Integer> selectedTags, String keyword, Integer auditStatus, PageBean pageBean) {
         StringBuilder find_conditions = null;
         if (selectedTags != null && selectedTags.size() > 0) {
             find_conditions = new StringBuilder("AND ( ");
@@ -404,7 +415,13 @@ public class ResBusiness {
             sql.and("category=", category);
         }
 
-        sql.or("title_proper LIKE", keyword, "creator_content LIKE", keyword).append("ORDER BY id DESC").limit(pageBean.getStart(), pageBean.getLinesPerPage());
+        sql.or("title_proper LIKE", keyword, "creator_content LIKE", keyword);
+        // 加入审核状态筛选
+        if (auditStatus != null) {
+            sql.and("audit_status=", auditStatus);
+        }
+        // 排序和分页
+        sql.append("ORDER BY id DESC").limit(pageBean.getStart(), pageBean.getLinesPerPage());
         List<ResBean> list = DBTool.list(ResBean.class, sql.sql(), sql.params());
 
         List<Long> res_ids = list.stream().map(ResBean::getId).collect(Collectors.toList());

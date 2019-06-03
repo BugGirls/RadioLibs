@@ -12,7 +12,7 @@
     <ui:define name="content">
         <h:panelGroup layout="block" styleClass="am-g am-margin">
             <h:panelGroup styleClass="am-u-sm-2">
-                <composite:switch ctrl="#{programController}" property="#{programController.channel_id}" items="#{common.fromChannels()}" source="entity" firstItem="请选择频率"/>
+                <composite:switch ctrl="#{programController}" property="#{programController.channelId}" items="#{common.fromChannels()}" source="entity" firstItem="请选择频率"/>
             </h:panelGroup>
             <h:panelGroup styleClass="am-u-sm-2">
                 <composite:searchbox keyword="#{programController.keyword}" ctrl="#{programController}"/>

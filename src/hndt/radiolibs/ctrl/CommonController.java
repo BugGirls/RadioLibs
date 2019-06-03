@@ -56,6 +56,10 @@ public class CommonController implements Serializable {
             list = Arrays.asList(EnumValue.Duration.values());
         } else if ("Color".equals(name)) {
             list = Arrays.asList(EnumValue.Color.values());
+        } else if ("Audit".equals(name)) {
+            list = Arrays.asList(EnumValue.OpenAudit.values());
+        } else if ("AuditStatus".equals(name)) {
+            list = Arrays.asList(EnumValue.AuditStatus.values());
         }
         return list;
     }
@@ -94,6 +98,14 @@ public class CommonController implements Serializable {
 
     public String yesnoLabel(int code) {
         return EnumValue.YesNo.instances(code).getName();
+    }
+
+    public String openAuditLabel(int code) {
+        return EnumValue.OpenAudit.instances(code).getName();
+    }
+
+    public String auditStatusLabel(int code) {
+        return EnumValue.AuditStatus.instances(code).getName();
     }
 
     public String SpecialLabel(int code) {

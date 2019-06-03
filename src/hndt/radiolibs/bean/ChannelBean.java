@@ -44,6 +44,10 @@ public class ChannelBean implements Serializable {
      * 创建时间
      */
     Timestamp createtime;
+    /**
+     * 是否开启审核
+     */
+    int audit;
 
     // transient
     /**
@@ -59,7 +63,6 @@ public class ChannelBean implements Serializable {
      */
     LocalTime endtime;
 
-    //transient
     ResBean shim;
 
     public Part getPart() {
@@ -156,6 +159,14 @@ public class ChannelBean implements Serializable {
 
     public void setShim(ResBean shim) {
         this.shim = shim;
+    }
+
+    public int getAudit() {
+        return audit;
+    }
+
+    public void setAudit(int audit) {
+        this.audit = audit;
     }
 
     @Override

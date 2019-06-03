@@ -3,7 +3,6 @@
 <%@ page import="hndt.radiolibs.servlet.TipAnnotation" %>
 <%@ page import="hndt.radiolibs.ctrl.CommonController" %>
 <%
-
     ManagerBean manager = (ManagerBean) session.getAttribute(EnumValue.LITERAL_MANAGER);
     if (manager == null) {
         response.sendRedirect("login.xhtml");
@@ -23,13 +22,18 @@
     <link rel="stylesheet" href="/resources/amazeui/css/amazeui.min.css"/>
     <link rel="stylesheet" href="/resources/amazeui/css/admin.css">
 </head>
+<style>
+    li.z-crt{
+        background-color:#f9f9f9;
+    }
+</style>
+
 <script type="text/javascript">
     if (top.location != self.location) {
         top.location = "http://admin.hndt.com/login.xhtml";
     }
 
     function tip(data) {
-        console.log(data);
         if (data.code > -2) {
             if (data.code == -1) $("#tip_alert").addClass("am-alert-warning");
             if (data.code == 0) $("#tip_alert").addClass("am-alert-secondary");
@@ -118,107 +122,109 @@
         $('#logout').click(function() {
             window.location.href = '/api/manager/logout';
         })
-    });
-</script>
-<body>
-<header class="am-topbar am-topbar-inverse admin-header">
-    <div class="am-topbar-brand">
-        <strong><span>河南人民广播电台</span> 网络广播管理平台</strong>
-        <small>V1.0</small>
-    </div>
-    <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only"
-            data-am-collapse="{target: '#topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span
-            class="am-icon-bars"></span></button>
-    <div class="am-collapse am-topbar-collapse" id="topbar-collapse">
-        <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list">
-            <%--<li><a href="javascript:;"><span class="am-icon-envelope-o"></span> 收件箱 <span class="am-badge am-badge-warning">5</span></a></li>--%>
-            <li class="am-dropdown" data-am-dropdown>
-                <a class="am-dropdown-toggle" data-am-dropdown-toggle href="javascript:;" title="<%=new CommonController().asString(manager.getRoleList(), "name")%>">
-                    <span class="am-icon-users"></span> <%=manager.getName()%> <span class="am-icon-caret-down"></span>
-                </a>
-                <ul class="am-dropdown-content">
-                    <li><a id="logout" class="" onclick="return confirm('确实要退出吗？')"><span
-                            class="am-icon-power-off"></span> 退出</a></li>
-                </ul>
-            </li>
-            <li class="am-hide-sm-only"><a href="javascript:;" id="admin-fullscreen"><span
-                    class="am-icon-arrows-alt"></span> <span class="admin-fullText">开启全屏</span></a></li>
-        </ul>
-    </div>
-</header>
-<%--header结束--%>
-<div class="am-cf admin-main">
-    <%--sidebar start--%>
-    <div class="admin-sidebar am-offcanvas" id="admin-offcanvas">
-        <div class="am-offcanvas-bar admin-offcanvas-bar">
-            <ul class="am-list admin-sidebar-list setbg">
 
-                <li style="background: #f9f9f9"><a href="home.xhtml" target="mainIframe"><span class="am-icon-home"></span> 首页</a></li>
-
-                <li><a href="channel_list.xhtml" target="mainIframe"><span class="am-icon-bookmark"></span> 我的网络广播频率</a></li>
-                <li><a href="typed_list.xhtml" target="mainIframe"><span class="am-icon-gears"></span> 规则管理</a></li>
-                <li><a href="clock_list.xhtml" target="mainIframe"><span class="am-icon-clock-o"></span> 钟型管理</a></li>
-                <li><a href="program_list.xhtml" target="mainIframe"><span class="am-icon-list-ul"></span> 节目单管理</a></li>
-                <li class="admin-parent">
-                    <a class="am-cf" data-am-collapse="{target: '#collapse-nav1'}"><span class="am-icon-database"></span> 系统资源库 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
-                    <ul class="am-list admin-sidebar-sub am-collapse" id="collapse-nav1">
-                        <% for (EnumValue.Category category : EnumValue.Category.values()) { %>
-                        <li><a href="res_list.xhtml?category=<%=category.getCode()%>" target="mainIframe"><span class="am-icon-file-audio-o"></span> <%=category.getName()%>
-                        </a></li>
-                        <% }%>
-                    </ul>
-                </li>
-                <li class="admin-parent">
-                    <a  class="am-cf" data-am-collapse="{target: '#collapse-nav2'}"><span class="am-icon-database am-text-success"></span> 我的资源库 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
-                    <ul class="am-list admin-sidebar-sub am-collapse" id="collapse-nav2">
-                        <% for (EnumValue.Category category : EnumValue.Category.values()) { %>
-                        <li><a href="res_by_member_list.xhtml?category=<%=category.getCode()%>" target="mainIframe"><span class="am-icon-file-audio-o"></span> <%=category.getName()%>
-                        </a></li>
-                        <% }%>
-                    </ul>
-                </li>
-                <li><a href="res_list_search.xhtml" target="mainIframe"><span class="am-icon-search"></span> 可用资源检索</a></li>
-                <li><a href="tag_group_list.xhtml" target="mainIframe"><span class="am-icon-tags"></span> 标签组管理</a></li>
-                <li><a href="log_list.xhtml" target="mainIframe"><span class="am-icon-calendar"></span> 操作日志</a></li>
-
-            </ul>
-        </div>
-    </div>
-    <%--sidebar end--%>
-    <%--content start--%>
-    <div class="admin-content">
-        <iframe id="mainIframe" name="mainIframe" src="home.xhtml" scrolling="auto" frameborder="0" style="width: 100%;height: 100%;"></iframe>
-    </div>
-</div>
-
-<div id="tip_wrap" class="am-panel am-panel-default am-padding-0" style="position: fixed; top: 2px; left: 32%; right: 32%;display: none;z-index: 1998;">
-    <div id="tip_alert" class="am-alert am-text-center am-margin-0" style="background: #fff; color: #5c5c5c;">
-        <i class="am-close am-icon-times" onclick="closeTips()" style="color: indianred;"></i>
-        <div id="tip_text"></div>
-    </div>
-</div>
-</body>
-
-<style>
-    li.z-crt{
-        background-color:#f9f9f9;
-    }
-</style>
-<script>
-    $(function() {
-        $('ul.setbg li').click(function() {
+        $('ul.setbg li').click(function () {
             var _this = $(this);
 
-            $('li').each(function() {
+            $('li').each(function () {
                 $(this).removeAttr('style');
                 $(this).removeClass('z-crt');
             });
             $(this).attr('style', 'background:#f9f9f9');
         });
-        $('ul.setbg li').find('ul').children().click(function(e) {
+
+        $('ul.setbg li').find('ul').children().click(function (e) {
             e.stopPropagation();
             $(this).addClass('z-crt').siblings().removeClass('z-crt');
         });
+
+//        $(document).on('click', '.resPathForPlay', function() {
+        $(".resPathForPlay").on("click", function () {
+            console.log(11111)
+            var url = $(this).data("url");
+            $(".player").attr("src", url);
+        });
     });
 </script>
+
+<body>
+    <header class="am-topbar am-topbar-inverse admin-header">
+        <div class="am-topbar-brand">
+            <strong><span>河南人民广播电台</span> 网络广播管理平台</strong>
+            <small>V1.0</small>
+        </div>
+        <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#topbar-collapse'}">
+            <span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span>
+        </button>
+        <div class="am-collapse am-topbar-collapse" id="topbar-collapse">
+            <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list">
+                <%--<li><a href="javascript:;"><span class="am-icon-envelope-o"></span> 收件箱 <span class="am-badge am-badge-warning">5</span></a></li>--%>
+                <li class="am-dropdown" data-am-dropdown>
+                    <a class="am-dropdown-toggle" data-am-dropdown-toggle href="javascript:;" title="<%=new CommonController().asString(manager.getRoleList(), "name")%>">
+                        <span class="am-icon-users"></span> <%=manager.getName()%> <span class="am-icon-caret-down"></span>
+                    </a>
+                    <ul class="am-dropdown-content">
+                        <li><a id="logout" class="" onclick="return confirm('确实要退出吗？')"><span class="am-icon-power-off"></span> 退出</a></li>
+                    </ul>
+                </li>
+                <li class="am-hide-sm-only"><a href="javascript:;" id="admin-fullscreen"><span class="am-icon-arrows-alt"></span> <span class="admin-fullText">开启全屏</span></a></li>
+            </ul>
+        </div>
+    </header>
+    <%--header结束--%>
+
+    <div class="am-cf admin-main">
+        <%--sidebar start--%>
+        <div class="admin-sidebar am-offcanvas" id="admin-offcanvas">
+            <div class="am-offcanvas-bar admin-offcanvas-bar">
+                <ul class="am-list admin-sidebar-list setbg">
+                    <li style="background: #f9f9f9"><a href="home.xhtml" target="mainIframe"><span class="am-icon-home"></span> 首页</a></li>
+
+                    <li><a href="channel_list.xhtml" target="mainIframe"><span class="am-icon-bookmark"></span> 我的网络广播频率</a></li>
+                    <li><a href="typed_list.xhtml" target="mainIframe"><span class="am-icon-gears"></span> 规则管理</a></li>
+                    <li><a href="clock_list.xhtml" target="mainIframe"><span class="am-icon-clock-o"></span> 钟型管理</a></li>
+                    <li><a href="program_list.xhtml" target="mainIframe"><span class="am-icon-list-ul"></span> 节目单管理</a></li>
+                    <li class="admin-parent">
+                        <a class="am-cf" data-am-collapse="{target: '#collapse-nav1'}"><span class="am-icon-database"></span> 系统资源库 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
+                        <ul class="am-list admin-sidebar-sub am-collapse" id="collapse-nav1">
+                            <% for (EnumValue.Category category : EnumValue.Category.values()) { %>
+                            <li><a href="res_list.xhtml?category=<%=category.getCode()%>" target="mainIframe"><span class="am-icon-file-audio-o"></span> <%=category.getName()%>
+                            </a></li>
+                            <% }%>
+                        </ul>
+                    </li>
+                    <li class="admin-parent">
+                        <a  class="am-cf" data-am-collapse="{target: '#collapse-nav2'}"><span class="am-icon-database am-text-success"></span> 我的资源库 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
+                        <ul class="am-list admin-sidebar-sub am-collapse" id="collapse-nav2">
+                            <% for (EnumValue.Category category : EnumValue.Category.values()) { %>
+                            <li><a href="res_by_member_list.xhtml?category=<%=category.getCode()%>" target="mainIframe"><span class="am-icon-file-audio-o"></span> <%=category.getName()%>
+                            </a></li>
+                            <% }%>
+                        </ul>
+                    </li>
+                    <li><a href="res_list_search.xhtml" target="mainIframe"><span class="am-icon-search"></span> 可用资源检索</a></li>
+                    <li><a href="tag_group_list.xhtml" target="mainIframe"><span class="am-icon-tags"></span> 标签组管理</a></li>
+                    <li><a href="audit_list.xhtml" target="mainIframe"><span class="am-icon-hourglass-half"></span> 资源审核</a></li>
+                    <li><a href="log_list.xhtml" target="mainIframe"><span class="am-icon-calendar"></span> 操作日志</a></li>
+                </ul>
+            </div>
+            <%--全局播放器--%>
+            <div style="margin-top: 10px">
+                <audio class="player" controls="controls" autoplay="autoplay" style="width: 250px; border: 1px solid #fff; border-radius: 10px; margin-left: 5px;" src="/upload/11111.mp3"></audio>
+            </div>
+        </div>
+        <%--sidebar end--%>
+        <%--content start--%>
+        <div class="admin-content">
+            <iframe id="mainIframe" name="mainIframe" src="home.xhtml" scrolling="auto" frameborder="0" style="width: 100%;height: 100%;"></iframe>
+        </div>
+    </div>
+
+    <div id="tip_wrap" class="am-panel am-panel-default am-padding-0" style="position: fixed; top: 2px; left: 32%; right: 32%;display: none;z-index: 1998;">
+        <div id="tip_alert" class="am-alert am-text-center am-margin-0" style="background: #fff; color: #5c5c5c;">
+            <i class="am-close am-icon-times" onclick="closeTips()" style="color: indianred;"></i>
+            <div id="tip_text"></div>
+        </div>
+    </div>
+</body>
 </html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:composite="http://xmlns.jcp.org/jsf/composite/composite" xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+<ui:composition template="template.xhtml">
+    <ui:param name="title" value="资源列表 -> 资源审核"/>
+    <ui:define name="content">
+        <h:panelGroup layout="block" styleClass="am-g am-margin">
+            <h:panelGroup styleClass="am-u-sm-2">
+                <composite:switch ctrl="#{resController}"  property="#{resController.managerId}" items="#{resController.getManagerListByGroup()}" source="entity" firstItem="请选择上传人"/>
+            </h:panelGroup>
+            <h:panelGroup styleClass="am-u-sm-2" style="float:left;">
+                <composite:switch ctrl="#{resController}" property="#{resController.auditStatus}" items="#{common.fromEnum('AuditStatus')}" source="enum" firstItem="请选择审核状态"/>
+            </h:panelGroup>
+        </h:panelGroup>
+        <hr class="am-list"/>
+        <h:panelGroup layout="block" id="table_list">
+            <h:dataTable value="#{resController.pageBean.list}" var="row" styleClass="am-table am-table-compact am-table-striped admin-content-table am-table-hover">
+                <h:column>
+                    <f:facet name="header">ID</f:facet>
+                    <h:outputText value="#{row.id}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">类别</f:facet>
+                    <h:outputText value="#{common.categoryLabel(row.category)}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">题名</f:facet>
+                    <h:outputText value="#{row.title_proper}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">创建者</f:facet>
+                    <h:outputText value="#{row.singer}" styleClass="am-text-sm"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">标签</f:facet>
+                    <h:panelGroup layout="block" class="am-dropdown" p:data-am-dropdown="">
+                        <h:outputText class="am-badge am-badge-default am-radius am-margin-xs am-dropdown-toggle" p:data-am-dropdown-toggle="" value="#{row.tagBeanList.size()}" rendered="#{row.tagBeanList.size() gt 0}" />
+                        <div class="am-dropdown-content" style="width: 500px;">
+                            <h:outputText escape="false" value="#{common.resTagAsDescription(row)}"/>
+                        </div>
+                    </h:panelGroup>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">生命期</f:facet>
+                    <h:outputText value="#{common.lifeLabel(row.lifetime)}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">时长</f:facet>
+                    <h:outputText value="#{common.duration(row.format_duration)}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">上传人</f:facet>
+                    <h:outputText value="#{common.manager(row.manager_id).name}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">审核状态</f:facet>
+                    <h:panelGroup layout="block" class="am-dropdown" p:data-am-dropdown="">
+                        <h:outputText class="am-badge am-badge-default am-radius am-margin-xs am-dropdown-toggle" p:data-am-dropdown-toggle="" value="#{common.auditStatusLabel(row.audit_status)}"/>
+                        <div class="am-dropdown-content" style="width: 500px;">
+                            <h:outputText escape="false" value="#{row.reject_cause}"/>
+                        </div>
+                    </h:panelGroup>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">创建/修改时间</f:facet>
+                    <h:panelGroup>
+                        <h:outputText styleClass="am-text-xs am-block" value="#{row.createtime}"/>
+                        <h:outputText styleClass="am-text-xs am-block"  value="#{row.updatetime}"/>
+                    </h:panelGroup>
+                </h:column>
+                <h:column>
+                    <h:panelGroup styleClass="am-btn-toolbar" layout="block">
+                        <div class="am-btn-group am-btn-group-xs">
+                            <h:commandLink styleClass="am-btn am-btn-link am-padding-right-0" action="#{resController.auditPass(row)}"> 通过</h:commandLink>
+
+                            <div class="am-dropdown" data-am-dropdown="">
+                                <button class="am-btn am-btn-link am-btn-xs am-dropdown-toggle am-padding-right-0" data-am-dropdown-toggle="">
+                                    <h:outputText value="不通过"/> <span class="am-icon-caret-down"></span>
+                                </button>
+                                <div class="am-dropdown-content">
+                                    <h:inputText value="#{row.reject_cause}"/>
+                                    <h:commandLink type="button" value="确定" styleClass="am-btn-link am-round am-btn-danger am-btn-xs" action="#{resController.auditNotPass(row)}"></h:commandLink>
+                                </div>
+                            </div>
+
+                            <div class="am-dropdown" data-am-dropdown="">
+                                <button class="am-btn am-btn-link am-btn-xs am-dropdown-toggle am-padding-right-0" data-am-dropdown-toggle=""><h:outputText value="#{resController.editable(row)?'编辑':'详情'} "/> <span class="am-icon-caret-down"></span></button>
+                                <ul class="am-dropdown-content">
+                                    <ui:repeat value="#{common.fromEnum('Section')}" var="section">
+                                        <li><h:commandLink action="#{resController.tab(row,section)}"> <i class="am-text-xs am-icon-#{section.icon}" style="font-size: 12px;"></i>#{section.name} #{section.code} </h:commandLink></li>
+                                    </ui:repeat>
+                                    <li><h:commandLink action="#{resController.download(row)}"> <i class="am-text-xs am-icon-download" style="font-size: 12px;"></i> 下载 download </h:commandLink></li>
+                                    <li><h:commandLink rendered="#{resController.editable(row)}" action="#{resController.delete(row)}" onclick="return confirm('删除后不可恢复，确认要删除吗123？');"> <i class="am-text-xs am-icon-remove" style="font-size: 12px;"></i> <b class="am-text-danger">删除 delete</b> </h:commandLink></li>
+                                </ul>
+                            </div>
+
+                            <a class="resPathForPlay am-btn am-btn-link" data-url="${row.path}" title="播放"><i class="am-icon-play-circle am-text-xs"></i></a>
+                        </div>
+                    </h:panelGroup>
+                </h:column>
+            </h:dataTable>
+        </h:panelGroup>
+        <composite:pagination ctrl="#{resController}"/>
+    </ui:define>
+
+</ui:composition>
+</html>

@@ -7,7 +7,9 @@ import hndt.radiolibs.util.Logger;
 import javax.servlet.ServletContext;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * 生成节目单信息
@@ -33,7 +35,7 @@ public class ExtractBusiness implements Runnable {
                     // 有声文摘特定需求：生成一个月的节目单
                     if (cbean.getId() == 96) {
                         Logger.info("有声文摘生成一个月的节目单");
-                        for (int i = 1; i <= now.getDayOfMonth(); i++) {
+                        for (int i = 1; i <= getDayOfMonth(); i++) {
                             if (RuntimeBusiness.getInstance().none(cbean.getId(), now.plusDays(i).toLocalDate())) {
                                 RuntimeBusiness.getInstance().generate(cbean.getId(), Timestamp.valueOf(now.plusDays(i)));
                             }
@@ -59,4 +61,18 @@ public class ExtractBusiness implements Runnable {
         }
     }
 
+    /**
+     * 获取当前月的天数
+     *
+     * @return
+     */
+    public static int getDayOfMonth(){
+        Calendar aCalendar = Calendar.getInstance(Locale.CHINA);
+        int day=aCalendar.getActualMaximum(Calendar.DATE);
+        return day;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(getDayOfMonth());
+    }
 }

@@ -4,47 +4,48 @@
     <ui:param name="title" value="节目单预览"/>
 
     <ui:define name="content">
-
         <div>
             <!--日历选择插件，选取日期-->
-            <div id="datetimepicker">
-                <h:inputText value="#{programController.dateValue}" id="selectDate" styleClass="am-form-field am-hide">
+            <div id="datetimepicker" style="z-index: 0">
+                <h:inputText value="#{programController.dateValue}" id="selectDate" styleClass="am-hide">
                     <f:ajax render="program_list" listener="#{programController.onChangeDate()}"/>
                 </h:inputText>
             </div>
-            <div>
-                <audio id="audios" style="width: 260px;z-index: 10000000; top: 404px; left: 11px; position: absolute;" src="" controls="controls" autoplay="autoplay">
-                    Your browser does not support the audio element.
-                </audio>
-            </div>
         </div>
 
+        <div data-am-sticky="{animation: 'slide-top'}" style="background-color: white; width: 100%">
+            <div class="am-panel-hd" >
+                <strong class="am-text-secondary">频率：</strong><span>#{common.channel(programController.bean.channel_id).name} [#{common.channel(programController.bean.channel_id).uuid}]</span>
+                <strong class="am-text-secondary am-margin-left">节目单：</strong><span>#{programController.bean.name} </span>
+                <strong class="am-text-secondary am-margin-left">播放时段：</strong><span>#{programController.bean.startStr} - #{programController.bean.endStr}</span>
+                <h:commandLink value="生成次日节目单" title="生成次日节目单，会重取文件会重新挑选音频资源并覆盖现有数据" action="#{programController.pick()}" styleClass="am-margin-left am-text-danger" onclick="return confirm('生成次日节目单，会重取文件会重新挑选音频资源并覆盖现有数据。要继续吗？')"/>
+            </div>
+            <div class="am-padding am-center">
+                <span class="am-icon-warning am-text-warning" style="margin-right: 10px;"></span>当天的节目单播放清单未开播的部分，可调整顺序、删除音频。
+                <!--<audio id="audios" src="" controls="controls" autoplay="autoplay">-->
+                    <!--Your browser does not support the audio element.-->
+                <!--</audio>-->
+            </div>
+
+            <h:panelGroup id="anchors" class="am-btn-group am-padding">
+                <c:set value="#{common.hours()}" var="hours"></c:set>
+                <ui:repeat value="#{hours}" var="h">
+                    <a type="button" id="#anchor_${h}" class="am-btn am-btn-default am-btn-xs anchor">#{h}</a>
+                </ui:repeat>
+                <!--定位到当前正在播放的资源文件按钮-->
+                <h:commandLink class="am-btn am-btn-default am-btn-xs" action="#{programController.findCurrentPlayItem()}"><i class="am-icon-anchor am-text-warning"></i>
+                    <f:ajax render="anchors"/>
+                </h:commandLink>
+                <!--回到顶部按钮-->
+                <a id="gotop" class="am-btn am-btn-default am-btn-xs"><i class="am-icon-rocket"></i></a>
+            </h:panelGroup>
+        </div>
 
         <!--节目单预览-->
         <h:panelGroup style="float: left;margin-top: 10px;margin-left:280px;width: 1020px;" id="top">
             <div class="am-panel am-panel-default">
-                <div class="am-panel-hd">
-                    <strong class="am-text-secondary">频率：</strong><span>#{common.channel(programController.bean.channel_id).name} [#{common.channel(programController.bean.channel_id).uuid}]</span>
-                    <strong class="am-text-secondary">节目单：</strong><span>#{programController.bean.name} </span>
-                    <strong class="am-text-secondary  am-margin-left">播放时段：</strong><span>#{programController.bean.startStr} - #{programController.bean.endStr}</span>
-                    <h:commandLink value="生成次日节目单" title="生成次日节目单，会重取文件会重新挑选音频资源并覆盖现有数据" action="#{programController.pick()}" styleClass="am-margin-left am-text-danger" onclick="return confirm('生成次日节目单，会重取文件会重新挑选音频资源并覆盖现有数据。要继续吗？')"/>
-                </div>
-                <div class="am-padding am-center">
-                    <span class="am-icon-warning am-text-warning"></span>当天的节目单播放清单未开播的部分，可调整顺序、删除音频。
-                </div>
-
-                <h:panelGroup id="anchors" class="am-btn-group am-padding">
-                    <c:set value="#{common.hours()}" var="hours"></c:set>
-                    <ui:repeat value="#{hours}" var="h">
-                        <a type="button" id="#anchor_${h}" class="am-btn am-btn-default am-btn-xs anchor">#{h}</a>
-                    </ui:repeat>
-                    <h:commandLink class="am-btn am-btn-default am-btn-xs" action="#{programController.findCurrentPlayItem()}"><i class="am-icon-anchor am-text-warning"></i>
-                        <f:ajax render="anchors"/>
-                    </h:commandLink>
-                </h:panelGroup>
-
                 <h:panelGroup id="program_list" styleClass="">
-                    <ui:repeat value="#{programController.bean.clockBeanList}" var="clock" varStatus="cvars">
+                    <ui:repeat value="#{programController.bean.clockBeanList}" var="clock" varStatus="cvars" id="item">
                         <div id="anchor_#{common.hour(clock.starttime)}"><a name="#{common.hour(clock.starttime)}"></a></div>
                         <div class="am-text-sm am-padding">
                             <h:panelGrid columns="2">
@@ -61,7 +62,7 @@
                             </div>
                         </div>
 
-                        <ul class="am-list am-list-static am-margin-left am-margin-top">
+                        <ul class="am-list am-list-static am-margin-left am-margin-top" id="#{clock.id}">
                             <h:outputLabel value="暂无节目" rendered="#{programController.isNull(clock.runtimeList)}"/>
                             <ui:repeat value="#{clock.runtimeList}" var="runtime">
                                 <li id="anchor_${runtime.id}">
@@ -84,12 +85,8 @@
             </div>
         </h:panelGroup>
 
-        <div data-am-sticky="{bottom:80}" style="float: right;" class="am-margin">
-            <a id="gotop" class="am-btn"><i class="am-icon-rocket am-text-xxl am-text-warning"></i></a>
-        </div>
-
+        <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
         <script>
-
             function goCurrentPlayItem(rid) {
                 $(".am-list>li").removeClass("running");
                 $(".am-list>li#anchor_" + rid).addClass("running");
@@ -151,6 +148,21 @@
             }
 
             $(function () {
+                // 表格拖动插件
+                var el = document.getElementById('275');
+                var sortable = new Sortable(el, {
+                    ghostClass: 'blue-background-class',
+                    onEnd: function (evt) {
+                        var ul = evt.to
+                        console.log(ul)
+                        console.log(ul.getElementsByTagName("li")[evt.oldIndex])
+                        console.log(ul.getElementsByTagName("li")[evt.newIndex])
+//                        console.log(evt.newIndex)
+//                        var itemEl = evt.item;
+//                        console.log(itemEl)
+
+                    }
+                });
 
                 $(document).on("click", "#gotop", function (e) {
                     $('html, body').animate({
@@ -197,8 +209,14 @@
         <style>
             .am-datepicker {
                 display: block;
-                margin-top: 60px;
+                margin-top: 213px;
                 margin-left: 10px;
+                z-index: 0;
+                top: none;
+                left: none;
+                -webkit-box-shadow: none;
+                box-shadow: none;
+                border: 1px solid #f0f0f0;
             }
 
             #program_list {
@@ -210,7 +228,6 @@
             .am-list > li.running {
                 background-color: #ffffaa;
             }
-
 
         </style>
     </ui:define>

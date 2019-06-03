@@ -40,7 +40,7 @@ ul {
 
 .admin-main {
   position: relative;
-  /*height: 96%;*/
+  height: 100%;
   padding-top: 64px;
   background: #f3f3f3;
 }

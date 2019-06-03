@@ -33,8 +33,8 @@
                     <h:commandLink styleClass="am-btn am-btn-default am-btn-sm am-btn-primary" action="#{resController.pagination()}"> <i class="am-icon-search"></i> 检索 </h:commandLink>
                 </div>
             </div>
-            <h:panelGroup styleClass="am-u-sm-2 am-text-right">
-                <audio id="player" style="width:80px;" src="" controls="controls" autoplay="autoplay"></audio>
+            <h:panelGroup styleClass="am-u-sm-2 am-text-right"  style="margin-right: 120px;">
+                <audio id="player" controls="controls" autoplay="autoplay"></audio>
             </h:panelGroup>
         </h:panelGroup>
         <hr class="am-list"/>
@@ -78,6 +78,15 @@
                     <h:outputText value="#{common.manager(row.manager_id).name}"/>
                 </h:column>
                 <h:column>
+                    <f:facet name="header">审核状态</f:facet>
+                    <h:panelGroup layout="block" class="am-dropdown" p:data-am-dropdown="">
+                        <h:outputText class="am-badge am-badge-default am-radius am-margin-xs am-dropdown-toggle" p:data-am-dropdown-toggle="" value="#{common.auditStatusLabel(row.audit_status)}"/>
+                        <div class="am-dropdown-content" style="width: 500px;">
+                            <h:outputText escape="false" value="#{row.reject_cause}"/>
+                        </div>
+                    </h:panelGroup>
+                </h:column>
+                <h:column>
                     <f:facet name="header">创建/修改时间</f:facet>
                     <h:panelGroup>
                         <h:outputText styleClass="am-text-xs am-block" value="#{row.createtime}"/>
@@ -86,9 +95,22 @@
                 </h:column>
                 <h:column>
                     <f:facet name="header"></f:facet>
-                    <a class="resPathForPlay am-btn am-btn-link" data-url="${row.path}" title="播放"><i class="am-icon-play-circle am-text-xs"></i></a>
+                    <h:panelGroup styleClass="am-btn-toolbar" layout="block">
+                        <div class="am-btn-group am-btn-group-xs am-margin-right-0 am-padding-right-0">
+                            <div class="am-dropdown" data-am-dropdown="">
+                                <button id="docTypeBtn" class="am-btn am-btn-link am-btn-xs am-dropdown-toggle am-padding-right-0" data-am-dropdown-toggle=""><h:outputText value="#{resController.editable(row)?'编辑':'详情'} "/>   <span class="am-icon-caret-down"></span></button>
+                                <ul class="am-dropdown-content">
+                                    <ui:repeat value="#{common.fromEnum('Section')}" var="section">
+                                        <li><h:commandLink action="#{resController.tab(row,section)}"> <i class="am-text-xs am-icon-#{section.icon}" style="font-size: 12px;"></i>#{section.name} #{section.code} </h:commandLink> </li>
+                                    </ui:repeat>
+                                    <li><h:commandLink action="#{resController.download(row)}"> <i class="am-text-xs am-icon-download" style="font-size: 12px;"></i> 下载 </h:commandLink></li>
+                                    <li><h:commandLink styleClass="am-text-danger" rendered="#{resController.editable(row)}" onclick="return confirm('删除后不可恢复，确认吗？')" action="#{resController.delete(row)}"><i class="am-text-xs am-icon-remove" style="font-size: 12px;"></i>删除此文件 </h:commandLink></li>
+                                </ul>
+                            </div>
+                            <a class="resPathForPlay am-btn am-btn-link" data-url="${row.path}" title="播放"><i class="am-icon-play-circle am-text-xs"></i></a>
+                        </div>
+                    </h:panelGroup>
                 </h:column>
-
             </h:dataTable>
         </h:panelGroup>
 

@@ -47,11 +47,6 @@ $(function () {
         $(".CheckboxRow").tableSelectable();
     }
 
-    $(".resPathForPlay").on("click", function () {
-        var url = $(this).data("url");
-        $("#player").attr("src", url);
-    });
-
 });
 
 function getUrlParam(name) {

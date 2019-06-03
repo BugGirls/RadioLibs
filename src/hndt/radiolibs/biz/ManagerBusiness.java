@@ -63,11 +63,24 @@ public class ManagerBusiness {
         return tip;
     }
 
+    /**
+     * 切换状态
+     *
+     * @param bean
+     * @return
+     */
     public int toggleStatus(ManagerBean bean) {
         int r = DBTool.update("UPDATE manager SET status=? WHERE id=?", bean.getStatus() == 1 ? 0 : 1, bean.getId());
         return r;
     }
 
+    /**
+     * 分页
+     *
+     * @param keyword
+     * @param pageBean
+     * @return
+     */
     public PageBean pagination(String keyword, PageBean pageBean) {
         pageBean = pageBean == null ? new PageBean() : pageBean;
 
@@ -155,8 +168,6 @@ public class ManagerBusiness {
         }
         return managerBeanList;
     }
-
-
 
     /**
      * 获取管理员ID列表
